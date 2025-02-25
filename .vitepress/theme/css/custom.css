@@ -1,0 +1,12 @@
+/* .vitepress/theme/style/custom.css */
+@import 'vitepress/theme/style/vars.css';
+
+/* 覆盖变量 */
+:root {
+  --vp-c-brand: #ff5e5e;
+}
+
+/* 继承默认文档样式 */
+.vp-doc {
+  max-width: 980px !important;
+}
