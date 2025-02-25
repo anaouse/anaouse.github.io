@@ -2,7 +2,10 @@ import { defineConfig } from 'vitepress'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "57D02",
-  
+  head: [
+    // 添加图标
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
+  ],
   description: "A VitePress Site",
   themeConfig: {
     // 全局背景图
