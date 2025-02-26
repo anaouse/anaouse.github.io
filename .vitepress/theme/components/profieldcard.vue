@@ -75,12 +75,12 @@ const handleAvatarError = (e) => {
 
 <style>
 .profile-card {
-  width: 100%;
   background: whitesmoke;
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 100%;
 }
 
 .profile-card:hover {
@@ -167,6 +167,7 @@ const handleAvatarError = (e) => {
   .profile-card {
     width: 260px;
     padding: 20px;
+    max-width: 100%;
   }
 
   .avatar-wrapper {

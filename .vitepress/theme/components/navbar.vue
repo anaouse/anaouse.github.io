@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <!-- 左侧品牌区 -->
+    <!-- 左侧区 -->
     <div class="brand-group">
       <a class="brand-logo" href="/">
         <img :src="props.logo" alt="avatar" >
@@ -8,9 +8,9 @@
       <a class="brand-text" href="/">{{ props.title }}</a>
     </div>
 
-    <!-- 中间搜索区 -->
+    <!-- 中间区 -->
     <div class="search-container">
-      <div class="search-input">
+      <div class="search-input"  v-if="false">
         <input type="text" placeholder="动物怎么叫" class="search-field">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </div>
@@ -114,7 +114,7 @@ const handleMenuClick = (item) => {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   align-items: center;
-  height: 64px;
+  height: var(--nav-height);
   padding: 0 24px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);

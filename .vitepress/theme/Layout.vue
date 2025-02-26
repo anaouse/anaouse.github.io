@@ -1,5 +1,6 @@
 <script setup>
-import 'element-plus/dist/index.css'
+import Starrysky from './components/Starrysky.vue';
+// import 'element-plus/dist/index.css'
 import { useData } from 'vitepress'
 const { page, frontmatter, theme } = useData()
 import navbar from './components/navbar.vue';
@@ -48,50 +49,51 @@ onUnmounted(() => {
 </script>
 
 <template>
+    <keep-alive>
+        <Starrysky />
+    </keep-alive>
     <div class="main-layout">
         <div class="navbar-container" :class="{ 'nav-hidden': !showNavbar }">
             <navbar :logo="theme.logo" :title="theme.title" :menuItems="theme.menuItems" />
         </div>
         <NotFound v-if="page.isNotFound" />
-        <div class="nullpage" v-else-if="frontmatter.layout === 'customPage'">
+        <Page class="nullpage" v-else-if="frontmatter.layout === 'customPage'">
             <Content />
-        </div>
+        </Page>
         <el-scrollbar ref="scrollbarRef" height="100vh" @scroll="handleScroll" :wrap-style="{ overflowX: 'hidden' }"
             v-else>
-            <Home v-if="frontmatter.layout === 'home'" />
-            <div class="content-container" v-if="frontmatter.layout === 'home'">
-                <div class="page-wrapper">
-                    <div class="page-card vp-doc" style="background-color: transparent;padding-top: 0%;">
-                        <div v-for="post in posts" :key="post.link" class="article-card">
+            <Page class="homePage" v-if="frontmatter.layout === 'home'">
+                <Home />
+                <div class="content-container">
+                    <div class="page-wrapper">
+                        <div class="page-card vp-doc" v-for="post in posts" :key="post.link">
                             <div class="text">
-                                <a :href="post.link" class="article-link">
-                                    <h3 class="article-title">{{ post.title }}</h3>
-                                    <p class="article-excerpt">{{ post.excerpt.replace(/\r\n/g, ' ') }}</p>
+                                <a :href="post.link" class="article-link" style="text-decoration: none;">
+                                    <h3 class="article-title" style=" color: #000;">{{ post.title }}</h3>
+                                    <p class="article-excerpt" style="color: grey;">{{ post.excerpt.replace(/\r\n/g, ' ') }}</p>
                                     <span class="read-more">阅读全文 →</span>
                                 </a>
                             </div>
-                            <div class="image">
-                                <img :src="post.cover" :alt="post.cover">
-                            </div>
                         </div>
                     </div>
-
                     <div class="sidebar">
                         <div class="sidebar-stay">
                             <profieldcard name="57D02" :socialLinks="theme.socialLinks" :avatar="theme.avatar"
-                            :position="theme.position" :bio="theme.bio" />
+                                :position="theme.position" :bio="theme.bio" />
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="content-container" v-else>
+            </Page>
+            <Page class="docPage" v-else>
                 <div id="post-info">
                     <postinfo :title="frontmatter.title"
                         :author="frontmatter?.author || theme?.defaultauthor || 'unknow'" :date="frontmatter.date" />
                 </div>
-                <div class="page-wrapper">
-                    <div class="page-card vp-doc">
-                        <Content />
+                <div class="content-container">
+                    <div class="page-wrapper">
+                        <div class="page-card vp-doc">
+                            <Content />
+                        </div>
                     </div>
                     <div class="sidebar">
                         <profieldcard name="57D02" :socialLinks="theme.socialLinks" :avatar="theme.avatar"
@@ -106,13 +108,11 @@ onUnmounted(() => {
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="footer-container" style="color: white;">
-                <Badge type="tip">{{ theme.footer.copyright }}</Badge>
-            </div>
+                <div class="footer-container" style="color: white;">
+
+                </div>
+            </Page>
         </el-scrollbar>
-
     </div>
 </template>
-
