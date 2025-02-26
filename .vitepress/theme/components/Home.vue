@@ -45,7 +45,7 @@ watchEffect(() => {
 
 onUnmounted(() => clearTimeout(timer))
 </script>
-<style lang="css" scoped>
+<style>
 .firstview {
     height: 100vh;
     display: flex;
@@ -63,8 +63,7 @@ onUnmounted(() => clearTimeout(timer))
 .subtitle {
     font-size: 1.5rem;
     min-height: 2em;
-    color: var(--vp-c-text-1);
-    ;
+    color: white;
 }
 
 .cursor {

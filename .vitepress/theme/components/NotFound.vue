@@ -16,7 +16,7 @@
     </div>
 </template>
 
-<style lang="css" scoped>
+<style>
 .not-found {
   height: 100vh; /* 添加固定高度 */
   overflow: hidden; /* 隐藏溢出内容 */
@@ -26,14 +26,14 @@
 }
 
 /* 在容器中添加最大宽度限制 */
-.container {
+.not-found .container {
   text-align: center;
   position: relative;
   padding: 2rem;
   max-width: 90vw; /* 防止横向溢出 */
 }
 
-.glitch {
+.not-found .glitch {
     font-size: 8rem;
     font-weight: 700;
     position: relative;
@@ -62,13 +62,13 @@
     }
 }
 
-.subtitle {
+.not-found .subtitle {
     font-size: 1.25rem;
     color: #a0a0c0;
     margin: 1rem 0 3rem;
 }
 
-.home-btn {
+.not-found .home-btn {
     display: inline-flex;
     align-items: center;
     padding: 1rem 2rem;
@@ -87,7 +87,7 @@
     }
 }
 
-.icon {
+.not-found .icon {
     width: 1.2rem;
     height: 1.2rem;
     margin-left: 0.8rem;
@@ -108,7 +108,7 @@
 }
 
 /* 调整按钮悬停效果 */
-.home-btn:hover .icon {
+.not-found .home-btn:hover .icon {
   transform: translateX(3px);
 }
 

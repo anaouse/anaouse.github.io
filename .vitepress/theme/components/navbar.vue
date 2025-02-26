@@ -109,7 +109,7 @@ const handleMenuClick = (item) => {
 }
 </script>
 
-<style scoped>
+<style>
 .navbar {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -124,7 +124,7 @@ const handleMenuClick = (item) => {
 }
 
 /* 品牌区样式 */
-.brand-group {
+.navbar .brand-group {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -154,13 +154,13 @@ const handleMenuClick = (item) => {
   justify-content: center;
 }
 
-.search-input {
+.navbar .search-input {
   position: relative;
   width: 100%;
   max-width: 400px;
 }
 
-.search-field {
+.navbar .search-field {
   width: 100%;
   padding: 8px 40px 8px 16px;
   border: 2px solid #ecf0f1;
@@ -169,12 +169,12 @@ const handleMenuClick = (item) => {
   transition: all 0.3s ease;
 }
 
-.search-field:focus {
+.navbar .search-field:focus {
   outline: none;
   box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
 }
 
-.search-icon {
+.navbar .search-icon {
   position: absolute;
   right: 16px;
   top: 50%;
