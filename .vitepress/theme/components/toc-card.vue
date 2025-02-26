@@ -138,7 +138,7 @@ onUnmounted(() => {
 
 <style scoped>
 .toc-card {
-    width: 300px;
+    width: 100%;
     right: 2rem;
     top: 6rem;
     background: #fff;

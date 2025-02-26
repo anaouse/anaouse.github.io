@@ -75,7 +75,7 @@ const handleAvatarError = (e) => {
 
 <style>
 .profile-card {
-  width: 300px;
+  width: 100%;
   background: whitesmoke;
   border-radius: 12px;
   padding: 24px;
