@@ -63,7 +63,7 @@ onUnmounted(() => {
         </div>
         <el-scrollbar ref="scrollbarRef" height="100vh" @scroll="handleScroll" :wrap-style="{ overflowX: 'hidden' }"
             v-else>
-            <div class="homePage" v-if="frontmatter.layout === 'home'">
+            <div class="homePage Page" v-if="frontmatter.layout === 'home'">
                 <Home />
                 <div class="content-container">
                     <div class="page-wrapper">
@@ -72,7 +72,7 @@ onUnmounted(() => {
                                 :link="post.link" :excerpt="post.excerpt" />
                         </div>
                     </div>
-                    <div class="sidebar">
+                    <div class="sidebar Page">
                         <div class="sidebar-stay">
                             <profieldcard name="57D02" :socialLinks="theme.socialLinks" :avatar="theme.avatar"
                                 :position="theme.position" :bio="theme.bio" />

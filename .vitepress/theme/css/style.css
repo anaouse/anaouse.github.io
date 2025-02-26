@@ -49,7 +49,7 @@ body {
   transform: translateY(-100%);
   box-shadow: none !important;
 }
-Page{
+.Page{
   display: grid;
 }
 .content-container {
