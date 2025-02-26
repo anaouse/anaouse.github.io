@@ -150,9 +150,6 @@ Page{
   /* Ë®Æ½¾ÓÖÐ */
   justify-content: center;
   flex-direction: column;
-  h1 {
-    color: wheat !important;
-  }
 }
 
 .footer-container {

@@ -78,9 +78,13 @@ const formattedDate = computed(() => {
 }
 
 .header-title h1 {
-  margin: 0;
-  font-size: 2rem;
-  color: var(--vp-c-text-1);
+  margin-bottom: 8px;
+  color: var(--white);
+  font-weight: 400;
+  font-size: 2.5em;
+  line-height: 1.5;
+  color: wheat !important;
+  
 }
 
 .meta-info {

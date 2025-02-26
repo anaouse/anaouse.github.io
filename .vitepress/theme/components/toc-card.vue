@@ -164,10 +164,11 @@ onUnmounted(() => {
 }
 
 li {
+    border-radius: 5px;
     color: #666;
     text-decoration: none;
     display: block;
-    padding: 6px 0;
+    padding: 6px;
     transition: all 0.2s;
     position: relative;
     transition:
@@ -183,6 +184,7 @@ li {
     &.active {
         color: #42b983;
         font-weight: 500;
+        background-color: #eee;
 
         &::before {
             content: "";
@@ -204,27 +206,27 @@ li {
 
 /* 层级缩进 */
 .toc-level-1 {
-    padding-left: 0
+    padding-left: 0.5rem
 }
 
 .toc-level-2 {
-    padding-left: 1rem
+    padding-left: 1.5rem
 }
 
 .toc-level-3 {
-    padding-left: 2rem
+    padding-left: 2.5rem
 }
 
 .toc-level-4 {
-    padding-left: 3rem
+    padding-left: 3.5rem
 }
 
 .toc-level-5 {
-    padding-left: 4rem
+    padding-left: 4.5rem
 }
 
 .toc-level-6 {
-    padding-left: 5rem
+    padding-left: 5.5rem
 }
 
 .empty-tip {

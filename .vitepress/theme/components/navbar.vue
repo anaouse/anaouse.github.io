@@ -268,6 +268,7 @@ el-dropdown,
   padding: 10px 16px;
   color: #2c3e50;
   transition: background 0.2s ease;
+  white-space: nowrap;
 }
 
 .custom-dropdown .menu-item:hover {

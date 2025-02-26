@@ -10,6 +10,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import postinfo from './components/postinfo.vue';
 import profieldcard from './components/profieldcard.vue';
 import tocCard from './components/toc-card.vue';
+import articleCard from './components/article-card.vue';
 import { data as posts } from './utils/posts.data.js'
 // 状态栏&滚动条设置
 const scrollbarRef = ref()
@@ -57,23 +58,18 @@ onUnmounted(() => {
             <navbar :logo="theme.logo" :title="theme.title" :menuItems="theme.menuItems" />
         </div>
         <NotFound v-if="page.isNotFound" />
-        <Page class="nullpage" v-else-if="frontmatter.layout === 'customPage'">
+        <div class="nullpage" v-else-if="frontmatter.layout === 'customPage'">
             <Content />
-        </Page>
+        </div>
         <el-scrollbar ref="scrollbarRef" height="100vh" @scroll="handleScroll" :wrap-style="{ overflowX: 'hidden' }"
             v-else>
-            <Page class="homePage" v-if="frontmatter.layout === 'home'">
+            <div class="homePage" v-if="frontmatter.layout === 'home'">
                 <Home />
                 <div class="content-container">
                     <div class="page-wrapper">
                         <div class="page-card vp-doc" v-for="post in posts" :key="post.link">
-                            <div class="text">
-                                <a :href="post.link" class="article-link" style="text-decoration: none;">
-                                    <h3 class="article-title" style=" color: #000;">{{ post.title }}</h3>
-                                    <p class="article-excerpt" style="color: grey;">{{ post.excerpt.replace(/\r\n/g, ' ') }}</p>
-                                    <span class="read-more">阅读全文 →</span>
-                                </a>
-                            </div>
+                            <articleCard :title="post.title" :author="post.author" :date="post.date"
+                                :link="post.link" :excerpt="post.excerpt" />
                         </div>
                     </div>
                     <div class="sidebar">
@@ -83,8 +79,8 @@ onUnmounted(() => {
                         </div>
                     </div>
                 </div>
-            </Page>
-            <Page class="docPage" v-else>
+            </div>
+            <div class="docPage" v-else>
                 <div id="post-info">
                     <postinfo :title="frontmatter.title"
                         :author="frontmatter?.author || theme?.defaultauthor || 'unknow'" :date="frontmatter.date" />
@@ -112,7 +108,7 @@ onUnmounted(() => {
                 <div class="footer-container" style="color: white;">
 
                 </div>
-            </Page>
+            </div>
         </el-scrollbar>
     </div>
 </template>

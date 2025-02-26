@@ -45,9 +45,9 @@ export default defineConfig({
         children: [
           {
             key: 'action1',
-            label: '404测试',
+            label: '付费CSDN解析',
             icon: 'fa-solid fa-circle',
-            link: '404'
+            link: 'https://mark.cuckooing.cn/'
           },
           {
             key: 'action2',
