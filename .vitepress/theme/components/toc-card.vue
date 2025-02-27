@@ -1,5 +1,5 @@
 <template>
-    <div class="toc-card">
+    <div class="toc-card a-card">
         <i class="fas fa-columns" />
         <span class="toc-title" style="font-weight: 600;">目录导航</span>
         <el-scrollbar>
@@ -141,12 +141,11 @@ onUnmounted(() => {
     width: 100%;
     right: 2rem;
     top: 6rem;
-    background: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 1rem;
     max-height: 80vh;
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 .toc-title {
@@ -182,9 +181,9 @@ li {
     }
 
     &.active {
-        color: #42b983;
+        color: #fff;
         font-weight: 500;
-        background-color: #eee;
+        background-color: #6d6e6e;
 
         &::before {
             content: "";

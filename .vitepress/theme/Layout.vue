@@ -11,6 +11,7 @@ import postinfo from './components/postinfo.vue';
 import profieldcard from './components/profieldcard.vue';
 import tocCard from './components/toc-card.vue';
 import articleCard from './components/article-card.vue';
+import ArchivePage from './components/ArchivePage.vue';
 import { data as posts } from './utils/posts.data.js'
 // 状态栏&滚动条设置
 const scrollbarRef = ref()
@@ -66,37 +67,45 @@ onUnmounted(() => {
             <div class="homePage Page" v-if="frontmatter.layout === 'home'">
                 <Home />
                 <div class="content-container">
+
                     <div class="page-wrapper">
-                        <div class="page-card vp-doc" v-for="post in posts" :key="post.link">
-                            <articleCard :title="post.title" :author="post.author" :date="post.date"
-                                :link="post.link" :excerpt="post.excerpt" />
+                        <div class="a-card vp-doc">
+                            <Content />
+                        </div>
+                        <div class="vp-doc" v-for="post in posts" :key="post.link">
+                            <articleCard :post="post" />
                         </div>
                     </div>
                     <div class="sidebar Page">
                         <div class="sidebar-stay">
                             <profieldcard name="57D02" :socialLinks="theme.socialLinks" :avatar="theme.avatar"
                                 :position="theme.position" :bio="theme.bio" />
+                            <div class="a-card vp-doc">
+                                hh
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="docPage" v-else>
+            <div class="docPage Page" v-else>
                 <div id="post-info">
                     <postinfo :title="frontmatter.title"
                         :author="frontmatter?.author || theme?.defaultauthor || 'unknow'" :date="frontmatter.date" />
                 </div>
                 <div class="content-container">
                     <div class="page-wrapper">
-                        <div class="page-card vp-doc">
+                        <div class="a-card vp-doc">
                             <Content />
                         </div>
                     </div>
                     <div class="sidebar">
+
                         <profieldcard name="57D02" :socialLinks="theme.socialLinks" :avatar="theme.avatar"
                             :position="theme.position" :bio="theme.bio" />
+
                         <div class="sidebar-stay">
                             <tocCard :posts="posts" :currentUrl="page.relativePath" />
-                            <div class="sidebar-card" v-if="false">
+                            <div class="a-card" v-if="false">
                                 <h3 class="outline-title">
                                     {{ frontmatter }}
                                 </h3>
@@ -104,11 +113,13 @@ onUnmounted(() => {
                         </div>
                     </div>
                 </div>
-
-                <div class="footer-container" style="color: white;">
-
-                </div>
             </div>
+            <div class="footer-container" style="color: white;">
+                    <el-tag size="small" type="success" effect="plain" round>
+                        {{ theme.footer.copyright }}
+                    </el-tag>
+                    
+                </div>
         </el-scrollbar>
     </div>
 </template>

@@ -69,18 +69,18 @@ body {
   width: 100%;
 }
 
-.page-card {
+.a-card {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   padding: 2rem;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   margin-bottom: 10px;
-  
   outline: none;
+  margin-top: 10px;
 }
 
-.page-card:hover {
+.a-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
 }
@@ -113,6 +113,7 @@ body {
     transform 0.3s ease;
   will-change: top;
   z-index: 50;
+  
 }
 
 .nav-hidden~.el-scrollbar .sidebar-stay {
@@ -121,12 +122,6 @@ body {
   /* 仅保留安全间距 */
 }
 
-.sidebar-card {
-  background-color: white;
-  padding: 10px;
-  border-radius: 8px;
-  width: 300px;
-}
 
 @media (min-width: 768px) {
   .sidebar {

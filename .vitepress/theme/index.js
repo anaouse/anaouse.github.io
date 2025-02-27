@@ -1,5 +1,6 @@
 // import DefaultTheme from 'vitepress/theme'
 import 'element-plus/dist/index.css'
+import 'element-plus/theme-chalk/display.css'
 const cssModules = import.meta.glob('./css/*.css', { eager: true })
 Object.values(cssModules).forEach(module => {
   if (module?.default) module = module.default
@@ -9,6 +10,7 @@ Object.values(cssModules).forEach(module => {
     document.head.appendChild(style)
   }
 })
+
 import Layout from './Layout.vue'
 import ElementPlus from 'element-plus'
 import './fontawesome/css/all.min.css'

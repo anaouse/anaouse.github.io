@@ -53,13 +53,13 @@ export default defineConfig({
             key: 'action2',
             label: '关于',
             icon: 'fa-solid fa-square',
-            link: 'about/index'
+            link: 'About/index'
           },
           {
             key: 'action3',
-            label: '归档',
+            label: '标签',
             icon: 'fa-solid fa-star',
-            link: 'posts/hahha'
+            link: 'Tags/index'
           }
         ]
       }

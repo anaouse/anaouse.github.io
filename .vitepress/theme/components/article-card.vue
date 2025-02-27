@@ -1,55 +1,33 @@
-<template>
-    <div class="text">
-        <a :href="props.link" class="article-link" style="text-decoration: none;">
-            <h3 class="article-title" style=" color: #000;">{{ props.title }}</h3>
-            <p class="article-excerpt" style="color: grey;">{{ props.excerpt.replace(/\r\n/g, ' ') }}</p>
-            <i class="fa-light fa-calendar"></i>
-            <time :datetime="props.date">{{ formattedDate }}</time>
-            <span class="read-more">阅读全文 →</span>
-        </a>
-    </div>
-</template>
 <script setup>
 import { computed } from 'vue'
 const props = defineProps({
-    title: {
-        type: String,
-        default: 'Untitled Article'
-    },
-    author: {
-        type: String,
-        default: 'Anonymous'
-    },
-    date: {
-        type: String,
-        default: '',
-        validator: (value) => {
-            if (!value) return true
-            return !isNaN(Date.parse(value))
-        }
-    },
-    link: {
-        type: String,
-        required: true
-    },
-    tags: {
-        type: Array,
-        default: () => []
-    },
-    categories: {
-        type: Array,
-        default: () => []
-    },
-    excerpt: {
-        type: String,
-        default: '' 
+    post: {
+        type: Object,
+        default: () => ({
+            title: 'Untitled Article',
+            author: 'Anonymous',
+            date: '',
+            link: '#',
+            tags: [],
+            categories: [],
+            excerpt: ''
+        })
     }
 })
-
+// 使用解构赋值设置默认值
+const { 
+    title = 'Untitled Article',
+    author = 'Anonymous',
+    date = '',
+    link = '#',
+    tags = [],
+    categories = [],
+    excerpt = '' 
+} = props.post || {}
 const formattedDate = computed(() => {
-    if (!props.date) return 'Unknown date'
+    if (!date) return 'Unknown date'
     try {
-        return new Date(props.date).toLocaleDateString('zh-CN', {
+        return new Date(date).toLocaleDateString('zh-CN', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
@@ -59,4 +37,73 @@ const formattedDate = computed(() => {
     }
 })
 </script>
-<style></style>
+<template>
+    <div class="a-card">
+        <a :href="link" class="article-link">
+            <!-- 标题部分 -->
+            <el-text tag="h3" class="article-title" size="large">{{ title }}</el-text>
+            
+            <!-- 摘要部分 -->
+            <el-text class="article-excerpt" type="info" truncated>{{ excerpt }}</el-text>
+
+            <!-- 元信息布局 -->
+            <el-row :gutter="8" class="meta-row">
+                <el-col :span="24">
+                    <el-space wrap>
+                        <el-icon><Calendar /></el-icon>
+                        <el-text type="info">{{ formattedDate }}</el-text>
+                    </el-space>
+                </el-col>
+            </el-row>
+
+            <!-- 标签展示 -->
+            <el-space wrap v-if="tags.length" class="tag-group">
+                <el-tag 
+                    v-for="(tag, index) in tags" 
+                    :key="index" 
+                    size="small"
+                    type="info"
+                    effect="plain"
+                    round
+                >
+                    {{ tag }}
+                </el-tag>
+            </el-space>
+
+            <!-- 底部操作 -->
+            <div class="card-footer">
+                <el-link type="primary" :underline="false">
+                    阅读全文 <el-icon class="el-icon--right"><ArrowRight /></el-icon>
+                </el-link>
+            </div>
+        </a>
+    </div>
+</template>
+<style>
+.article-title {
+    margin-bottom: 8px;
+    color: var(--el-color-primary) !important;
+}
+
+.article-excerpt {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin: 8px 0;
+}
+
+.meta-row {
+    margin: 12px 0;
+}
+
+.tag-group {
+    margin-top: 12px;
+}
+
+.card-footer {
+    margin-top: 16px;
+    border-top: 1px solid var(--el-border-color-light);
+    padding-top: 12px;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-card" :class="{ 'has-border': border }">
+  <div class="a-card" :class="{ 'has-border': border }">
     <!-- 头像区域 -->
     <div class="avatar-wrapper">
       <img :src="avatar" :alt="name" class="avatar" @error="handleAvatarError">
@@ -74,22 +74,6 @@ const handleAvatarError = (e) => {
 </script>
 
 <style>
-.profile-card {
-  background: whitesmoke;
-  border-radius: 12px;
-  padding: 24px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 100%;
-}
-
-.profile-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-}
-
-
-
 /* 头像样式 */
 .avatar-wrapper {
   width: 100px;

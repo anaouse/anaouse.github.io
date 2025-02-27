@@ -45,7 +45,6 @@
 
 <script setup>
 
-import { ref } from 'vue';
 const props = defineProps({
   logo: {
     type: String,
@@ -90,20 +89,21 @@ const props = defineProps({
 
 const handleMenuClick = (item) => {
   if (item.children?.length) {
-    // 包含子菜单时不执行跳转
     return
   }
 
   if (item.link) {
-    // 外部链接处理
+    // 生成完整路径
+    const basePath = window.location.origin
+    const fullPath = item.link.startsWith('/') 
+      ? `${basePath}${item.link}`
+      : `${basePath}/${item.link}`
+
     if (item.link.startsWith('http')) {
       window.open(item.link, '_blank')
     }
-    // 内部路由处理（需配置vue-router）
     else {
-      import('vue-router').then(({ useRouter }) => {
-        window.open(item.link, '_blank')
-      })
+      window.open(fullPath, '_blank') // 保持新标签页打开行为
     }
   }
 }
@@ -137,7 +137,7 @@ const handleMenuClick = (item) => {
   transition: transform 0.3s ease;
 }
 
-.brand-logo:hover img {
+.brand-group:hover img {
   transform: scale(1.1);
 }
 
@@ -253,25 +253,5 @@ el-dropdown,
   }
 }
 
-/* 全局下拉菜单样式 */
-.custom-dropdown .el-dropdown-menu {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  padding: 8px 0;
-}
 
-.custom-dropdown .menu-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  color: #2c3e50;
-  transition: background 0.2s ease;
-  white-space: nowrap;
-}
-
-.custom-dropdown .menu-item:hover {
-  background: #f8f9fa;
-}
 </style>
