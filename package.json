@@ -12,7 +12,7 @@
     "build": "vitepress build --outDir docs",
     "dev": "vitepress dev",
     "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build --outDir docs",
+    "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
   },
   "dependencies": {

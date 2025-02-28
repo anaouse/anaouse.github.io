@@ -48,7 +48,7 @@ export default defineConfig({
             key: 'action2',
             label: '关于',
             icon: 'fa-light fa-address-card',
-            link: 'About/index'
+            link: 'About'
           },
           {
             key: 'music',
@@ -72,7 +72,7 @@ export default defineConfig({
             key: 'tags',
             label: '标签',
             icon: 'fa-light fa-tags',
-            link: '/tags/'
+            link: '/Tags/'
           },
           {
             key: 'categories',

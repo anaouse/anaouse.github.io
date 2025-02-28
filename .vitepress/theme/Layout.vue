@@ -1,17 +1,19 @@
 <script setup>
+import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import Starrysky from './components/Starrysky.vue';
-import { useData } from 'vitepress'
-const { page, frontmatter, theme } = useData()
 import navbar from './components/navbar.vue';
 import Home from './components/Home.vue';
-import NotFound from './components/NotFound.vue';
-import { ref, onMounted, onUnmounted ,watch} from 'vue'
 import postinfo from './components/postinfo.vue';
-import profieldcard from './components/profieldcard.vue';
+import NotFound from './components/NotFound.vue';
 import tocCard from './components/toc-card.vue';
+import profieldcard from './components/profieldcard.vue';
 import articleCard from './components/article-card.vue';
-import { data as posts } from './utils/posts.data.js'
 import moreFuc from './components/moreFuc.vue';
+import { useData } from 'vitepress'
+
+const { page, frontmatter, theme } = useData()
+import { data as posts } from './utils/posts.data.js'
+const isClient = typeof window !== 'undefined'
 // 状态栏&滚动条设置
 const scrollbarRef = ref()
 const contentContainer = ref()
@@ -19,6 +21,7 @@ const showNavbar = ref(true)
 const lastScrollY = ref(0)
 const scrollingDown = ref(false)
 const handleScroll = ({ scrollTop }) => {
+    if (!isClient) return
     const currentY = scrollTop
     const windowHeight = scrollbarRef.value?.wrapRef?.clientHeight || 0
     scrollingDown.value = currentY > lastScrollY.value
@@ -35,31 +38,18 @@ const handleScroll = ({ scrollTop }) => {
     }
     lastScrollY.value = currentY
 }
-// 使用被动事件监听器优化性能
-let rafId
 
-const fullscreenLoading = ref(false)
-const isPageLoaded = ref(false)
-
-// 监听页面元数据变化
-watch([page, frontmatter], ([newPage, newFrontmatter]) => {
-  if (newPage.isNotFound || newFrontmatter.layout) {
-    // 当页面元数据就绪时，延迟 500ms 确保 DOM 渲染完成
-    setTimeout(() => {
-      isPageLoaded.value = true
-      fullscreenLoading.value = false
-    }, 500)
-  }
-}, { immediate: true, deep: true })
 
 onMounted(() => {
-    fullscreenLoading.value = true
-    contentContainer.value = scrollbarRef.value?.wrapRef?.querySelector('.el-scrollbar__view')
+    if (!isClient) return
+    nextTick(() => { // 等待 DOM 更新
+        contentContainer.value = scrollbarRef.value?.wrapRef?.querySelector('.el-scrollbar__view')
+    })
 })
 
 onUnmounted(() => {
+    if (!isClient) return
     window.removeEventListener('scroll', optimizedScrollHandler)
-    if (rafId) cancelAnimationFrame(rafId)
 })
 </script>
 
@@ -67,7 +57,6 @@ onUnmounted(() => {
     <keep-alive>
         <Starrysky />
     </keep-alive>
-    <div v-loading.fullscreen.lock="fullscreenLoading && !isPageLoaded"></div>
     <div class="main-layout">
         <div class="navbar-container" :class="{ 'nav-hidden': !showNavbar }">
             <navbar />
@@ -81,7 +70,6 @@ onUnmounted(() => {
             <div class="homePage Page" v-if="frontmatter.layout === 'home'">
                 <Home />
                 <div class="content-container">
-
                     <div class="page-wrapper">
                         <div class="a-card vp-doc">
                             <Content />
