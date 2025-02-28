@@ -24,8 +24,8 @@
                             <el-checkbox-button v-for="tag in Tags" :key="tag" :value="tag" :label="tag" />
                         </el-space>
                     </el-checkbox-group>
-                    <el-select-v2 v-model="ExclusionList" filterable :options="tagOptions" placeholder="选择排除的标签" multiple
-                        class="mb-2" />
+                    <el-select-v2 v-model="ExclusionList" filterable :options="tagOptions" placeholder="选择排除的标签"
+                        multiple class="mb-2" />
                 </div>
             </el-col>
         </el-row>
@@ -34,17 +34,19 @@
         <div class="result-section">
             <h3>匹配文章（{{ filteredPosts.length }}篇）📚</h3>
             <el-divider />
-            <el-space wrap>
-                <div v-for="post in filteredPosts" :key="post.url" class="a-card" style="width: 300px;">
-                    <a :href="post.url">{{ post.title }}</a>
+            <div>
+                <div v-for="post in filteredPosts" :key="post.link">
+                    <articleCard :post="post" />
                 </div>
-            </el-space>
+            </div>
         </div>
     </div>
 </template>
 <script setup>
 import { ref, computed } from 'vue'
 import { data as posts } from '../utils/posts.data.js'
+import articleCard from './article-card.vue';
+
 const Tags = ref([])
 const ExclusionList = ref([])
 const AllowList = ref([])
@@ -90,8 +92,10 @@ const filteredPosts = computed(() => {
     border-radius: 8px;
     margin-bottom: 20px;
 }
+
 .result-section {
     margin-top: 30px;
+    display: block;
 }
 
 .mb-2 {

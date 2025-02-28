@@ -70,7 +70,7 @@ const formattedDate = computed(() => {
             <!-- 底部操作 -->
             <div class="card-footer">
                 <el-link type="primary" :underline="false">
-                    阅读全文 <el-icon class="el-icon--right"><ArrowRight /></el-icon>
+                    阅读全文
                 </el-link>
             </div>
         </a>
@@ -80,6 +80,7 @@ const formattedDate = computed(() => {
 .article-title {
     margin-bottom: 8px;
     color: var(--el-color-primary) !important;
+    max-width: 100%;
 }
 
 .article-excerpt {
