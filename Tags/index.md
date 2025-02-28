@@ -6,4 +6,6 @@ title: 标签页
 <script setup>
 import ArchivePage from '../.vitepress/theme/components/ArchivePage.vue'
 </script>
-<ArchivePage/>
+<ClientOnly>
+  <ArchivePage />
+</ClientOnly>

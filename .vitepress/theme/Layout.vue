@@ -41,21 +41,19 @@ const handleScroll = ({ scrollTop }) => {
 
 
 onMounted(() => {
-    if (!isClient) return
-    nextTick(() => { // 等待 DOM 更新
-        contentContainer.value = scrollbarRef.value?.wrapRef?.querySelector('.el-scrollbar__view')
-    })
+    contentContainer.value = scrollbarRef.value?.wrapRef?.querySelector('.el-scrollbar__view')
 })
 
 onUnmounted(() => {
-    if (!isClient) return
     window.removeEventListener('scroll', optimizedScrollHandler)
 })
 </script>
 
 <template>
     <keep-alive>
-        <Starrysky />
+        <ClientOnly>
+            <Starrysky />
+        </ClientOnly>
     </keep-alive>
     <div class="main-layout">
         <div class="navbar-container" :class="{ 'nav-hidden': !showNavbar }">
