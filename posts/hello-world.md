@@ -2,7 +2,7 @@
 title: Hello World！ 
 date: 2024-01-25 15:35:57
 cover: https://resource-un4.pages.dev/yspic/dm1.webp
-categories: 瞎捣鼓
+tags: 瞎捣鼓
 copyright: true
 copyright_author: Fomalhaut
 copyright_url: https://www.fomal.cc/posts/4aa2d85f.html

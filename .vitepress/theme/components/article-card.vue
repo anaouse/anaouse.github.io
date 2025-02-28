@@ -42,22 +42,16 @@ const formattedDate = computed(() => {
         <a :href="link" class="article-link">
             <!-- 标题部分 -->
             <el-text tag="h3" class="article-title" size="large">{{ title }}</el-text>
-            
-            <!-- 摘要部分 -->
-            <el-text class="article-excerpt" type="info" truncated>{{ excerpt }}</el-text>
-
-            <!-- 元信息布局 -->
-            <el-row :gutter="8" class="meta-row">
-                <el-col :span="24">
-                    <el-space wrap>
-                        <el-icon><Calendar /></el-icon>
-                        <el-text type="info">{{ formattedDate }}</el-text>
-                    </el-space>
-                </el-col>
-            </el-row>
-
             <!-- 标签展示 -->
             <el-space wrap v-if="tags.length" class="tag-group">
+                <el-tag 
+                    size="small"
+                    type="primary"
+                    effect="plain"
+                    round
+                >
+                {{ formattedDate }}
+                </el-tag>
                 <el-tag 
                     v-for="(tag, index) in tags" 
                     :key="index" 
@@ -69,6 +63,9 @@ const formattedDate = computed(() => {
                     {{ tag }}
                 </el-tag>
             </el-space>
+            <el-divider />
+            <!-- 摘要部分 -->
+            <el-text class="article-excerpt" type="info" truncated>{{ excerpt }}</el-text>
 
             <!-- 底部操作 -->
             <div class="card-footer">
@@ -91,10 +88,6 @@ const formattedDate = computed(() => {
     -webkit-box-orient: vertical;
     overflow: hidden;
     margin: 8px 0;
-}
-
-.meta-row {
-    margin: 12px 0;
 }
 
 .tag-group {

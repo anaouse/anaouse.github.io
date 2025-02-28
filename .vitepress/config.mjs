@@ -8,11 +8,6 @@ export default defineConfig({
   ],
   description: "A VitePress Site",
   themeConfig: {
-    // 全局背景图
-    bgImage: {
-      src: '',
-      alt: '57D02'
-    },
     // 首页配置
     mainTitle: '57D02',
     subTitles: ['全栈开发爱好者', '算法优化爱好者', '软件开发爱好者', '安卓与嵌入式开发爱好者'],
@@ -69,7 +64,7 @@ export default defineConfig({
     avatar: "https://resource-un4.pages.dev/article/yjtp.webp",
     name: '57D02',
     position: '全栈开发、优化算法爱好者',
-    bio: '呜呜呜呜呜呜',
+    bio: '红红火火恍恍惚惚',
     socialLinks: [
       {
         name: 'GitHub',

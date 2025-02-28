@@ -4,7 +4,7 @@ date: 2024-02-22 22:58:17
 cover: https://resource-un4.pages.dev/article/图片.webp
 copyright_author: 川原 礫
 copyright_info: 翻译：rockroxas 校对：J.C.T.G=SDNagi
-categories: SAO
+tags: SAO
 copyright: true
 --- 
 

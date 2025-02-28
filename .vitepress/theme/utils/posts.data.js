@@ -39,7 +39,7 @@ const contentLoaderConfig = {
                 date: page.frontmatter.date,
                 link: page.url,
                 excerpt: excerpt,
-                tags: (page.frontmatter.tags?.split(',') ?? []).map(tag => tag.trim()),
+                tags: (page.frontmatter.tags?.split(/[,\s]+/) ?? []).map(tag => tag.trim()),
                 categories: (page.frontmatter.categories?.split(',') ?? []).map(category => category.trim()),
                 cover: page.frontmatter.cover || ''  // 封面图也添加默认值
             }

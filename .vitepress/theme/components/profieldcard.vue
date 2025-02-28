@@ -10,7 +10,6 @@
       <h2 class="name">{{ name }}</h2>
       <div class="position">{{ position }}</div>
       <p class="bio">{{ bio }}</p>
-
       <!-- 社交链接 -->
       <div class="social-links">
         <a v-for="(link, index) in socialLinks" :key="index" :href="link.url" target="_blank" class="social-item"

@@ -2,7 +2,7 @@
 title: columngeneration 列生成算法
 date: 2024-05-10 23:07:59
 cover: https://resource-un4.pages.dev/yspic/Marx&Engels.webp
-categories: Learn
+tags: Learn
 copyright: true
 ---
 

@@ -2,7 +2,7 @@
 title: 如何写一篇hexo博客 
 date: 2024-01-29 23:39:47
 cover: https://resource-un4.pages.dev/yspic/dm1.webp
-categories: 瞎捣鼓
+tags: 瞎捣鼓
 copyright: true
 ---
 

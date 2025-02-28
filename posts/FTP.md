@@ -1,7 +1,7 @@
 ---
 title: FTP for Android and Window 
 date: 2024-01-25 15:35:57
-categories: 瞎捣鼓
+tags: 瞎捣鼓
 cover: https://resource-un4.pages.dev/yspic/Marx&Engels.webp
 copyright: true
 ---

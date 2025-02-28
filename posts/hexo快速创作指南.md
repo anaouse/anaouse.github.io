@@ -1,7 +1,7 @@
 ---
 title: hexo快速创作指南 
 date: 2024-02-17 20:25:41
-categories: 瞎捣鼓
+tags: 瞎捣鼓
 cover: https://resource-un4.pages.dev/yspic/dm2.webp
 copyright: true
 ---

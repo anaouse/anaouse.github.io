@@ -3,14 +3,14 @@
     <!-- 左侧区 -->
     <div class="brand-group">
       <a class="brand-logo" href="/">
-        <img :src="props.logo" alt="avatar" >
+        <img :src="props.logo" alt="avatar">
       </a>
       <a class="brand-text" href="/">{{ props.title }}</a>
     </div>
 
     <!-- 中间区 -->
     <div class="search-container">
-      <div class="search-input"  v-if="false">
+      <div class="search-input" v-if="false">
         <input type="text" placeholder="动物怎么叫" class="search-field">
         <i class="fa-solid fa-magnifying-glass search-icon"></i>
       </div>
@@ -34,7 +34,6 @@
               @click="handleMenuClick(subitem)">
               <i :class="subitem.icon"></i>
               {{ subitem.label }}
-              
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -95,7 +94,7 @@ const handleMenuClick = (item) => {
   if (item.link) {
     // 生成完整路径
     const basePath = window.location.origin
-    const fullPath = item.link.startsWith('/') 
+    const fullPath = item.link.startsWith('/')
       ? `${basePath}${item.link}`
       : `${basePath}/${item.link}`
 
@@ -190,6 +189,7 @@ el-dropdown,
   gap: 12px;
   border: 0px;
 }
+
 [class*="el-"]:focus-visible {
   outline: none !important;
 }
@@ -199,11 +199,13 @@ el-dropdown,
   line-height: 2;
   margin-left: 20px;
 }
-.menu-fitem span{
+
+.menu-fitem span {
   background: linear-gradient(to right, #3498db, #2980b9) no-repeat left bottom;
   background-size: 0 5px;
   transition: background-size 0.3s;
-  padding-bottom: 10px; /* 添加底部内边距创造空隙 */
+  padding-bottom: 10px;
+  /* 添加底部内边距创造空隙 */
   font-size: 1rem;
 }
 
@@ -244,14 +246,8 @@ el-dropdown,
 }
 
 @media (max-width: 480px) {
-  .menu-fitem span {
-    display: none;
-  }
-
   .menu-fitem i {
     margin: 0;
   }
 }
-
-
 </style>
