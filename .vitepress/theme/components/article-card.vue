@@ -15,14 +15,14 @@ const props = defineProps({
     }
 })
 // 使用解构赋值设置默认值
-const { 
+const {
     title = 'Untitled Article',
     author = 'Anonymous',
     date = '',
     link = '#',
     tags = [],
     categories = [],
-    excerpt = '' 
+    excerpt = ''
 } = props.post || {}
 const formattedDate = computed(() => {
     if (!date) return 'Unknown date'
@@ -41,26 +41,14 @@ const formattedDate = computed(() => {
     <div class="a-card">
         <a :href="link" class="article-link">
             <!-- 标题部分 -->
-            <el-text tag="h3" class="article-title" size="large">{{ title }}</el-text>
+            <el-text tag="h3" class="article-title" size="large" >{{ title }}</el-text>
             <!-- 标签展示 -->
             <el-space wrap v-if="tags.length" class="tag-group">
-                <el-tag 
-                    size="small"
-                    type="primary"
-                    effect="plain"
-                    round
-                >
-                {{ formattedDate }}
+                <el-tag size="small" type="primary" effect="plain" round>
+                    <i class="fa-light fa-calendar"></i>{{ formattedDate }}
                 </el-tag>
-                <el-tag 
-                    v-for="(tag, index) in tags" 
-                    :key="index" 
-                    size="small"
-                    type="info"
-                    effect="plain"
-                    round
-                >
-                    {{ tag }}
+                <el-tag v-for="(tag, index) in tags" :key="index" size="small" type="info" effect="plain" round>
+                    <i class="fa-light fa-tag"></i>{{ tag }}
                 </el-tag>
             </el-space>
             <el-divider />
@@ -81,6 +69,7 @@ const formattedDate = computed(() => {
     margin-bottom: 8px;
     color: var(--el-color-primary) !important;
     max-width: 100%;
+    text-decoration:none
 }
 
 .article-excerpt {

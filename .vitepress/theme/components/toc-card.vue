@@ -2,25 +2,22 @@
     <div class="toc-card a-card">
         <i class="fas fa-columns" />
         <span class="toc-title" style="font-weight: 600;">目录导航</span>
-        <el-scrollbar>
-            <template v-if="currentPost?.headings?.length">
-                <ul class="toc-list" style="max-height: 500px" :wrap-style="{ overflowX: 'hidden' }">
-                    <li v-for="heading in currentPost.headings" :key="heading.anchor"
-                        :class="[`toc-level-${heading.level}`, { active: currentAnchor === heading.anchor }]">
-                        <a :href="getHeadingLink(heading)" class="toc-link"
-                            @click.prevent="handleAnchorClick(heading.anchor)">
-                            {{ heading.text }}
-                        </a>
-                    </li>
-                </ul>
-            </template>
-            <div v-else class="empty-tip">暂无目录</div>
-        </el-scrollbar>
+        <el-anchor v-if="currentPost?.headings?.length"
+          :container="scrollContainer"
+          direction="vertical"
+          type="underline"
+          :offset="30"
+          @click="handleClick"
+          style="background-color: transparent;"
+        >
+          <el-anchor-link v-for="heading in currentPost.headings" :href="heading.anchor" :title="heading.text" />
+          
+        </el-anchor>
     </div>
 </template>
 
 <script setup>
-import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { computed, ref, onMounted} from 'vue'
 
 // 通用工具函数
 const normalizeLink = link => link.replace(/\.(md|html)$/, '')
@@ -33,10 +30,9 @@ const props = defineProps({
     currentUrl: String
 })
 
-const currentAnchor = ref(typeof window !== 'undefined' ? decodeURIComponent(window.location.hash) : '')
 
 const scrollContainer = ref(null)
-let scrollTimer = null
+
 
 // 计算属性
 const normalizedUrl = computed(() => {
@@ -52,87 +48,11 @@ const currentPost = computed(() =>
     props.posts.find(post => normalizeLink(post.link) === normalizedUrl.value)
 )
 
-// console.log(currentPost)
-// console.log(normalizedUrl)
-// 锚点操作方法
-const getHeadingLink = heading => `${normalizeLink(currentPost.value.link)}${heading.anchor}`
-
-const handleAnchorClick = anchor => {
-    currentAnchor.value = anchor
-    history.replaceState(null, '', anchor)
-    smoothScroll(anchor)
+const handleClick = (e) => {
+  e.preventDefault()
 }
-
-const smoothScroll = anchor => {
-    if (!anchor || anchor === '#') return
-    const decodedAnchor = decodeURIComponent(anchor)  // 添加解码
-    const target = document.querySelector(decodedAnchor.startsWith('#')
-        ? decodedAnchor
-        : `#${decodedAnchor}`)
-    if (!target) return
-
-    const container = scrollContainer.value
-    const headerOffset = document.querySelector('header')?.offsetHeight || 70
-    const targetY = calculateScrollPosition(target, container) - headerOffset
-
-    container.scrollTo?.({ top: targetY, behavior: 'smooth' }) || (container.scrollTop = targetY)
-}
-
-const calculateScrollPosition = (target, container) => {
-    const targetRect = target.getBoundingClientRect()
-    return container === window
-        ? window.scrollY + targetRect.top
-        : container.scrollTop + targetRect.top - container.getBoundingClientRect().top
-}
-
-// 自动锚点检测
-const updateActiveAnchor = () => {
-    clearTimeout(scrollTimer)
-    scrollTimer = setTimeout(() => {
-        if (!currentPost.value?.headings) return
-
-        const anchors = currentPost.value.headings.map(h => `#${h.anchor.slice(1)}`)
-        const closest = findClosestAnchor(anchors)
-
-        if (closest && closest !== currentAnchor.value) {
-            currentAnchor.value = closest
-            history.replaceState(null, '', closest)
-        }
-    }, 150)
-}
-
-const findClosestAnchor = anchors => {
-    const container = scrollContainer.value
-    const scrollTop = container === window ? window.scrollY : container.scrollTop
-
-    return anchors.reduce((closest, anchor) => {
-        const element = document.querySelector(anchor)
-        if (!element) return closest
-
-        const position = calculateScrollPosition(element, container)
-        const distance = Math.abs(position - scrollTop - 100) // 100px 顶部偏移
-
-        return distance < (closest.distance ?? Infinity)
-            ? { anchor, distance }
-            : closest
-    }, {}).anchor
-}
-
-const handleHashChange = e => {
-    currentAnchor.value = decodeURIComponent(new URL(e.newURL).hash) // 解码新哈希
-    smoothScroll(currentAnchor.value)
-}
-
 onMounted(() => {
     scrollContainer.value = getScrollContainer()
-    scrollContainer.value.addEventListener('scroll', updateActiveAnchor)
-    window.addEventListener('hashchange', handleHashChange)
-    updateActiveAnchor()
-})
-
-onUnmounted(() => {
-    scrollContainer.value?.removeEventListener('scroll', updateActiveAnchor)
-    window.removeEventListener('hashchange', handleHashChange)
 })
 </script>
 

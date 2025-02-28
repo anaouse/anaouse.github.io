@@ -1,6 +1,11 @@
+@font-face {
+  font-family: 'AZY';
+  src: url('../font/ZhuZiAWan2.woff2') format('woff2');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'AZY', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
     width: 100vw;
@@ -32,6 +37,9 @@ body {
   --content-min-width: 250px;
   --sidebar-width: 300px;
   --sidebar-initial-offset: -300px;
+  --el-fill-color-blank:transparent;
+  
+  --el-collapse-header-bg-color: transparent;
 }
 
 .navbar-container {

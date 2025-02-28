@@ -23,13 +23,13 @@ export default defineConfig({
           {
             key: 'action1',
             label: '闪装智拼',
-            icon: 'fas fa-cubes',
+            icon: 'fa-light fa-cubes',
             link: 'https://box.57d02.cn'
           },
           {
             key: 'action2',
             label: 'alist云盘',
-            icon: 'fa-solid fa-square',
+            icon: 'fa-light fa-cloud',
             link: 'https://alist.57d02.cn'
           },
         ]
@@ -41,20 +41,50 @@ export default defineConfig({
           {
             key: 'action1',
             label: '付费CSDN解析',
-            icon: 'fa-solid fa-circle',
+            icon: 'fa-light fa-magnifying-glass-chart',
             link: 'https://mark.cuckooing.cn/'
           },
           {
             key: 'action2',
             label: '关于',
-            icon: 'fa-solid fa-square',
+            icon: 'fa-light fa-address-card',
             link: 'About/index'
           },
           {
-            key: 'action3',
+            key: 'music',
+            label: '音乐',
+            icon: 'fa-light fa-music',
+            link: '/music/'
+          },
+          {
+            key: 'movies',
+            label: '电影',
+            icon: 'fa-light fa-video',
+            link: '/movies/'
+          },
+          {
+            key: 'archives',
+            label: '归档',
+            icon: 'fa-light fa-archive',
+            link: '/archives/'
+          },
+          {
+            key: 'tags',
             label: '标签',
-            icon: 'fa-solid fa-star',
-            link: 'Tags/index'
+            icon: 'fa-light fa-tags',
+            link: '/tags/'
+          },
+          {
+            key: 'categories',
+            label: '分类',
+            icon: 'fa-light fa-folder-open',
+            link: '/categories/'
+          },
+          {
+            key: 'link',
+            label: '链接',
+            icon: 'fa-light fa-link',
+            link: '/link/'
           }
         ]
       }

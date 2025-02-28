@@ -4,7 +4,6 @@
     <div class="avatar-wrapper">
       <img :src="avatar" :alt="name" class="avatar" @error="handleAvatarError">
     </div>
-
     <!-- 个人信息 -->
     <div class="profile-content">
       <h2 class="name">{{ name }}</h2>
@@ -22,50 +21,18 @@
 </template>
 
 <script setup>
+import { useData } from 'vitepress'
 
-const props = defineProps({
-  avatar: {
-    type: String,
-    default: "https://resource-un4.pages.dev/article/yjtp.webp"
-  },
-  name: {
-    type: String,
-    required: true
-  },
-  position: {
-    type: String,
-    default: '全栈开发者'
-  },
-  bio: {
-    type: String,
-    default: '热爱技术，乐于分享'
-  },
-  socialLinks: {
-    type: Array,
-    default: () => [
-      {
-        name: 'GitHub',
-        icon: 'fa-brands fa-github',
-        url: '#'
-      },
-      {
-        name: '知乎',
-        icon: 'fa-brands fa-zhihu',
-        url: '#'
-      },
-      {
-        name: '邮箱',
-        icon: 'fa-regular fa-envelope',
-        url: 'mailto:#@example.com'
-      }
-    ]
-  },
-  border: {
-    type: Boolean,
-    default: true
-  }
-})
+const { theme } = useData()
 
+const {
+  avatar = "",
+  name = '未命名',
+  position = '全栈开发者',
+  bio = '热爱技术，乐于分享',
+  socialLinks = [],
+  border = true
+} = theme.value
 const defaultAvatar = '/default-avatar.png'
 const handleAvatarError = (e) => {
   e.target.src = defaultAvatar

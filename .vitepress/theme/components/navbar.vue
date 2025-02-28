@@ -1,11 +1,14 @@
 <template>
+  <el-drawer v-model="drawer" size="90%" style="background-color: antiquewhite;">
+    <moreFuc />
+  </el-drawer>
   <nav class="navbar">
     <!-- 左侧区 -->
     <div class="brand-group">
       <a class="brand-logo" href="/">
-        <img :src="props.logo" alt="avatar">
+        <img :src="logo" alt="avatar">
       </a>
-      <a class="brand-text" href="/">{{ props.title }}</a>
+      <a class="brand-text" href="/">{{ title }}</a>
     </div>
 
     <!-- 中间区 -->
@@ -18,73 +21,76 @@
 
     <!-- 右侧菜单区 -->
     <div class="menu-group">
-      <el-dropdown v-for="item in menuItems" :key="item.label" popper-class="custom-dropdown">
+      <div class="dropitem">
+        <el-dropdown v-for="item in menuItems" :key="item.label" popper-class="custom-dropdown">
+          <h3 class="menu-fitem">
+            <span>
+              <i :class="item.icon"></i>
+              {{ item.label }}
+              <i class="fa-light fa-angle-up arrow-icon"></i>
+            </span>
+          </h3>
+          <template #dropdown v-if="item.children?.length">
+            <el-dropdown-menu>
+              <el-dropdown-item v-for="subitem in item.children" :key="subitem.key" class="menu-item"
+                @click="handleMenuClick(subitem)">
+                <i :class="subitem.icon"></i>
+                {{ subitem.label }}
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </div>
+      <div class="sbbtn">
         <h3 class="menu-fitem">
-          <span>
-            <i :class="item.icon"></i>
-            {{ item.label }}
-            <i class="fa-light fa-angle-up arrow-icon"></i>
-          </span>
-        </h3>
-
-
-        <template #dropdown v-if="item.children?.length">
-          <el-dropdown-menu>
-            <el-dropdown-item v-for="subitem in item.children" :key="subitem.key" class="menu-item"
-              @click="handleMenuClick(subitem)">
-              <i :class="subitem.icon"></i>
-              {{ subitem.label }}
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
+        <span>
+          <i class="fa-solid fa-list" @click="drawer = true"></i>
+        </span>
+      </h3>
+      </div>
+      
     </div>
+
   </nav>
 </template>
 
 <script setup>
+import moreFuc from './moreFuc.vue';
+import { ref } from 'vue'
+import { useData } from 'vitepress'
+const { theme } = useData()
+const {
+  logo = "https://resource-un4.pages.dev/article/yjtp.webp",
+  title = "57D02",
+  menuItems = [
+    {
+      label: '更多',
+      icon: 'fa-solid fa-list',
+      children: [
+        {
+          key: 'action1',
+          label: 'action1',
+          icon: 'fa-solid fa-circle',
+          link: 'website'
+        },
+        {
+          key: 'action2',
+          label: 'Action 2',
+          icon: 'fa-solid fa-square',
+          link: 'index'
+        },
+        {
+          key: 'action3',
+          label: 'Action 3',
+          icon: 'fa-solid fa-star',
+          link: 'website'
+        }
+      ]
+    }
+  ]
+} = theme.value
 
-const props = defineProps({
-  logo: {
-    type: String,
-    default: "https://resource-un4.pages.dev/article/yjtp.webp"
-  },
-  title: {
-    type: String,
-    default: '57D02'
-  },
-  menuItems: {
-    type: Array,
-    default: () => [
-      {
-        label: '更多',
-        icon: 'fa-solid fa-list',
-        children: [
-          {
-            key: 'action1',
-            label: 'action1',
-            icon: 'fa-solid fa-circle',
-            link: 'website'
-          },
-          {
-            key: 'action2',
-            label: 'Action 2',
-            icon: 'fa-solid fa-square',
-            link: 'index'
-          },
-          {
-            key: 'action3',
-            label: 'Action 3',
-            icon: 'fa-solid fa-star',
-            link: 'website'
-          }
-        ]
-      }
-    ]
-  }
-})
-
-
+const drawer = ref(false)
 
 const handleMenuClick = (item) => {
   if (item.children?.length) {
@@ -147,39 +153,6 @@ const handleMenuClick = (item) => {
   text-decoration: none;
 }
 
-/* 搜索区样式 */
-.search-container {
-  display: flex;
-  justify-content: center;
-}
-
-.navbar .search-input {
-  position: relative;
-  width: 100%;
-  max-width: 400px;
-}
-
-.navbar .search-field {
-  width: 100%;
-  padding: 8px 40px 8px 16px;
-  border: 2px solid #ecf0f1;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.9);
-  transition: all 0.3s ease;
-}
-
-.navbar .search-field:focus {
-  outline: none;
-  box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
-}
-
-.navbar .search-icon {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #3498db;
-}
 
 /* 菜单区样式 */
 el-dropdown,
@@ -205,12 +178,22 @@ el-dropdown,
   background-size: 0 5px;
   transition: background-size 0.3s;
   padding-bottom: 10px;
-  /* 添加底部内边距创造空隙 */
   font-size: 1rem;
+  white-space: nowrap;
+  /* 新增禁止换行属性 */
+  display: inline-flex;
+  /* 使用弹性布局保持元素对齐 */
+  align-items: center;
+  gap: 6px;
+  /* 控制图标和文字间距 */
 }
 
 .menu-fitem span:hover {
   background-size: 100% 5px;
+}
+
+.sbbtn {
+  display: none;
 }
 
 .arrow-icon {
@@ -233,6 +216,7 @@ el-dropdown,
   .brand-text {
     display: none;
   }
+
 }
 
 @media (max-width: 768px) {
@@ -249,5 +233,14 @@ el-dropdown,
   .menu-fitem i {
     margin: 0;
   }
+  .dropitem{
+    display: none;
+  }
+
+  .sbbtn {
+    display: flex;
+  }
+
 }
+
 </style>
