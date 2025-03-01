@@ -1,5 +1,5 @@
 <template>
-    <el-collapse accordion>
+    <el-collapse v-if="isClient" accordion>
         <el-collapse v-model="activeName" accordion>
             <el-collapse-item v-for="(item, index) in menuItems" :title="item.label" :name="index">
 
@@ -17,6 +17,8 @@
 <script setup>
 import { useData } from 'vitepress'
 const { theme } = useData()
+import { ref,onMounted } from 'vue'
+const isClient = ref(false)
 const {
     menuItems = [
         {
@@ -46,7 +48,6 @@ const {
     ]
 } = theme.value
 
-import { ref } from 'vue'
 
 const activeName = ref('1')
 
@@ -70,7 +71,9 @@ const handleMenuClick = (item) => {
         }
     }
 }
-
+onMounted(() => {
+      isClient.value = true
+    })
 </script>
 <style>
 :root {

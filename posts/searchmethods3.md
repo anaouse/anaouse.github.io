@@ -2,7 +2,7 @@
 title: 搜索与优化 
 date: 2024-10-04 22:47:50
 cover: https://resource-un4.pages.dev/yspic/dm2.webp
-tags: Learn
+tags: Learn 优化算法
 copyright: true
 ---
 

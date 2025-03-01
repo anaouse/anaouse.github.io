@@ -2,7 +2,7 @@
 title: Searchmethod (一)
 date: 2024-09-23 21:12:48
 copyright: true
-tags: Learn
+tags: Learn 优化算法
 ---
 
 # Searchmethod（一）

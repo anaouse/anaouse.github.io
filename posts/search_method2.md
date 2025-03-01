@@ -2,7 +2,7 @@
 title: search_method (二)
 date: 2024-10-04 17:34:45
 cover: https://resource-un4.pages.dev/yspic/dm2.webp
-tags: Learn
+tags: Learn 优化算法
 copyright: true
 ---
 
