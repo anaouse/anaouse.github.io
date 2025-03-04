@@ -25,7 +25,7 @@ npm run dev
 ```
 构建生产版本
 > 这将生成构建到docs目录，可以直接部署到GitHub Pages
->
+
 
 ```bash
 npm run build:docs
@@ -79,6 +79,7 @@ Blog/
 └── package.json       # 依赖配置
 ```
 ### 文章规范
+
 在 posts 目录中创建 .md 文件：
 
 
@@ -92,3 +93,28 @@ layout: doc # 可选布局
 ```
 贡献
 欢迎贡献代码和反馈问题。
+
+### 部署
+
+- 在public文件夹中的CNAME写好域名
+- 配置好自己域名的DNS为github Page域名（自行搜索）
+
+##### 本地构建
+
+1. 构建生产版本
+
+> 这将生成构建到docs目录，可以直接部署到GitHub Pages
+>
+> 可能有build complete in 13.26s.之后卡住，自行结束即可。没时间修bug了 
+
+
+```bash
+npm run build:docs
+```
+
+2. 上传到github
+3. 配置GitHub Page
+
+![1741082221235](https://resource-un4.pages.dev/article/1741082221235.png)
+
+##### eee
