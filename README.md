@@ -1,19 +1,18 @@
 # VitePress-Butterfly 主题
 
-基于VitePress和Element Plus的现代化文档主题，集成多种增强功能和视觉优化。
+基于VitePress和Element Plus的卡片式仿butterfly主题。
 
-## ? 特性
+##  特性
 
 - 基于 VitePress 1.6.3 + Vue 3 构建
 - 集成 Element Plus 组件库
 - 响应式布局和动态导航栏
 - 自定义主题样式系统
 - 内置文章卡片、标签云等组件
-- 支持暗色/亮色主题切换
 - SEO 友好配置
 - 静态资源自动优化
 
-## ? 快速开始
+##  快速开始
 
 ### 安装依赖
 ```bash
@@ -84,12 +83,11 @@ Blog/
 
 
 ```markdown
-Apply
 ---
 title: 文章标题
 date: 2024-03-20
 author: 作者
-layout: home # 可选布局
+layout: doc # 可选布局
 ---
 ```
 贡献
