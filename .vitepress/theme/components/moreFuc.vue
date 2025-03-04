@@ -75,8 +75,8 @@ onMounted(() => {
       isClient.value = true
     })
 </script>
-<style>
-:root {
+<style scoped>
+.a-card {
     --el-fill-color-blank: transparent;
 }
 </style>

@@ -1,23 +1,16 @@
 {
   "devDependencies": {
-    "autoprefixer": "^10.4.20",
-    "less": "^4.2.2",
-    "less-loader": "^12.2.0",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^3.4.17",
     "vitepress": "^1.6.3",
     "vue": "^3.5.13"
   },
   "scripts": {
-    "build": "vitepress build --outDir docs",
     "dev": "vitepress dev",
-    "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
-    "docs:preview": "vitepress preview"
+    "build": "vitepress build",
+    "preview": "vitepress preview",
+    "build:docs": "vitepress build --outDir docs"
   },
   "dependencies": {
-    "element-plus": "^2.9.4",
-    "vue-router": "^4.5.0"
+    "element-plus": "^2.9.5"
   },
   "type": "module"
 }

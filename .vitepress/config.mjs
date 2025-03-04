@@ -1,12 +1,20 @@
 import { defineConfig } from 'vitepress'
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "57D02",
+  title: "VitePress-Butterfly",
+  description: "VitePress-Butterfly",
   head: [
     // 添加图标
-    ['link', { rel: 'icon', href: '/favicon.ico' }]
+    ['link', { rel: 'icon', href: '/favicon.ico' },
+      {
+        rel: 'preload',
+        href: '/font/ZhuZiAWan2.woff2',
+        as: 'font',
+        type: 'font/woff2',
+        crossorigin: 'anonymous'
+      }]
   ],
-  description: "A VitePress Site",
   themeConfig: {
     // 首页配置
     mainTitle: '57D02',
@@ -88,7 +96,7 @@ export default defineConfig({
           }
         ]
       }
-      
+
     ],
     // 侧边信息栏配置
     avatar: "https://resource-un4.pages.dev/article/yjtp.webp",

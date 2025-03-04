@@ -1,52 +1,37 @@
 {
-  "hash": "7628089f",
-  "configHash": "04ad1703",
-  "lockfileHash": "f4bed993",
-  "browserHash": "8934c043",
+  "hash": "0804a42d",
+  "configHash": "87a1663f",
+  "lockfileHash": "e3b0c442",
+  "browserHash": "b66b7221",
   "optimized": {
     "vue": {
-      "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "src": "../../../node_modules/.store/vue@3.5.13/node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "ac0f24f5",
+      "fileHash": "1243398b",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
-      "src": "../../../node_modules/@vue/devtools-api/dist/index.js",
+      "src": "../../../node_modules/.store/@vue+devtools-api@7.7.2/node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "b5e8f830",
+      "fileHash": "a4a9916f",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
-      "src": "../../../node_modules/@vueuse/core/index.mjs",
+      "src": "../../../node_modules/.store/@vueuse+core@12.7.0/node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "336b51f4",
+      "fileHash": "d0189abd",
       "needsInterop": false
     },
     "element-plus": {
-      "src": "../../../node_modules/element-plus/es/index.mjs",
+      "src": "../../../node_modules/.store/element-plus@2.9.5/node_modules/element-plus/es/index.mjs",
       "file": "element-plus.js",
-      "fileHash": "f3eae5ff",
-      "needsInterop": false
-    },
-    "vue-router": {
-      "src": "../../../node_modules/.store/vue-router@4.5.0/node_modules/vue-router/dist/vue-router.mjs",
-      "file": "vue-router.js",
-      "fileHash": "f926a74f",
-      "needsInterop": false
-    },
-    "@element-plus/icons-vue": {
-      "src": "../../../node_modules/@element-plus/icons-vue/dist/index.js",
-      "file": "@element-plus_icons-vue.js",
-      "fileHash": "46d4804e",
+      "fileHash": "b1dc9127",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-CJ44FZ5D": {
-      "file": "chunk-CJ44FZ5D.js"
-    },
-    "chunk-GWYN3LB4": {
-      "file": "chunk-GWYN3LB4.js"
+    "chunk-5LG7N4K4": {
+      "file": "chunk-5LG7N4K4.js"
     },
     "chunk-5WRI5ZAA": {
       "file": "chunk-5WRI5ZAA.js"

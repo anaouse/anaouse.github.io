@@ -1,126 +1,84 @@
 <script setup>
-import { ref, onMounted, onUnmounted, nextTick } from 'vue'
-import Starrysky from './components/Starrysky.vue';
-import navbar from './components/navbar.vue';
-import Home from './components/Home.vue';
-import postinfo from './components/postinfo.vue';
-import NotFound from './components/NotFound.vue';
-import tocCard from './components/toc-card.vue';
-import profieldcard from './components/profieldcard.vue';
-import articleCard from './components/article-card.vue';
-import moreFuc from './components/moreFuc.vue';
 import { useData } from 'vitepress'
+import Starrysky from './components/Starrysky.vue';
+import profieldcard from './components/profieldcard.vue';
+import NotFound from './components/NotFound.vue';
+import MainLayout from './components/MainLayout.vue';
+import articleCard from './components/article-card.vue';
+import articleCardmini from './components/article-cardmini.vue';
+import Home from './components/Home.vue';
+import { ref, onMounted } from 'vue'
+import postinfo from './components/postinfo.vue';
 
+import moreFuc from './components/moreFuc.vue';
+import tocCard from './components/toc-card.vue';
+// https://vitepress.dev/reference/runtime-api#usedata
 const { page, frontmatter, theme } = useData()
 import { data as posts } from './utils/posts.data.js'
-const isClient = typeof window !== 'undefined'
-// Áä∂ÊÄÅÊ†è&ÊªöÂä®Êù°ËÆæÁΩÆ
-const scrollbarRef = ref()
-const contentContainer = ref()
-const showNavbar = ref(true)
-const lastScrollY = ref(0)
-const scrollingDown = ref(false)
-const handleScroll = ({ scrollTop }) => {
-    if (!isClient) return
-    const currentY = scrollTop
-    const windowHeight = scrollbarRef.value?.wrapRef?.clientHeight || 0
-    scrollingDown.value = currentY > lastScrollY.value
-    if (currentY < 100) {
-        showNavbar.value = true
-    } else if (scrollingDown.value) {
-        showNavbar.value = false
-    } else {
-        showNavbar.value = true
-    }
-    const documentHeight = contentContainer.value?.scrollHeight || 0
-    if (currentY + windowHeight >= documentHeight - 100) {
-        showNavbar.value = true
-    }
-    lastScrollY.value = currentY
-}
-
-
+const isMounted = ref(false) // –¬‘ˆ±Í÷æŒª
 onMounted(() => {
-    contentContainer.value = scrollbarRef.value?.wrapRef?.querySelector('.el-scrollbar__view')
-})
-
-onUnmounted(() => {
-    window.removeEventListener('scroll', optimizedScrollHandler)
+    isMounted.value = true // …Ë÷√±Í÷æŒªŒ™ true
 })
 </script>
 
 <template>
-    <keep-alive>
-        <ClientOnly>
-            <Starrysky />
-        </ClientOnly>
-    </keep-alive>
-    <div class="main-layout">
-        <div class="navbar-container" :class="{ 'nav-hidden': !showNavbar }">
-            <navbar />
-        </div>
-        <NotFound v-if="page.isNotFound" />
-        <div class="nullpage" v-else-if="frontmatter.layout === 'customPage'">
-            <Content />
-        </div>
-        <el-scrollbar ref="scrollbarRef" height="100vh" @scroll="handleScroll" :wrap-style="{ overflowX: 'hidden' }"
-            v-else>
-            <div class="homePage Page" v-if="frontmatter.layout === 'home'">
-                <Home />
-                <div class="content-container">
-                    <div class="page-wrapper">
-                        <div class="a-card vp-doc">
-                            <Content />
-                        </div>
-                        <div class="vp-doc" v-for="post in posts" :key="post.link">
-                            <articleCard :post="post" />
-                        </div>
-                    </div>
-                    <div class="sidebar Page">
-                        <profieldcard />
-                        <div class="a-card vp-doc">
-                            <moreFuc />
-                        </div>
-                        <div class="sidebar-stay">
-                            <profieldcard />
-                        </div>
 
-                    </div>
-                </div>
-            </div>
-            <div class="docPage Page" v-else>
-                <div id="post-info">
-                    <postinfo :title="frontmatter.title"
-                        :author="frontmatter?.author || theme?.defaultauthor || 'unknow'" :date="frontmatter.date" />
-                </div>
-                <div class="content-container">
-                    <div class="page-wrapper">
-                        <div class="a-card vp-doc">
-                            <Content />
-                        </div>
-                    </div>
-                    <div class="sidebar">
+  <keep-alive>
+    <ClientOnly>
+      <Starrysky />
+    </ClientOnly>
+  </keep-alive>
+  <NotFound v-if="page.isNotFound" />
+  <div class="nullpage" v-else-if="frontmatter.layout === 'customPage'">
+    <Content />
+  </div>
 
-                        <profieldcard />
+  <MainLayout v-else-if="frontmatter.layout === 'home'">
+    <template #navbar>
+    </template>
+    <template #header>
+      <Home />
+    </template>
+    <template #main-content>
+      <div class="a-card vp-doc">
+        <Content />
+      </div>
+      <div class="vp-doc" v-for="post in posts" :key="post.link" v-if="isMounted">
+        <articleCard :post="post" />
+      </div>
+    </template>
+    <template #sidebar-non-stay>
+      <profieldcard />
+      <div class="a-card vp-doc">
+        <moreFuc />
+      </div>
+    </template>
+    <template #sidebar-stay>
+      <profieldcard />
+    </template>
+  </MainLayout>
+  <MainLayout v-else>
+    <template #navbar>
+    </template>
+    <template #header>
+      <div class="header-info" style="display: flex; width: 100%; justify-content: center;">
+        <postinfo/>
+      </div>
+    </template>
+    <template #main-content>
+      <div class="a-card vp-doc">
+        <Content />
+      </div>
 
-                        <div class="sidebar-stay">
-                            <tocCard :posts="posts" :currentUrl="page.relativePath" />
-                            <div class="a-card" v-if="false">
-                                <h3 class="outline-title">
-                                    {{ frontmatter }}
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-container" style="color: white;margin-bottom: 250px;">
-                <el-tag size="small" type="success" effect="plain" round>
-                    {{ theme.footer.copyright }}
-                </el-tag>
-            </div>
-
-        </el-scrollbar>
-    </div>
-
+    </template>
+    <template #sidebar-non-stay>
+      <profieldcard />
+    </template>
+    <template #sidebar-stay>
+      <tocCard :posts="posts" :currentUrl="page.relativePath" />
+      <div class="vp-doc" v-for="post in posts" :key="post.link">
+        <articleCardmini :post="post" />
+      </div>
+    </template>
+  </MainLayout>
 </template>

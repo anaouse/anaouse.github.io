@@ -1,10 +1,9 @@
 <template>
-  <div class="article-header">
+  <div class="article-header a-card" style="display: grid;">
     <!-- 标题区域 -->
-    <div class="header-title">
+    <div id="header-title">
       <h1>{{ title }}</h1>
     </div>
-
     <!-- 元信息区域 -->
     <div class="meta-info">
       <!-- 作者信息 -->
@@ -12,10 +11,8 @@
         <i class="fa-light fa-user"></i>
         <span class="author">{{ author }}</span>
       </div>
-
       <!-- 分隔线 -->
       <div class="divider"></div>
-
       <!-- 发布日期 -->
       <div class="date-info">
         <i class="fa-light fa-calendar"></i>
@@ -61,23 +58,25 @@ const formattedDate = computed(() => {
 })
 </script>
 
-<style scoped>
+<style>
 .article-header {
   padding: 2rem;
   border-radius: 8px;
   margin-bottom: 2rem;
   backdrop-filter: blur(10px);
   border-color: rgba(228, 195, 195, 0.13);
+  background-color: transparent;
+  display: flex;
 }
 
-.header-title {
+#header-title {
   display: flex;
   align-items: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
 }
 
-.header-title h1 {
+#header-title h1 {
   margin-bottom: 8px;
   color: var(--white);
   font-weight: 400;
@@ -123,7 +122,7 @@ const formattedDate = computed(() => {
     padding: 1.5rem;
   }
 
-  .header-title h1 {
+  #header-title h1 {
     font-size: 1.5rem;
   }
 
