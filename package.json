@@ -7,10 +7,11 @@
     "dev": "vitepress dev",
     "build": "vitepress build",
     "preview": "vitepress preview",
-    "build:docs": "vitepress build --outDir docs"
+    "docs:build": "vitepress build --outDir docs"
   },
   "dependencies": {
-    "element-plus": "^2.9.5"
+    "element-plus": "^2.9.5",
+    "lodash-es": "^4.17.21"
   },
   "type": "module"
 }

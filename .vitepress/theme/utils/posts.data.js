@@ -1,5 +1,4 @@
 import { createContentLoader } from 'vitepress'
-
 const contentLoaderConfig = {
     includeSrc: true,
     render: true,

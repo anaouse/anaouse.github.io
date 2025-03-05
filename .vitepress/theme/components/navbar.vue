@@ -60,8 +60,8 @@ import { ref } from 'vue'
 import { useData } from 'vitepress'
 const { theme } = useData()
 const {
-  logo = "https://resource-un4.pages.dev/article/yjtp.webp",
-  title = "57D02",
+  logo = theme.value.logo,
+  title = theme.value.siteTitle,
   menuItems = [
     {
       label: '更多',

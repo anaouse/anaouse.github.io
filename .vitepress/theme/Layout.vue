@@ -66,8 +66,9 @@ onMounted(() => {
       </div>
     </template>
     <template #main-content>
+      <el-skeleton :rows="5" animated v-if="!isMounted"/>
       <div class="a-card vp-doc">
-        <Content />
+        <Content v-show="isMounted"/>
       </div>
 
     </template>
