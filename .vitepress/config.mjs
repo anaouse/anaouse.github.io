@@ -120,13 +120,5 @@ export default defineConfig({
       message: "VitePress",
       copyright: "Copyright © 2025-present 57D02",
     },
-    // https://vitepress.dev/reference/default-theme-config
-    lastUpdated: {
-      text: 'Updated at',
-      formatOptions: {
-        dateStyle: 'full',
-        timeStyle: 'medium'
-      }
-    },
   }
 })

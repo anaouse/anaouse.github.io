@@ -83,3 +83,8 @@ onMounted(() => {
     </template>
   </MainLayout>
 </template>
+<style>
+*{
+  --el-fill-color-blank: transparent;
+}
+</style>

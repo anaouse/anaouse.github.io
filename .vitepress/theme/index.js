@@ -2,15 +2,18 @@
 import Layout from './Layout.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-const cssModules = import.meta.glob('./css/*.css', { eager: true })
-Object.values(cssModules).forEach(module => {
-  if (module?.default) module = module.default
-  if (typeof module === 'string') {
-    const style = document.createElement('style')
-    style.textContent = module
-    document.head.appendChild(style)
-  }
+const cssModules = import.meta.glob('./css/*.css', { 
+  eager: true,
+  query: '?inline' // 使用 Vite 的内联模式
 })
+
+// 合并所有样式到单个 style 标签
+const combinedCSS = Object.values(cssModules)
+  .map(module => module.default)
+  .join('')
+const style = document.createElement('style')
+style.textContent = combinedCSS
+document.head.appendChild(style)
 import './fontawesome/css/all.min.css'
 
 
