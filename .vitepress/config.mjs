@@ -1,5 +1,7 @@
 import { defineConfig } from 'vitepress'
-
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "VitePress-Butterfly",
@@ -120,5 +122,20 @@ export default defineConfig({
       message: "VitePress",
       copyright: "Copyright © 2025-present 57D02",
     },
-  }
+  },
+  vite: {
+    ssr: {
+      noExternal: ['element-plus']
+    },
+    plugins: [
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+      
+    ], 
+  },
+  
 })

@@ -1,15 +1,16 @@
 // https://vitepress.dev/guide/custom-theme
 import Layout from './Layout.vue'
-import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+// import 'element-plus/lib/theme-chalk/base.css'
 import './fontawesome/css/all.min.css'
 
 
 /** @type {import('vitepress').Theme} */
 export default {
   Layout,
+  ignoreDeadLinks: true,
   enhanceApp({ app, router, siteData }) {
-    app.use(ElementPlus)
+    // app.use(ElementPlus)
     const modules = import.meta.glob('./css/*.css', { eager: true });
     if (!import.meta.env.SSR) {
       for (const path in modules) {
@@ -18,6 +19,7 @@ export default {
         document.head.appendChild(style);
       }
     }
-  }
+  },
+  
 }
 

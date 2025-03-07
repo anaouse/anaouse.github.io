@@ -1,40 +1,148 @@
 {
-  "hash": "0804a42d",
-  "configHash": "87a1663f",
-  "lockfileHash": "e3b0c442",
-  "browserHash": "b66b7221",
+  "hash": "4c1408c2",
+  "configHash": "9f37b22f",
+  "lockfileHash": "081f48ee",
+  "browserHash": "26e9ddc0",
   "optimized": {
     "vue": {
-      "src": "../../../node_modules/.store/vue@3.5.13/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "1243398b",
+      "fileHash": "7d916ef8",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
-      "src": "../../../node_modules/.store/@vue+devtools-api@7.7.2/node_modules/@vue/devtools-api/dist/index.js",
+      "src": "../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "a4a9916f",
+      "fileHash": "7534953a",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
-      "src": "../../../node_modules/.store/@vueuse+core@12.7.0/node_modules/@vueuse/core/index.mjs",
+      "src": "../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "d0189abd",
+      "fileHash": "0e785834",
       "needsInterop": false
     },
-    "element-plus": {
-      "src": "../../../node_modules/.store/element-plus@2.9.5/node_modules/element-plus/es/index.mjs",
-      "file": "element-plus.js",
-      "fileHash": "b1dc9127",
+    "element-plus/es": {
+      "src": "../../../node_modules/element-plus/es/index.mjs",
+      "file": "element-plus_es.js",
+      "fileHash": "2e8fcadb",
+      "needsInterop": false
+    },
+    "element-plus/es/components/base/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/base/style/css.mjs",
+      "file": "element-plus_es_components_base_style_css.js",
+      "fileHash": "0a248752",
+      "needsInterop": false
+    },
+    "element-plus/es/components/skeleton/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/skeleton/style/css.mjs",
+      "file": "element-plus_es_components_skeleton_style_css.js",
+      "fileHash": "1c87b451",
+      "needsInterop": false
+    },
+    "element-plus/es/components/scrollbar/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/scrollbar/style/css.mjs",
+      "file": "element-plus_es_components_scrollbar_style_css.js",
+      "fileHash": "bf8e7f56",
+      "needsInterop": false
+    },
+    "element-plus/es/components/tag/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/tag/style/css.mjs",
+      "file": "element-plus_es_components_tag_style_css.js",
+      "fileHash": "11379ec8",
+      "needsInterop": false
+    },
+    "element-plus/es/components/link/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/link/style/css.mjs",
+      "file": "element-plus_es_components_link_style_css.js",
+      "fileHash": "28ad4313",
+      "needsInterop": false
+    },
+    "element-plus/es/components/divider/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/divider/style/css.mjs",
+      "file": "element-plus_es_components_divider_style_css.js",
+      "fileHash": "f687adb7",
+      "needsInterop": false
+    },
+    "element-plus/es/components/space/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/space/style/css.mjs",
+      "file": "element-plus_es_components_space_style_css.js",
+      "fileHash": "bf6a8e3e",
+      "needsInterop": false
+    },
+    "element-plus/es/components/text/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/text/style/css.mjs",
+      "file": "element-plus_es_components_text_style_css.js",
+      "fileHash": "c7e87065",
+      "needsInterop": false
+    },
+    "typeit": {
+      "src": "../../../node_modules/typeit/dist/index.es.js",
+      "file": "typeit.js",
+      "fileHash": "e8b28bd5",
+      "needsInterop": false
+    },
+    "element-plus/es/components/collapse/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/collapse/style/css.mjs",
+      "file": "element-plus_es_components_collapse_style_css.js",
+      "fileHash": "f4e5191c",
+      "needsInterop": false
+    },
+    "element-plus/es/components/collapse-item/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/collapse-item/style/css.mjs",
+      "file": "element-plus_es_components_collapse-item_style_css.js",
+      "fileHash": "b3caad48",
+      "needsInterop": false
+    },
+    "element-plus/es/components/anchor/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/anchor/style/css.mjs",
+      "file": "element-plus_es_components_anchor_style_css.js",
+      "fileHash": "24e204c6",
+      "needsInterop": false
+    },
+    "element-plus/es/components/anchor-link/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/anchor-link/style/css.mjs",
+      "file": "element-plus_es_components_anchor-link_style_css.js",
+      "fileHash": "b020d40e",
+      "needsInterop": false
+    },
+    "element-plus/es/components/dropdown/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/dropdown/style/css.mjs",
+      "file": "element-plus_es_components_dropdown_style_css.js",
+      "fileHash": "dabbca64",
+      "needsInterop": false
+    },
+    "element-plus/es/components/dropdown-menu/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/dropdown-menu/style/css.mjs",
+      "file": "element-plus_es_components_dropdown-menu_style_css.js",
+      "fileHash": "d4bcf1da",
+      "needsInterop": false
+    },
+    "element-plus/es/components/dropdown-item/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/dropdown-item/style/css.mjs",
+      "file": "element-plus_es_components_dropdown-item_style_css.js",
+      "fileHash": "3855f1ad",
+      "needsInterop": false
+    },
+    "element-plus/es/components/drawer/style/css": {
+      "src": "../../../node_modules/element-plus/es/components/drawer/style/css.mjs",
+      "file": "element-plus_es_components_drawer_style_css.js",
+      "fileHash": "2b21c2bc",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-5LG7N4K4": {
-      "file": "chunk-5LG7N4K4.js"
+    "chunk-GWYN3LB4": {
+      "file": "chunk-GWYN3LB4.js"
     },
-    "chunk-5WRI5ZAA": {
-      "file": "chunk-5WRI5ZAA.js"
+    "chunk-KN2VQJ4R": {
+      "file": "chunk-KN2VQJ4R.js"
+    },
+    "chunk-I4F2TRT2": {
+      "file": "chunk-I4F2TRT2.js"
+    },
+    "chunk-FKKTXJBD": {
+      "file": "chunk-FKKTXJBD.js"
     }
   }
 }
