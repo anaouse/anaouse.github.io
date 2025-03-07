@@ -1,5 +1,5 @@
 <template>
-  <div class="article-header a-card" style="display: grid;">
+  <div class="article-header a-card" style="display: grid; background-color:  rgba(236, 227, 227, 0.333);">
     <!-- ±êÌâÇøÓò -->
     <div id="header-title">
       <h1>{{ title }}</h1>
@@ -24,30 +24,19 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useData } from 'vitepress'
 
-const props = defineProps({
-  title: {
-    type: String,
-    default: 'Untitled Article'
-  },
-  author: {
-    type: String,
-    default: 'Anonymous'
-  },
-  date: {
-    type: String,
-    default: '',
-    validator: (value) => {
-      if (!value) return true
-      return !isNaN(Date.parse(value))
-    }
-  }
-})
+const { frontmatter } = useData()
+const {
+  title = "Untitled Article",
+  author = 'Anonymous',
+  date = '',
+} = frontmatter.value
 
 const formattedDate = computed(() => {
-  if (!props.date) return 'Unknown date'
+  if (!date) return 'Unknown date'
   try {
-    return new Date(props.date).toLocaleDateString('zh-CN', {
+    return new Date(date).toLocaleDateString('zh-CN', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'

@@ -29,6 +29,7 @@ onMounted(() => {
 
 // -------流星脚本开始-------
 const createMeteor = () => {
+    if (!document.getElementById("bodyId")) return;
     let meteor = document.createElement("div");
     meteor.classList.add("meteor");
     meteor.style.position = "absolute";
@@ -98,14 +99,14 @@ onBeforeUnmount(() => {
     margin: 0;
     padding: 0;
     background: radial-gradient(200% 100% at bottom center,
-            #f7f7b6,
+            #ededde,
             #e96f92,
             #1b2947);
     background: radial-gradient(200% 105% at top center,
             #1b2947 10%,
             #75517d 40%,
-            #e96f92 65%,
-            #f7f7b6);
+            #070405 65%,
+            #848482);
     background-attachment: fixed;
     overflow: hidden;
 }

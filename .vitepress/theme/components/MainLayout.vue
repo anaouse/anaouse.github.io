@@ -1,4 +1,5 @@
 <template>
+
     <div id="main-layout">
         <div class="navbar-container" :class="{ 'nav-hidden': !showNavbar }" v-if="isMounted">
             <slot name="navbar">
@@ -6,13 +7,12 @@
             </slot>
         </div>
         <el-scrollbar ref="scrollbarRef" height="100vh" @scroll="handleScroll" :wrap-style="{ overflowX: 'hidden' }">
+            
             <div class="Page">
                 <div class="header-slot" style="width: 100%;">
                     <div id="fill" style="height: var(--nav-height);"></div>
                     <slot name="header">
-                        <postinfo :title="frontmatter.title"
-                            :author="frontmatter?.author || theme?.defaultauthor || 'unknow'"
-                            :date="frontmatter.date" />
+                        <postinfo/>
                     </slot>
                 </div>
                 <div id="content-container">
@@ -51,10 +51,9 @@
     </div>
 </template>
 <script setup>
-import { useData } from 'vitepress'
-const { page, frontmatter, theme } = useData()
-import { data as posts } from '../utils/posts.data.js'
-import { ref, onMounted, onUnmounted } from 'vue'
+import { useData,useRouter  } from 'vitepress'
+const {  theme } = useData()
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import navbar from './navbar.vue'
 import postinfo from './postinfo.vue';
 // 状态栏&滚动条设置
@@ -64,7 +63,16 @@ const showNavbar = ref(true)
 const lastScrollY = ref(0)
 const scrollingDown = ref(false)
 const isMounted = ref(false) // 新增标志位
-
+const { route } = useRouter();
+watch(
+  () => route.path,
+  () => {
+    if (!import.meta.env.SSR && isMounted.value) {
+      scrollbarRef.value?.setScrollTop(0)
+      showNavbar.value = true // 同时显示导航栏
+    }
+  }
+);
 const handleScroll = ({ scrollTop }) => {
     if (!isMounted.value) return // 挂载前不处理
     const currentY = scrollTop
@@ -95,9 +103,7 @@ onMounted(() => {
     showNavbar.value = initialScrollTop < 100
 })
 
-onUnmounted(() => {
-    window.removeEventListener('scroll', optimizedScrollHandler)
-})
+
 
 </script>
 <style>
