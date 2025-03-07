@@ -5,9 +5,9 @@
   },
   "scripts": {
     "dev": "vitepress dev",
-    "build": "vitepress build",
+    "build": "vitepress build --outDir docs",
     "preview": "vitepress preview",
-    "docs:build": "vitepress build --outDir docs"
+    "docs:build": "vitepress build"
   },
   "dependencies": {
     "element-plus": "^2.9.5",
