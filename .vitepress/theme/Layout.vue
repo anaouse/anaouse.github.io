@@ -15,7 +15,11 @@ import tocCard from './components/toc-card.vue';
 // https://vitepress.dev/reference/runtime-api#usedata
 const { page, frontmatter, theme } = useData()
 import { data as posts } from './utils/posts.data.js'
-const isMounted = ref(false) // 新增标志位
+const {
+  avatar = "",
+  name = '未命名',
+} = theme.value
+const isMounted = ref(false) 
 const { route } = useRouter();
 const isTransitioning = ref(false);
 watch(
@@ -44,7 +48,9 @@ onMounted(() => {
       justifyContent: 'center',
       alignItems: 'center'
     }">
-      66
+      <div class="avatar-wrapper">
+        <img :src="avatar" :alt="name" class="avatar" @error="handleAvatarError">
+      </div>
     </div>
   </transition>
   <keep-alive>

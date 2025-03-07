@@ -9,11 +9,13 @@
     "dev": "vitepress dev",
     "build": "vitepress build --outDir docs",
     "preview": "vitepress preview",
-    "docs:build": "vitepress build"
+    "docs:build": "vitepress build",
+    "safe-build": "npm run docs:build && taskkill /f /im node.exe"
   },
   "dependencies": {
     "element-plus": "^2.9.5",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "typeit": "^8.8.7"
   },
   "type": "module"
 }
