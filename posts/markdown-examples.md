@@ -3,6 +3,8 @@ title: Markdown Extension Examples
 date: 2023-08-29
 author: VitePress
 layout: doc
+tags: VitePress
+
 ---
 # Markdown Extension Examples
 

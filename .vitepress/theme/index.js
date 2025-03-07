@@ -18,8 +18,6 @@ export default {
         document.head.appendChild(style);
       }
     }
-    // 创建<style>标签并插入到<head>
-
   }
 }
 
