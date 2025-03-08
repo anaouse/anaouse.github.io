@@ -99,6 +99,12 @@ layout: doc # 可选布局
 - 在public文件夹中的CNAME写好域名
 - 配置好自己域名的DNS为github Page域名（自行搜索）
 
+##### 工作流构建（推荐）
+
+打开.github workflow 复制main.yml内容，在github page 创建工作流粘贴使用即可。
+
+优点：只需要修改posts文件夹内容，上传即可。
+
 ##### 本地构建
 
 1. 构建生产版本
@@ -117,4 +123,3 @@ npm run build:docs
 
 ![1741082221235](https://resource-un4.pages.dev/article/1741082221235.png)
 
-##### eee
