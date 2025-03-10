@@ -101,7 +101,12 @@ layout: doc # 可选布局
 
 ##### 工作流构建（推荐）
 
-打开.github workflow 复制main.yml内容，在github page 创建工作流粘贴使用即可。
+1. 打开.github workflow 复制deploy.yml内容
+	![image-20250310101611742](https://resource-un4.pages.dev/article/image-20250310101611742.png)
+1. 在github page 创建工作流粘贴使用即可。
+
+
+
 
 优点：只需要修改posts文件夹内容，上传即可。
 
