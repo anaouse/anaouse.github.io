@@ -78,12 +78,12 @@ onMounted(() => {
     </template>
     <template #sidebar-non-stay>
       <profieldcard />
+      
+    </template>
+    <template #sidebar-stay>
       <div class="a-card vp-doc">
         <moreFuc />
       </div>
-    </template>
-    <template #sidebar-stay>
-      <profieldcard />
     </template>
   </MainLayout>
   <MainLayout v-else>
