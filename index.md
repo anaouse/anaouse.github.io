@@ -1,12 +1,8 @@
----
-title: Vitepress-Butterfly
-layout: home
-date: 2023-08-29
----
 # VitePress-Butterfly 主题
 
 基于VitePress和Element Plus的卡片式仿butterfly主题。
 
+**演示站点：**[Vitepress-Butterfly | VitePress-Butterfly (57d02.cn)](https://vitepress.57d02.cn/)
 ##  特性
 
 - 基于 VitePress 1.6.3 + Vue 3 构建
@@ -104,13 +100,23 @@ layout: doc # 可选布局
 - 在public文件夹中的CNAME写好域名
 - 配置好自己域名的DNS为github Page域名（自行搜索）
 
+##### 工作流构建（推荐）
+
+1. 打开.github workflow 复制deploy.yml内容
+	![image-20250310101611742](https://resource-un4.pages.dev/article/image-20250310101611742.png)
+1. 在github page 创建工作流粘贴使用即可。
+
+
+
+
+优点：只需要修改posts文件夹内容，上传即可。
+
 ##### 本地构建
 
 1. 构建生产版本
 
 > 这将生成构建到docs目录，可以直接部署到GitHub Pages
 >
-> 可能有build complete in 13.26s.之后卡住，自行结束即可。没时间修bug了 
 
 
 ```bash
@@ -122,4 +128,3 @@ npm run build:docs
 
 ![1741082221235](https://resource-un4.pages.dev/article/1741082221235.png)
 
-##### eee

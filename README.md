@@ -2,6 +2,7 @@
 
 基于VitePress和Element Plus的卡片式仿butterfly主题。
 
+**演示站点：**[Vitepress-Butterfly | VitePress-Butterfly (57d02.cn)](https://vitepress.57d02.cn/)
 ##  特性
 
 - 基于 VitePress 1.6.3 + Vue 3 构建
@@ -116,7 +117,6 @@ layout: doc # 可选布局
 
 > 这将生成构建到docs目录，可以直接部署到GitHub Pages
 >
-> 可能有build complete in 13.26s.之后卡住，自行结束即可。没时间修bug了 
 
 
 ```bash
