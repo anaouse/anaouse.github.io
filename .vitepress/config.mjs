@@ -27,20 +27,20 @@ export default defineConfig({
     siteTitle: '57D02',
     menuItems: [
       {
-        label: '我的网址',
+        label: '网址',
         icon: 'fal fa-browser',
         children: [
           {
             key: 'action1',
-            label: '闪装智拼',
+            label: '百度',
             icon: 'fa-light fa-cubes',
-            link: 'https://box.57d02.cn'
+            link: 'https://baidu.com'
           },
           {
             key: 'action2',
-            label: 'alist云盘',
+            label: '作者博客',
             icon: 'fa-light fa-cloud',
-            link: 'https://alist.57d02.cn'
+            link: 'https://57d02.cn'
           },
         ]
       },
