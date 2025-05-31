@@ -29,9 +29,10 @@ const anchor_change = (e: string) => {
     // const currentNode = treeRef.value?.getCurrentNode()
     // const currentKey = treeRef.value?.getCurrentKey()
     if (typeof window === 'undefined') return
-    window.history.replaceState(null, '', e)
-    nextTick()
-    move2current_anchor()
+    setTimeout(() => {
+        window.history.replaceState(null, '', e)
+        move2current_anchor()
+    }, 100)
 }
 const move2current_anchor = () => {
     if (treeRef.value?.getCurrentKey() && scrollTocContainer.value) {
