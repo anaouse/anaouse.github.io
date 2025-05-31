@@ -1,6 +1,6 @@
 export default {
     // VitePress 站点基本配置,必填，允许留空
-    site_name: "My Awesome Sitea",
+    site_name: "My Awesome Site",
     site_description: "这是一个使用 VitePress 构建的文档站点。",
     site_url: "/",
     author: '57Darling02',

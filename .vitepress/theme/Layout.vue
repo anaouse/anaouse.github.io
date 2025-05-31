@@ -11,7 +11,7 @@
         </div>
     </transition>
 
-    <el-scrollbar height="100vh" ref="scrollbarRef" @scroll="handleScroll"  wrap-style="max-width:100vw;" noresize>
+    <el-scrollbar height="100vh" ref="scrollbarRef" @scroll="handleScroll"  wrap-style="max-width:100vw;">
 
         <el-header height="var(--nav-height)">
             <Nav />
@@ -37,29 +37,29 @@ import Loading from './components/default/Loading.vue'
 import Bg_StarrySkySass from './components/default/Bg_StarrySkySass.vue'
 import { useRouter } from 'vitepress'
 const router = useRouter()
-// »ñÈ¡È«¾Ö×´Ì¬
+// èŽ·å–å…¨å±€çŠ¶æ€
 const isFocusMode = inject('isFocusMode')
 const showNavbar = inject('showNavbar', ref(true))
 const showSidebar = inject('showSidebar', ref(true))
-// »ñÈ¡È«¾Ö¿Ø¼þ
+// èŽ·å–å…¨å±€æŽ§ä»¶
 const isMounted = ref(false)
 const scrollbarRef = ref()
 const contentContainer = ref()
 
 
-// ´°¿Ú¿í¶È×´Ì¬ºÍ³ß´ç±ä»¯´¦Àí
+// çª—å£å®½åº¦çŠ¶æ€å’Œå°ºå¯¸å˜åŒ–å¤„ç†
 const windowWidth = ref(window.innerWidth)
 const handleResize = () => {
     windowWidth.value = window.innerWidth
-    // ¿í¶È´óÓÚ748pxÏÔÊ¾²à±ßÀ¸
+    // å®½åº¦å¤§äºŽ748pxæ˜¾ç¤ºä¾§è¾¹æ 
     showSidebar.value = windowWidth.value > 748
 }
 
-//ÊµÏÖµ¼º½À¸¹ö¶¯µÄÒþ²ØºÍÏÔÊ¾
+//å®žçŽ°å¯¼èˆªæ æ»šåŠ¨çš„éšè—å’Œæ˜¾ç¤º
 const lastScrollY = ref(0)
 const scrollingDown = ref(false)
 const handleScroll = ({ scrollTop }) => {
-    if (!isMounted.value) return // ¹ÒÔØÇ°²»´¦Àí
+    if (!isMounted.value) return // æŒ‚è½½å‰ä¸å¤„ç†
     const currentY = scrollTop
     const windowHeight = scrollbarRef.value?.wrapRef?.clientHeight || 0
     scrollingDown.value = currentY > lastScrollY.value
@@ -80,18 +80,18 @@ const handleScroll = ({ scrollTop }) => {
     lastScrollY.value = currentY
 }
 
-// ¿ØÖÆÀ¸
+// æŽ§åˆ¶æ 
 const backToTop = () => {
     scrollbarRef.value?.wrapRef?.scrollTo({ top: 0, behavior: 'smooth' })
 }
 
 
-// ¹ÒÔØ´¦Àí
+// æŒ‚è½½å¤„ç†
 onMounted(() => {
     contentContainer.value = scrollbarRef.value?.wrapRef?.querySelector('.el-scrollbar__view')
     const initialScrollTop = scrollbarRef.value?.wrapRef?.scrollTop || 0
     showNavbar.value = initialScrollTop < 100
-    // Ìí¼Ó´°¿Ú´óÐ¡±ä»¯ÊÂ¼þ¼àÌýÆ÷
+    // æ·»åŠ çª—å£å¤§å°å˜åŒ–äº‹ä»¶ç›‘å¬å™¨
     handleResize()
     window.addEventListener('resize', handleResize)
     setTimeout(() => {
