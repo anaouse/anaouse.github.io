@@ -38,8 +38,7 @@
 </template>
 <script lang='ts' setup>
 import Toc from '../Toc.vue'
-
-import PostInfo from '../default/postinfo.vue'
+import PostInfo from '../default/PostInfo.vue'
 import { ref, inject, onMounted, computed } from 'vue'
 import ProfileCard from '../default/ProfileCard.vue'
 // 获取全局状态和方法
