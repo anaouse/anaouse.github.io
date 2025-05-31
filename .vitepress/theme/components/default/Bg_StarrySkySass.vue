@@ -1,9 +1,21 @@
 <template>
-    <div class="bg-space">
-        <div v-for="layer in 5" :class="`layer${layer}`" />
+    <div 
+        class="bg-space" 
+        :style="BGIMG_url ? { 
+            backgroundImage: `url(${BGIMG_url})`, 
+            backgroundSize: 'cover',       /* 自适应覆盖容器 */
+            backgroundPosition: 'center',  /* 居中显示 */
+            backgroundRepeat: 'no-repeat'  /* 禁止重复 */
+        } : {}"
+    >
+        <div  v-for="layer in 5" :class="`layer${layer}`" />
     </div>
 </template>
 <script lang='ts' setup>
+import { useData } from 'vitepress'
+const { theme, page, frontmatter } = useData()
+const BGIMG_url = theme.value.background || ''
+
 </script>
 <style lang="scss" scoped>
 @use "sass:math";

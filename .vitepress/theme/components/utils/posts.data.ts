@@ -29,7 +29,6 @@ const contentLoaderConfig = {
                 cover: page.frontmatter.cover || '' , 
                 lastUpdated: page.lastUpdated || page.frontmatter.date || '',
                 textNum,
-                page
             }
         })
     }

@@ -1,18 +1,15 @@
 <template>
     <Loading v-if="!isMounted" />
-    <Bg_StarrySkySass v-if="!isFocusMode" />
+    <Bg_StarrySkySass v-if="!(isFocusMode&&(!frontmatter.layout||frontmatter.layout=='doc'))" />
     <transition name="el-fade-in">
-
-        <div id="control" v-if="showNavbar">
+        <div id="control" v-if="showNavbar&&lastScrollY>100">
             <div class="social-item" @click="backToTop">
                 <el-icon><ArrowUpBold /></el-icon>
             </div>
-
         </div>
     </transition>
 
     <el-scrollbar height="100vh" ref="scrollbarRef" @scroll="handleScroll"  wrap-style="max-width:100vw;">
-
         <el-header height="var(--nav-height)">
             <Nav />
         </el-header>
@@ -47,8 +44,9 @@ const contentContainer = ref()
 
 
 // 窗口宽度状态和尺寸变化处理
-const windowWidth = ref(window.innerWidth)
+const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 0)
 const handleResize = () => {
+    if (typeof window === 'undefined') return
     windowWidth.value = window.innerWidth
     // 宽度大于748px显示侧边栏
     showSidebar.value = windowWidth.value > 748
@@ -63,7 +61,7 @@ const handleScroll = ({ scrollTop }) => {
     const windowHeight = scrollbarRef.value?.wrapRef?.clientHeight || 0
     scrollingDown.value = currentY > lastScrollY.value
 
-    if (currentY < 100 && (frontmatter.value.layout === 'doc' || frontmatter.value.layout === undefined)) {
+    if (typeof window !== 'undefined' && currentY < 100 && (frontmatter.value.layout === 'doc' || frontmatter.value.layout === undefined) && window !== undefined) {
         window.history.replaceState(null, '', router.route.path.replace('.html', ''))
         showNavbar.value = true
     } else if (scrollingDown.value) {
@@ -87,6 +85,7 @@ const backToTop = () => {
 
 // 挂载处理
 onMounted(() => {
+    if (typeof window === 'undefined') return
     contentContainer.value = scrollbarRef.value?.wrapRef?.querySelector('.el-scrollbar__view')
     const initialScrollTop = scrollbarRef.value?.wrapRef?.scrollTop || 0
     showNavbar.value = initialScrollTop < 100
@@ -98,6 +97,7 @@ onMounted(() => {
     }, 800)
 })
 onUnmounted(() => {
+    if (typeof window === 'undefined') return
     window.removeEventListener('resize', handleResize)
 })
 

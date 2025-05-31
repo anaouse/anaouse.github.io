@@ -42,15 +42,11 @@ import Toc from '../Toc.vue'
 import PostInfo from '../default/postinfo.vue'
 import { ref, inject, onMounted, computed } from 'vue'
 import ProfileCard from '../default/ProfileCard.vue'
-import { useData } from 'vitepress'
 // 获取全局状态和方法
 const isFocusMode = inject('isFocusMode')
 const showNavbar = inject('showNavbar')
 const showSidebar = inject('showSidebar')
 const top = computed(() => (showNavbar.value ? 'var(--nav-height)' : '0px'))
-const width = computed(() => (!showSidebar.value ? '100%' : '0px'))
-import { data as posts } from '../utils/posts.data.ts'
-console.log(posts[0])
 const isMounted = ref(false)
 onMounted(() => {
     isMounted.value = true
@@ -71,6 +67,7 @@ onMounted(() => {
     padding: 20px;
     width: 100%;
     padding: 5px 15px 5px;
+    margin-left: 10px;
 }
 
 .sidebar {
@@ -85,7 +82,7 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    animation: fadeInUp 1s ease-in-out 0.6s forwards;
+    animation: fadeInUp 1s ease-in-out 0.2s forwards;
 }
 
 .sidebar-stay {

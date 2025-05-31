@@ -20,19 +20,21 @@ onMounted(() => {
     scrollContainer.value = getScrollContainer()
     headers.value = getHeaders(frontmatter.value.outline ?? theme.value.outline ?? 'deep');
 })
-onContentUpdated(() => {
-    
-    headers.value = getHeaders(frontmatter.value.outline ?? theme.value.outline ?? 'deep');
-})
+// onContentUpdated(() => {
+//     headers.value = getHeaders(frontmatter.value.outline ?? theme.value.outline ?? 'deep');
+// })
 
-const anchor_change =  (e: string) => {
+const anchor_change = (e: string) => {
     treeRef.value?.setCurrentKey(e)
     // const currentNode = treeRef.value?.getCurrentNode()
-    const currentKey = treeRef.value?.getCurrentKey()
+    // const currentKey = treeRef.value?.getCurrentKey()
+    if (typeof window === 'undefined') return
     window.history.replaceState(null, '', e)
     nextTick()
-
-    if (currentKey && scrollTocContainer.value) {
+    move2current_anchor()
+}
+const move2current_anchor = () => {
+    if (treeRef.value?.getCurrentKey() && scrollTocContainer.value) {
         const nodeEl = treeRef.value?.$el.querySelector(`.el-anchor__link.is-active`)
         // console.log('nodeEl:', nodeEl)
         if (!nodeEl) return
@@ -64,7 +66,6 @@ const anchor_change =  (e: string) => {
                 behavior: 'smooth'
             });
         }
-
     }
 }
 //根据官方主题简化的大纲逻辑
@@ -94,7 +95,7 @@ function getHeaders(range: any) {
                 children: [],
             } as Node;
         });
-        
+
     // return headers
     return resolveHeaders(headers, range);
 }
@@ -144,10 +145,13 @@ function buildTree(data: Node[], min: number, max: number) {
 </script>
 
 <template>
-    
-    <span class="toc-title" style="font-weight: 600;height: 25px;"><i class="fas fa-columns" />目录导航</span>
+    <span class="toc-title" style="font-weight: 600;height: 25px;"><i class="fas fa-columns" />目录导航 <el-button
+            type="default" size="small" @click="move2current_anchor" >锚点定位<i class="fa-regular fa-circle-dot"></i></el-button>
+    </span>
+
     <el-anchor v-if="headers.length" :container="scrollContainer" :offset="45" direction="vertical"
-        style="background-color: transparent;flex: 1;overflow: hidden;display: flex;" :marker="false" :select-scroll-top="true" @change="anchor_change">
+        style="background-color: transparent;flex: 1;overflow: hidden;display: flex;" :marker="false"
+        :select-scroll-top="true" @change="anchor_change">
         <el-scrollbar style="flex: 1;" ref="scrollTocContainer">
             <el-tree ref="treeRef" style="max-width: 300px;background-color: transparent;" :data="headers"
                 :props="treeProps" :expand-on-click-node="false" :highlight-current="true" :indent="12"
@@ -163,7 +167,7 @@ function buildTree(data: Node[], min: number, max: number) {
 </template>
 
 <style lang="scss">
-.el-anchor__list{
+.el-anchor__list {
     flex: 1;
     display: flex;
     overflow: hidden;

@@ -35,10 +35,7 @@ const formattedDate = computed(() => {
 
 
 const hasValidDate = props.post.lastUpdated && !isNaN(new Date(props.post.lastUpdated).getTime())
-
-
 const date = hasValidDate.value ? new Date(props.post.lastUpdated!) : new Date()
-
 const isoDatetime = hasValidDate.value ? date.toISOString() : ''
 const datetime = ref('')
 
@@ -66,19 +63,14 @@ datetime.value = new Intl.DateTimeFormat(
                 <div class="article-info" data-allow-mismatch>
                     
                     <el-space wrap class="tag-group">
-                        
                         <el-tag v-for="(tag, index) in props.post.tags" :key="index" size="default" type="info" effect="plain" style="display: flex;justify-content: center;background-color: var(--vp-c-bg-soft);" round>
                             🏷️{{ tag }}
                         </el-tag>
-                        <p v-if="formattedDate">📅{{ formattedDate }}</p>
+                        <p v-if="formattedDate" class="article-words">📅{{ formattedDate }}</p>
                         ✍️{{ props.post.textNum }}字
                         <time :datetime="isoDatetime">最后更新于:{{ datetime }}</time>
-
                     </el-space>
-                    <!-- <span v-if="readingTime?.words" class="article-words">
-                    <Icon name="ph:paragraph-bold" />
-                    {{ formatNumber(readingTime.words) }}字
-                </span> -->
+                    
                 </div>
             </article>
         </a>

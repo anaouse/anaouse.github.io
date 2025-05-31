@@ -10,7 +10,7 @@ export default {
         mainTitle:"My Awesome Site",
         subTitles:['世界上只有一种英雄主义','那就是在认清生活的真相后','依然热爱生活'],//打字机效果的副标题，使用字符串列表
     },
-    
+    background:'/wallpaper/1.webp',
     // 侧边简介卡
     avatar: "https://resource-un4.pages.dev/article/yjtp.webp",
     name: '57Darling02',
