@@ -6,32 +6,33 @@
     </div>
 
     <div id="content-container" :style="{ maxWidth: isFocusMode ? 'none' : '1200px' }">
-        <div id="page-wrapper" :class="{ 'a-card': !isFocusMode }">
+
+        <div id="page-wrapper" :class="{ 'a-card': !isFocusMode }" class="fade-item">
             <content class="vp-doc" style="overflow-x: hidden;" />
         </div>
-        <transition name="el-fade-in">
-            <div class="sidebar" v-if="showSidebar">
-                <template v-if="!isFocusMode">
-                    <slot name="sidebar-non-stay">
-                        <ProfileCard />
-                    </slot>
-                    <div class="sidebar-stay">
-                        <slot name="sidebar-stay">
-                            <div class="a-card"
-                                style="height: 300px;display: flex;flex-direction: column;padding: 18px;">
-                                <Toc />
-                            </div>
 
-                        </slot>
-                    </div>
-                </template>
-                <template v-else>
-                    <div class="sidebar-stay" style="background-color: var(--vp-sidebar-bg-color);">
-                        <Toc />
-                    </div>
-                </template>
-            </div>
-        </transition>
+
+        <div class="sidebar" v-if="showSidebar">
+            <template v-if="!isFocusMode">
+                <slot name="sidebar-non-stay">
+                    <ProfileCard />
+                </slot>
+                <div class="sidebar-stay">
+                    <slot name="sidebar-stay">
+                        <div class="a-card" style="height: 300px;display: flex;flex-direction: column;padding: 18px;">
+                            <Toc />
+                        </div>
+
+                    </slot>
+                </div>
+            </template>
+            <template v-else>
+                <div class="sidebar-stay" style="background-color: var(--vp-sidebar-bg-color);">
+                    <Toc />
+                </div>
+            </template>
+        </div>
+
     </div>
 
 </template>
@@ -47,7 +48,9 @@ const isFocusMode = inject('isFocusMode')
 const showNavbar = inject('showNavbar')
 const showSidebar = inject('showSidebar')
 const top = computed(() => (showNavbar.value ? 'var(--nav-height)' : '0px'))
-
+const width = computed(() => (!showSidebar.value ? '100%' : '0px'))
+import { data as posts } from '../utils/posts.data.ts'
+console.log(posts[0])
 const isMounted = ref(false)
 onMounted(() => {
     isMounted.value = true
@@ -55,7 +58,6 @@ onMounted(() => {
 </script>
 <style lang="scss">
 #content-container {
-    animation: fadeInUp 1s ease-in-out 0.4s forwards;
     display: flex;
     justify-self: center;
     justify-content: center;
@@ -68,11 +70,11 @@ onMounted(() => {
 #page-wrapper {
     padding: 20px;
     width: 100%;
-
+    padding: 5px 15px 5px;
 }
 
 .sidebar {
-    padding: 10px;
+    padding: 0px 10px;
     // position: static;
     min-width: var(--sidebar-width);
     max-width: var(--sidebar-width);
@@ -82,16 +84,15 @@ onMounted(() => {
     visibility: visible;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     animation: fadeInUp 1s ease-in-out 0.6s forwards;
-
 }
 
 .sidebar-stay {
     position: sticky;
     top: v-bind(top);
     max-height: calc(100vh - (var(--nav-height) + 20px));
-    margin-bottom: 40px;
+
     /* 保留滚动缓冲空间 */
     transition:
         top 0.3s cubic-bezier(0.4, 0, 0.2, 1),

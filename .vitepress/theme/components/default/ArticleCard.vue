@@ -95,7 +95,7 @@ datetime.value = new Intl.DateTimeFormat(
     margin: 1rem 0;
     border-radius: 0.8rem;
     color: var(--vp-c-text);
-    animation: float-in 0.2s var(--delay) backwards;
+    
 
     >article {
         display: grid;

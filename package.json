@@ -1,0 +1,22 @@
+{
+  "devDependencies": {
+    "element-plus": "^2.9.5",
+    "markdown-it-mathjax3": "^4.3.2",
+    "sass": "^1.89.0",
+    "unplugin-auto-import": "^0.17.4",
+    "unplugin-vue-components": "^0.27.0",
+    "vitepress": "^1.6.3",
+    "vue": "^3.5.13"
+  },
+  "scripts": {
+    "dev": "vitepress dev",
+    "preview": "vitepress preview",
+    "docs:build": "vitepress build"
+  },
+  "dependencies": {
+    "element-plus": "^2.9.5",
+    "lodash-es": "^4.17.21",
+    "typeit": "^8.8.7"
+  },
+  "type": "module"
+}
