@@ -12,7 +12,6 @@ const treeProps = {
 }
 const scrollContainer = ref()
 const scrollTocContainer = ref()
-const show = ref('')
 const getScrollContainer = () => {
     if (typeof window === 'undefined') return null
     return document.querySelector('.el-scrollbar__wrap') || window
@@ -22,12 +21,13 @@ onMounted(() => {
     headers.value = getHeaders(frontmatter.value.outline ?? theme.value.outline ?? 'deep');
 })
 onContentUpdated(() => {
+    
     headers.value = getHeaders(frontmatter.value.outline ?? theme.value.outline ?? 'deep');
 })
 
 const anchor_change =  (e: string) => {
     treeRef.value?.setCurrentKey(e)
-    const currentNode = treeRef.value?.getCurrentNode()
+    // const currentNode = treeRef.value?.getCurrentNode()
     const currentKey = treeRef.value?.getCurrentKey()
     window.history.replaceState(null, '', e)
     nextTick()
@@ -94,7 +94,7 @@ function getHeaders(range: any) {
                 children: [],
             } as Node;
         });
-
+        
     // return headers
     return resolveHeaders(headers, range);
 }
@@ -144,8 +144,8 @@ function buildTree(data: Node[], min: number, max: number) {
 </script>
 
 <template>
-    <i class="fas fa-columns" />
-    <span class="toc-title" style="font-weight: 600;height: 25px;">目录导航</span>
+    
+    <span class="toc-title" style="font-weight: 600;height: 25px;"><i class="fas fa-columns" />目录导航</span>
     <el-anchor v-if="headers.length" :container="scrollContainer" :offset="45" direction="vertical"
         style="background-color: transparent;flex: 1;overflow: hidden;display: flex;" :marker="false" :select-scroll-top="true" @change="anchor_change">
         <el-scrollbar style="flex: 1;" ref="scrollTocContainer">

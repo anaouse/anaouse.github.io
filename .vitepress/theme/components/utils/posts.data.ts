@@ -7,10 +7,6 @@ const contentLoaderConfig = {
         return rawData.sort((a, b) => {
             return +new Date(b.frontmatter.date) - +new Date(a.frontmatter.date)
         }).map((page) => {
-            // 大纲处理
-            if (true) {
-                
-            }
             // 摘要处理
             let excerpt = page.excerpt
             let textNum = 0
@@ -32,7 +28,8 @@ const contentLoaderConfig = {
                 categories: (page.frontmatter.categories?.split(',') ?? []).map(category => category.trim()),
                 cover: page.frontmatter.cover || '' , 
                 lastUpdated: page.lastUpdated || page.frontmatter.date || '',
-                textNum
+                textNum,
+                page
             }
         })
     }
@@ -46,7 +43,7 @@ interface Node {
     value: string;
     level: number;
 }
-function getHeaders(range: any) {
+function getHeaders(range: any,document: Document) {
     if (range === false) {
         return [];
     }

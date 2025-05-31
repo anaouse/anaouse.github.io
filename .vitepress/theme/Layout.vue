@@ -29,7 +29,6 @@ import { inject, onMounted, onUnmounted, ref } from 'vue'
 import { useData } from 'vitepress'
 const { theme, page, frontmatter } = useData()
 import { ArrowUpBold } from '@element-plus/icons-vue'
-
 import Nav from './components/Nav.vue'
 import Footer from './components/Footer.vue'
 import MainView from './components/Views/MainView.vue'
@@ -103,11 +102,42 @@ onUnmounted(() => {
 })
 
 </script>
-<style scoped>
+<style lang="scss">
 #control {
     position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 9999;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+$base-delay: 0.2s;
+$delay-step: 0.05s;
+/* 公共动画类 */
+.fade-item {
+    opacity: 0;
+    animation: fadeInUp 0.2s ease-in-out forwards;
+    animation-delay: $base-delay; /* 使用初始延迟 */
+    /* 每次应用后自动累加步长 */
+    $base-delay: $base-delay + $delay-step;
+}
+.fade-group {
+    /* 为每个循环项设置递增延迟 */
+    @for $i from 1 through 30 {
+        .fade-item:nth-child(#{$i}) {
+            animation-delay: ($i - 1) * $delay-step; /* 第一个元素0s，第二个0.05s...第30个1.45s */
+        }
+    }
+    $base-delay: 0.2s;
 }
 </style>

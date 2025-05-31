@@ -1,8 +1,8 @@
 <template>
     <div style="display: flex;width: 100%;flex-direction: column;align-items: center;justify-content: center;">
         <div id="content-container" :style="{ maxWidth: isFocusMode ? 'none' : '1200px' }">
-            <div id="page-wrapper">
-                <div class="vp-doc" v-for="post in posts" :key="post.link">
+            <div id="page-wrapper" class="fade-group" style="display: flex;flex-direction: column;gap: 10px; padding: 0%;">
+                <div class="a-card fade-item" v-for="post in posts" :key="post.link">
                     <ArticleCard :post="post" />
                 </div>
             </div>
@@ -18,7 +18,6 @@
                             </div>
                         </slot>
                     </div>
-                
             </div>
         </div>
     </div>
@@ -26,15 +25,16 @@
 </template>
 <script lang='ts' setup>
 import { inject } from 'vue';
-import { data as posts } from '../utils/posts.data.js'
+import { data as posts } from '../utils/posts.data.ts'
 import ArticleCard from '../default/ArticleCard.vue';
 import ProfileCard from '../default/ProfileCard.vue';
 import { useData } from 'vitepress'
-import { pa } from 'element-plus/es/locales.mjs';
 const { theme, frontmatter, page } = useData()
 
 // 获取全局状态和方法
 const isFocusMode = inject('isFocusMode')
 const showSidebar = inject('showSidebar') 
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss">
+
+</style>
