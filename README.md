@@ -82,7 +82,7 @@ npm run preview
 ##### 工作流（推荐）
 
 1. 打开.github workflow 复制deploy.yml内容
-  ![image-20250310101611742](https://resource-un4.pages.dev/article/image-20250310101611742.png)
+    ![image-20250310101611742](https://resource-un4.pages.dev/article/image-20250310101611742.png)
 
 1. 在github page 创建工作流自己的工作流：
 
@@ -115,26 +115,19 @@ npm run build
 
 ```bash
 git remote add upstream https://github.com/57Darling02/VitePress_butterfly.git
-git fetch upstream  # 获取上游所有分支
 ```
 
-#### **2. 获取主题更新（仅更新核心文件）**
+#### **2. 获取主题更新**
 
-当作者更新了`core`分支后，用户通过以下命令合并更新非自定义文件：
+1. 直接更新：运行update_theme.sh
 
-```bash
-# 确保在main分支
-git checkout main
+	> 这将仅保留 "posts/" "site_config.ts"  "public/"  ".github/"，其余文件将被覆盖。如果只修改了以上文件，简单更新即可。
 
-# 从上游core分支合并更新（不会影响posts和site_config.ts）
-git merge upstream/core --allow-unrelated-histories
-```
-
-
+2. 手动更新，同步仓库并合并冲突
 
 ## 配置指南
 
-修改根目录下的 site_config.ts进行主题配置：内容可参考.vitepress目录中的模板site_config.ts。
+修改根目录下的 site_config.ts进行主题配置：内容可参考.vitepress目录中的模板site_config_template.ts。可将其重命名复制到根目录下的 site_config.ts。
 
 > 注意，修改模板没什么效果，还可能导致你更新主题时面临合并问题。
 
@@ -152,6 +145,8 @@ export default {
         mainTitle:"My Awesome Site",
         subTitles:['世界上只有一种英雄主义','那就是在认清生活的真相后','依然热爱生活'],//打字机效果的副标题，使用字符串列表
     },
+    background:'/wallpaper/1.webp',//背景图片
+    pageSize:8, //首页文章列表分页大小，默认为8
     
     // 侧边简介卡
     avatar: "https://resource-un4.pages.dev/article/yjtp.webp",
@@ -189,11 +184,14 @@ Blog/                   # 项目根目录
 ```
 ### 文章规范
 
+图片使用相对路径即可。建议使用typra编辑器，可以方便的插入相对路径图片
+
 ```markdown
 ---
 title: 文章标题
 date: 2024-03-20
 author: 作者
+cover: url...
 layout: doc # 可选布局
 ---
 ```
