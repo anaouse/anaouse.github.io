@@ -1,95 +1,113 @@
 #!/bin/bash
-# update-theme.sh
+# update_theme.sh - VitePress主题更新工具
 
-set -e  # 出错时终止脚本
+# 设置上游仓库URL
+UPSTREAM_URL="https://github.com/57Darling02/VitePress_butterfly.git"
 
-# 颜色定义
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[0;33m'
-NC='\033[0m' # 无颜色
+echo "🚀 VitePress_butterfly 主题更新工具"
+echo "---------------------------------"
 
-echo -e "${YELLOW}=============================================${NC}"
-echo -e "${YELLOW}         VitePress主题一键更新工具          ${NC}"
-echo -e "${YELLOW}=============================================${NC}"
-echo -e "${GREEN}提示：本工具将从上游仓库更新主题核心文件${NC}"
-echo -e "${RED}警告：以下文件将被覆盖：${NC}"
-echo -e "  - .vitepress/ 目录"
-echo -e "  - package.json"
-echo -e "  - package-lock.json"
-echo -e "${GREEN}以下文件将保持不变：${NC}"
-echo -e "  - posts/ 目录"
-echo -e "  - public/ 目录"
-echo -e "  - site_config.ts"
-echo -e "  - .gitignore"
-echo -e "  - .github/ 目录"
-echo -e ""
-
-# 确认用户操作
-read -p "是否继续更新？(y/N) " -n 1 -r
-echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo -e "${RED}更新已取消${NC}"
-    exit 1
+# 第一步：检查是否在Git仓库中
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  echo "错误：当前目录不是Git仓库！"
+  echo "请确保在项目根目录运行此脚本"
+  exit 1
 fi
 
-# 检查Git是否安装
-if ! command -v git &> /dev/null; then
-    echo -e "${RED}错误：未找到Git，请先安装Git${NC}"
-    exit 1
+# 第二步：添加上游仓库
+if ! git remote | grep -q upstream; then
+  echo "添加上游主题仓库..."
+  git remote add upstream $UPSTREAM_URL
 fi
 
-# 检查是否在Git仓库中
-if ! git rev-parse --is-inside-work-tree &> /dev/null; then
-    echo -e "${RED}错误：当前目录不是Git仓库${NC}"
-    exit 1
-fi
-
-# 保存当前进度
-git stash save "pre-update-backup" || true
-
-# 设置上游仓库（如果尚未设置）
-if ! git remote -v | grep -q 'upstream'; then
-    echo -e "${YELLOW}设置上游仓库为：https://github.com/57Darling02/VitePress_butterfly.git${NC}"
-    git remote add upstream https://github.com/57Darling02/VitePress_butterfly.git
-fi
-
-# 获取上游更新
-echo -e "${GREEN}正在从上游仓库获取更新...${NC}"
+# 第三步：获取最新主题
+echo "获取最新主题..."
 git fetch upstream main
 
-# 创建临时分支进行更新
-git checkout -b temp-update upstream/main
+# 第四步：显示警告信息
+echo ""
+echo "⚠️ 警告：以下文件将被覆盖（除非你已修改）:"
+echo "----------------------------------------"
+git diff --name-only HEAD upstream/main -- \
+  .vitepress \
+  package.json \
+  update_theme.sh \
+  -- . ':!posts/' ':!site_config.ts' ':!public/' ':!.gitignore' ':!.github/'
 
-# 复制需要更新的文件到当前目录
-echo -e "${GREEN}正在更新核心文件...${NC}"
-cp -r .vitepress ../
-cp package.json ../
-cp package-lock.json ../ 2>/dev/null || true  # 忽略不存在的文件
+# 第五步：用户选择更新方式
+echo ""
+echo "请选择更新方式:"
+echo "1) 安全更新（推荐）: 只更新主题文件，保留你的内容"
+echo "2) Git 合并更新（高级）: 手动解决冲突"
+echo "3) 退出"
+read -p "请输入选项 (1/2/3): " choice </dev/tty
 
-# 回到主分支
-git checkout main
-git branch -D temp-update  # 删除临时分支
+case $choice in
+  1)
+    # 安全更新模式
+    echo "正在执行安全更新..."
+    
+    # 备份用户配置文件
+    if [ -f "site_config.ts" ]; then
+      cp site_config.ts site_config.ts.bak
+    fi
+    
+    # 检出上游文件（排除用户内容）
+    git checkout upstream/main -- \
+      .vitepress \
+      package.json \
+      update_theme.sh
+    
+    # 恢复用户配置文件
+    if [ -f "site_config.ts.bak" ]; then
+      mv site_config.ts.bak site_config.ts
+      echo "已恢复你的站点配置 (site_config.ts)"
+    fi
+    
+    echo "✅ 主题更新完成！以下内容已保留:"
+    echo "  - 所有文章 (posts/)"
+    echo "  - 站点配置 (site_config.ts)"
+    echo "  - 静态资源 (public/)"
+    echo "  - GitHub配置 (.github/)"
+    echo "  - Git忽略配置 (.gitignore)"
+    ;;
+  2)
+    # Git 合并模式
+    echo "正在执行 Git 合并..."
+    git merge upstream/main
+    
+    # 检查合并状态
+    if [ $? -ne 0 ]; then
+      echo "⚠️ 检测到合并冲突！请手动解决:"
+      echo "  1. 查看冲突文件: git status"
+      echo "  2. 编辑带冲突标记的文件 (<<<<<<<)"
+      echo "  3. 解决后标记为已解决: git add <文件>"
+      echo "  4. 完成合并: git merge --continue"
+    else
+      echo "✅ 合并完成，无冲突"
+    fi
+    ;;
+  3)
+    echo "操作已取消"
+    exit 0
+    ;;
+  *)
+    echo "无效选项，操作已取消"
+    exit 1
+    ;;
+esac
 
-# 恢复更新的文件
-echo -e "${GREEN}正在应用更新...${NC}"
-git checkout -- .  # 清除未跟踪的文件
-cp -r ../.vitepress .
-cp ../package.json .
-cp ../package-lock.json . 2>/dev/null || true
+# 第六步：更新依赖
+echo "更新依赖包..."
+npm install
 
-# 提交更新
-git add .vitepress package.json package-lock.json
-git commit -m "Update theme core from upstream" || true
-
-# 恢复用户修改
-echo -e "${GREEN}正在恢复你的自定义修改...${NC}"
-git stash pop || true
-
-echo -e "${GREEN}=============================================${NC}"
-echo -e "${GREEN}主题核心已成功更新！${NC}"
-echo -e "${GREEN}=============================================${NC}"
-echo -e "${YELLOW}高级用户建议：${NC}"
-echo -e "  1. 使用 'git diff' 查看详细变更"
-echo -e "  2. 执行 'npm install' 更新依赖"
-echo -e "  3. 如需更精细控制，建议使用 'git merge upstream/main'"
+# 第七步：完成提示
+echo ""
+echo "🎉 更新完成！"
+echo "---------------------------------"
+echo "下一步建议:"
+echo "1. 运行本地预览: npm run dev"
+echo "2. 检查站点功能"
+echo "3. 如有问题可回退: git reset --hard HEAD@{1}"
+echo ""
+echo "💡 提示：定期运行此脚本保持主题更新"
