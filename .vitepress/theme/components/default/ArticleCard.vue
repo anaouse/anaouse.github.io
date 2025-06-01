@@ -52,7 +52,7 @@ datetime.value = new Intl.DateTimeFormat(
 <template>
     <div class="a-card">
         <a class="article-card" :href="props.post.link.replace('.html','')">
-            <el-image v-if="props.post.cover" class="article-cover" :src="props.post.cover" :alt="props.post.title" style="width: 100px; height: 100px"/>
+            <el-image v-if="props.post.cover" class="article-cover" :src="props.post.cover" :alt="props.post.title" fit="cover" lazy/>
             <article>
                 <h1 class="article-title">
                     {{ props.post.title ?? 'Untitled Article' }}
@@ -138,7 +138,7 @@ datetime.value = new Intl.DateTimeFormat(
     mask: linear-gradient(to right, transparent, #fff 50%);
     transition: all 0.2s;
     object-fit: cover;
-
+    border-radius:  12px;
     :hover>& {
         opacity: 1;
     }

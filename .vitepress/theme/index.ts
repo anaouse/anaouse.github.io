@@ -7,6 +7,7 @@ import 'element-plus/theme-chalk/display.css'
 // import 'element-plus/theme-chalk/dark/css-vars.css'
 import Layout from './Layout.vue'
 import './css/style.css'
+import '../static/fontawesome/css/all.min.css'
 
 export default {
   

@@ -1,5 +1,5 @@
 <template>
-  <div class="a-card" id="article-header">
+  <div id="article-header">
     <!-- 标题区域 -->
     <div id="header-title">
       <h1>{{ title }}</h1>
@@ -8,19 +8,22 @@
     <div class="meta-info">
       <!-- 作者信息 -->
       <div class="author-info">
-        <el-icon><User /></el-icon>
+        <el-icon>
+          <User />
+        </el-icon>
         <span class="author">{{ author }}</span>
       </div>
       <!-- 分隔线 -->
       <div class="divider"></div>
       <!-- 发布日期 -->
       <div class="date-info">
-        <el-icon><Calendar /></el-icon>
+        <el-icon>
+          <Calendar />
+        </el-icon>
         <time :datetime="date">{{ formattedDate }}</time>
       </div>
     </div>
-    <VPDocFooterLastUpdated/>
-    
+    <VPDocFooterLastUpdated />
   </div>
 </template>
 
@@ -29,13 +32,13 @@ import { computed } from 'vue'
 import { useData } from 'vitepress'
 import { Calendar, User } from '@element-plus/icons-vue'
 import VPDocFooterLastUpdated from './VPDocFooterLastUpdated.vue'
-const { frontmatter,theme,page } = useData()
+const { frontmatter, theme, page } = useData()
 // console.log(frontmatter.value)
 // console.log(theme.value)
 // console.log(page.value)
 const {
   title = "Untitled Article",
-  author = frontmatter.value?.author ||theme.value?.author || "Unknown Author",
+  author = frontmatter.value?.author || theme.value?.author || "Unknown Author",
   date = '',
 } = frontmatter.value
 
@@ -54,7 +57,6 @@ const formattedDate = computed(() => {
 </script>
 
 <style>
-
 #article-header {
   padding: 2rem;
   border-radius: 8px;
@@ -84,7 +86,7 @@ const formattedDate = computed(() => {
   font-size: 2.5em;
   line-height: 1.5;
   color: wheat !important;
-  
+
 }
 
 .meta-info {

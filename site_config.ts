@@ -11,8 +11,11 @@ export default {
         subTitles:['世界上只有一种英雄主义','那就是在认清生活的真相后','依然热爱生活'],//打字机效果的副标题，使用字符串列表
     },
     background:'/wallpaper/1.webp',
+    pageSize:8, //首页文章列表分页大小，默认为8
+
+
     // 侧边简介卡
-    avatar: "https://resource-un4.pages.dev/article/yjtp.webp",
+    avatar: "https://resource-un4.pages.dev/article/yjtp.webp", //头像地址
     name: '57Darling02',
     position: '全栈开发、优化算法爱好者',
     bio: '红红火火恍恍惚惚',
@@ -27,20 +30,5 @@ export default {
         message: 'Released under the MIT License.',
         copyright: 'Copyright © 2025-present My Awesome Site'
     },
-    // 即将完成的配置
-    nav: [
-        { text: '首页', link: '/' },
-        { text: '指南', link: '/guide/' },
-    ],
-    sidebar: {
-        '/guide/': [
-            {
-                text: '指南',
-                items: [
-                    { text: '介绍', link: '/guide/introduction' },
-                    { text: '安装', link: '/guide/installation' }
-                ]
-            }
-        ]
-    },
+    
 }

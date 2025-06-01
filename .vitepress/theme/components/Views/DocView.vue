@@ -1,57 +1,49 @@
 <template>
-    <div class="doc-header" style="width: 100%;" v-if="!isFocusMode">
-        <slot name="doc-header">
-            <PostInfo />
-        </slot>
+
+    <div class="doc-header" style="width: 100%;">
+        <slot name="doc-header"/>
     </div>
 
     <div id="content-container" :style="{ maxWidth: isFocusMode ? 'none' : '1200px' }">
 
-        <div id="page-wrapper" :class="{ 'a-card': !isFocusMode }" class="fade-item">
-            <content class="vp-doc" style="overflow-x: hidden;" />
+        <!-- 主内容 -->
+        <div id="page-wrapper">
+            <slot name="main-content" />
         </div>
 
-
+        <!-- 侧边栏 -->
         <div class="sidebar" v-if="showSidebar">
+            <!-- 正常模式 -->
             <template v-if="!isFocusMode">
-                <slot name="sidebar-non-stay">
-                    <ProfileCard />
-                </slot>
-                <div class="sidebar-stay">
-                    <slot name="sidebar-stay">
-                        <div class="a-card" style="height: 300px;display: flex;flex-direction: column;padding: 18px;">
-                            <Toc />
-                        </div>
-
-                    </slot>
+                <slot name="sidebar-non-stay"/>
+                <div class="sidebar-stay" :class="{ 'nav-hidden': !showNavbar }">
+                    <slot name="sidebar-stay"/>
                 </div>
             </template>
+            <!-- 专注模式 -->
             <template v-else>
-                <div class="sidebar-stay" style="background-color: var(--vp-sidebar-bg-color);">
-                    <Toc />
+                <div class="sidebar-stay" style="background-color: var(--vp-sidebar-bg-color);"
+                    :class="{ 'nav-hidden': !showNavbar }">
+                    <slot name="sidebar-stay"/>
                 </div>
             </template>
         </div>
-
     </div>
-
 </template>
 <script lang='ts' setup>
-import Toc from '../Toc.vue'
-import PostInfo from '../default/PostInfo.vue'
-import { ref, inject, onMounted, computed } from 'vue'
-import ProfileCard from '../default/ProfileCard.vue'
+import { ref, inject, onMounted } from 'vue'
 // 获取全局状态和方法
 const isFocusMode = inject('isFocusMode')
 const showNavbar = inject('showNavbar')
 const showSidebar = inject('showSidebar')
-const top = computed(() => (showNavbar.value ? 'var(--nav-height)' : '0px'))
 const isMounted = ref(false)
 onMounted(() => {
     isMounted.value = true
 })
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
+$hide-offset: var(--nav-height);
+
 #content-container {
     display: flex;
     justify-self: center;
@@ -63,10 +55,8 @@ onMounted(() => {
 }
 
 #page-wrapper {
-    padding: 20px;
+    padding: 0px 5px 0px;
     width: 100%;
-    padding: 5px 15px 5px;
-    margin-left: 10px;
 }
 
 .sidebar {
@@ -86,9 +76,8 @@ onMounted(() => {
 
 .sidebar-stay {
     position: sticky;
-    top: v-bind(top);
-    max-height: calc(100vh - (var(--nav-height) + 20px));
-
+    top: var(--nav-height);
+    max-height: calc(100vh - (var(--nav-height)));
     /* 保留滚动缓冲空间 */
     transition:
         top 0.3s cubic-bezier(0.4, 0, 0.2, 1),
@@ -97,5 +86,9 @@ onMounted(() => {
     z-index: 50;
     display: flex;
     flex-direction: column;
+    &.nav-hidden {
+        top: 0px;
+        max-height: 100vh;
+    }
 }
 </style>

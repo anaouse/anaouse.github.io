@@ -98,7 +98,6 @@ export default defineConfig({
   description: myconfig.site_description||"VitePress-Butterfly is a VitePress theme inspired by the Butterfly theme.",
   themeConfig: myconfig,
   lastUpdated: true,
-  head: [['link', { rel: 'stylesheet', href: 'https://cdnjs.snrat.com/ajax/libs/font-awesome/6.5.1/css/all.min.css' }]],
   vite: {
     ssr: {
       noExternal: ['element-plus']

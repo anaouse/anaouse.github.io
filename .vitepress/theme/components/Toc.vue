@@ -146,25 +146,30 @@ function buildTree(data: Node[], min: number, max: number) {
 </script>
 
 <template>
-    <span class="toc-title" style="font-weight: 600;height: 25px;"><i class="fas fa-columns" />目录导航 <el-button
-            type="default" size="small" @click="move2current_anchor" >锚点定位<i class="fa-regular fa-circle-dot"></i></el-button>
-    </span>
+    <div style="min-height: 0;height: 100%;display: flex;flex-direction: column;">
+        <span class="toc-title" style="font-weight: 600;height: 25px;"><i class="fas fa-columns" />目录导航 <el-button
+                type="default" size="small" @click="move2current_anchor">锚点定位<i
+                    class="fa-regular fa-circle-dot"></i></el-button>
+        </span>
 
-    <el-anchor v-if="headers.length" :container="scrollContainer" :offset="45" direction="vertical"
-        style="background-color: transparent;flex: 1;overflow: hidden;display: flex;" :marker="false"
-        :select-scroll-top="true" @change="anchor_change">
-        <el-scrollbar style="flex: 1;" ref="scrollTocContainer">
-            <el-tree ref="treeRef" style="max-width: 300px;background-color: transparent;" :data="headers"
-                :props="treeProps" :expand-on-click-node="false" :highlight-current="true" :indent="12"
-                :check-on-click-leaf="false" node-key="value" :auto-expand-parent="false" :render-after-expand="false">
-                <template #default="{ node, data }">
-                    <el-anchor-link :href="`${data.value}`" :title="data.label">
-                    </el-anchor-link>
-                </template>
-            </el-tree>
-        </el-scrollbar>
+        <el-anchor v-if="headers.length" :container="scrollContainer" :offset="45" direction="vertical"
+            style="background-color: transparent;min-height: 0;height: 100%;display: flex;flex-direction: column;" :marker="false"
+            :select-scroll-top="true" @change="anchor_change">
+            <el-scrollbar style="flex: 1;min-height: 0;" ref="scrollTocContainer">
+                <el-tree ref="treeRef" style="max-width: 300px;background-color: transparent;" :data="headers"
+                    :props="treeProps" :expand-on-click-node="false" :highlight-current="true" :indent="12"
+                    :check-on-click-leaf="false" node-key="value" :auto-expand-parent="false"
+                    :render-after-expand="false">
+                    <template #default="{ node, data }">
+                        <el-anchor-link :href="`${data.value}`" :title="data.label">
+                        </el-anchor-link>
+                    </template>
+                </el-tree>
+            </el-scrollbar>
 
-    </el-anchor>
+        </el-anchor>
+    </div>
+
 </template>
 
 <style lang="scss">

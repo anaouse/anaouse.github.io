@@ -11,7 +11,8 @@
   "scripts": {
     "dev": "vitepress dev",
     "preview": "vitepress preview",
-    "docs:build": "vitepress build"
+    "docs:build": "vitepress build",
+    "build": "vitepress build --outDir docs"
   },
   "dependencies": {
     "element-plus": "^2.9.5",
