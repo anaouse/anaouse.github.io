@@ -13,7 +13,7 @@
 </template>
 <script lang='ts' setup>
 import { useData } from 'vitepress'
-const { theme, page, frontmatter } = useData()
+const { theme} = useData()
 const BGIMG_url = theme.value.background || ''
 
 </script>
@@ -45,12 +45,12 @@ const BGIMG_url = theme.value.background || ''
 
 
 $duration: 400s;
-$count: 1000;
-@for $i from 1 through 5 {
+$count: 250;
+@for $i from 1 through 4 {
     $duration: calc($duration / 2);
     $count: math.floor(calc($count / 2));
     .layer#{$i} {
-        $size: #{$i}px;
+        $size: #{$i*2}px;
         position: fixed;
         width: $size;
         height: $size;

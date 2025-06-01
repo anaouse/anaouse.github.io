@@ -1,15 +1,17 @@
 <template>
     <Loading v-if="!isMounted" />
-    <Bg_StarrySkySass v-if="!(isFocusMode&&(!frontmatter.layout||frontmatter.layout=='doc'))" />
+    <Bg_StarrySkySass v-if="!(isFocusMode && (!frontmatter.layout || frontmatter.layout == 'doc'))" />
     <transition name="el-fade-in">
-        <div id="control" v-if="showNavbar&&lastScrollY>100">
+        <div id="control" v-if="showNavbar && lastScrollY > 100">
             <div class="social-item" @click="backToTop">
-                <el-icon><ArrowUpBold /></el-icon>
+                <el-icon>
+                    <ArrowUpBold />
+                </el-icon>
             </div>
         </div>
     </transition>
 
-    <el-scrollbar height="100vh" ref="scrollbarRef" @scroll="handleScroll"  wrap-style="max-width:100vw;">
+    <el-scrollbar height="100vh" ref="scrollbarRef" @scroll="handleScroll" wrap-style="max-width:100vw;">
         <el-header height="var(--nav-height)">
             <Nav />
         </el-header>
@@ -23,6 +25,7 @@
 
 <script setup lang="ts">
 import { inject, onMounted, onUnmounted, ref } from 'vue'
+import { throttle } from 'lodash-es'
 import { useData } from 'vitepress'
 const { theme, page, frontmatter } = useData()
 import { ArrowUpBold } from '@element-plus/icons-vue'
@@ -55,7 +58,7 @@ const handleResize = () => {
 //实现导航栏滚动的隐藏和显示
 const lastScrollY = ref(0)
 const scrollingDown = ref(false)
-const handleScroll = ({ scrollTop }) => {
+const handleScroll = throttle(({ scrollTop }) => {
     if (!isMounted.value) return // 挂载前不处理
     const currentY = scrollTop
     const windowHeight = scrollbarRef.value?.wrapRef?.clientHeight || 0
@@ -75,7 +78,7 @@ const handleScroll = ({ scrollTop }) => {
         showNavbar.value = true
     }
     lastScrollY.value = currentY
-}
+}, 250)
 
 // 控制栏
 const backToTop = () => {
@@ -111,33 +114,40 @@ onUnmounted(() => {
 }
 
 @keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
 
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
+
 $base-delay: 0.2s;
 $delay-step: 0.05s;
+
 /* 公共动画类 */
 .fade-item {
     opacity: 0;
     animation: fadeInUp 0.2s ease-in-out forwards;
-    animation-delay: $base-delay; /* 使用初始延迟 */
+    animation-delay: $base-delay;
+    /* 使用初始延迟 */
     /* 每次应用后自动累加步长 */
     $base-delay: $base-delay + $delay-step;
 }
+
 .fade-group {
+
     /* 为每个循环项设置递增延迟 */
     @for $i from 1 through 30 {
         .fade-item:nth-child(#{$i}) {
-            animation-delay: ($i - 1) * $delay-step; /* 第一个元素0s，第二个0.05s...第30个1.45s */
+            animation-delay: ($i - 1) * $delay-step;
+            /* 第一个元素0s，第二个0.05s...第30个1.45s */
         }
     }
+
     $base-delay: 0.2s;
 }
 </style>
