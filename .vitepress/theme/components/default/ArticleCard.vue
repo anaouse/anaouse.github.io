@@ -35,8 +35,9 @@ const formattedDate = computed(() => {
 
 
 const hasValidDate = props.post.lastUpdated && !isNaN(new Date(props.post.lastUpdated).getTime())
-const date = hasValidDate.value ? new Date(props.post.lastUpdated!) : new Date()
-const isoDatetime = hasValidDate.value ? date.toISOString() : ''
+
+const date = hasValidDate ? new Date(props.post.lastUpdated!) : new Date()
+const isoDatetime = hasValidDate ? date.toISOString() : ''
 const datetime = ref('')
 
 datetime.value = new Intl.DateTimeFormat(
