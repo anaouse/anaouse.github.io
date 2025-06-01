@@ -1,7 +1,0 @@
-
-.gitignore merge=ours
-posts/** merge=ours
-public/** merge=ours
-site_config.ts merge=ours
-.github/ merge=ours
-* merge=union
