@@ -78,9 +78,6 @@ done
 echo "清理临时文件..."
 rm -rf "$BACKUP_DIR"
 
-# 第十步：更新依赖
-echo "更新依赖包..."
-npm install
 
 # 完成提示
 echo ""
