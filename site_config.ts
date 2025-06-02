@@ -16,7 +16,7 @@ export default {
 
 
   // 侧边简介卡
-  avatar: "https://resource-un4.pages.dev/article/yjtp.webp", //头像地址
+  avatar: "http://p1.music.126.net/ACZbqR-2XlucBQMdcYDfkw==/109951170473559542.jpg?param=180y180", //头像地址
   name: 'anaouse',
   position: '个人博客',
   bio: '我是无敌玩耍高手',
