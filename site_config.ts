@@ -4,7 +4,7 @@ export default {
   site_description: "wuwuuw",
   site_url: "/",
   author: 'anaouse',
-  defaultFocusMode: false, // 是否默认开启焦点模式
+  defaultFocusMode: true, // 是否默认开启焦点模式
   isDark: null, // 是否默认开启深色模式, null 则会跟随系统
   // 首页配置
   home: {
@@ -16,7 +16,7 @@ export default {
 
 
   // 侧边简介卡
-  avatar: "http://p1.music.126.net/ACZbqR-2XlucBQMdcYDfkw==/109951170473559542.jpg?param=180y180", //头像地址
+  avatar: "./public/anaouse.jpg", //头像地址
   name: 'anaouse',
   position: '个人博客',
   bio: '我是无敌玩耍高手',
