@@ -62,12 +62,11 @@ const formattedDate = computed(() => {
   padding: 2rem;
   border-radius: 8px;
   margin-bottom: 2rem;
+  /* background: var(--vp-c-background); */
   backdrop-filter: blur(5px);
-  border-color: rgba(228, 195, 195, 0.13);
-  background-color: transparent;
+  border-color: rgba(228, 195, 195, 0.619);
   display: flex;
   animation: fadeInUp 1s ease-in-out 0.2s forwards;
-  opacity: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,11 +81,9 @@ const formattedDate = computed(() => {
 
 #header-title h1 {
   margin-bottom: 8px;
-  color: var(--white);
   font-weight: 400;
   font-size: 2.5em;
   line-height: 1.5;
-  color: wheat !important;
 
 }
 

@@ -4,7 +4,7 @@
         <slot name="doc-header"/>
     </div>
 
-    <div id="content-container" :style="{ maxWidth: isFocusMode ? 'none' : '1200px' }">
+    <div id="content-container" :style="{ maxWidth: isFocusMode&& (!frontmatter.layout || frontmatter.layout == 'doc') ? 'none' : '1200px' }">
 
         <!-- 主内容 -->
         <div id="page-wrapper">
@@ -32,6 +32,8 @@
 </template>
 <script lang='ts' setup>
 import { ref, inject, onMounted } from 'vue'
+import { useData } from 'vitepress'
+const { theme, page, frontmatter } = useData()
 // 获取全局状态和方法
 const isFocusMode = inject('isFocusMode')
 const showNavbar = inject('showNavbar')

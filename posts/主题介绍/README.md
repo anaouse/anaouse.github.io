@@ -1,3 +1,10 @@
+---
+title: VitePress-Butterfly 主题readme
+date: 2024-05-20
+author: 57Darling02
+---
+
+
 # VitePress-Butterfly 主题
 
 基于VitePress和Element Plus的卡片式仿butterfly主题。
@@ -153,8 +160,8 @@ export default {
   site_description: "这是一个使用 VitePress 构建的文档站点。",
   site_url: "/",
   author: '57Darling02',
-  defaultFocusMode: false, // 是否默认开启焦点模式，有性能问题请打开
-  isDark: null, // 是否默认开启深色模式, null 则会跟随系统 
+  defaultFocusMode: false, // 是否默认开启焦点模式,如果出现闪屏等性能问题，请打开
+  isDark: null, // 是否默认开启深色模式, null 则会跟随系统
   // 首页配置
   home: {
     mainTitle: "My Awesome Site",
@@ -211,7 +218,6 @@ export default {
     
   ],
 }
-
 ```
 ### 目录结构
 

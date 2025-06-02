@@ -16,7 +16,6 @@
         <el-header height="var(--nav-height)">
             <ClientOnly><Nav /></ClientOnly>
         </el-header>
-        
             <NotFound v-if="page.isNotFound" />
             <MainView v-else />
             <el-footer>
