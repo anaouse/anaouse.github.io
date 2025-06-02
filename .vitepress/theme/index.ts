@@ -15,7 +15,8 @@ export default {
   Layout,
   enhanceApp({ app, router, siteData }) {
     // 注入全局变量
-    const isFocusMode = ref(false) // 专注模式
+    const isFocusMode = ref(siteData.value.themeConfig.defaultFocusMode || false) // 专注模式
+    
     const showNavbar = ref(true) // 显示导航栏
     const showSidebar = ref(true)
     app.provide('isFocusMode', isFocusMode)

@@ -2,15 +2,14 @@
 
 基于VitePress和Element Plus的卡片式仿butterfly主题。
 
-##  特性
+示例站点：[模板站点](https://vitepress.57d02.cn/)
 
-- 基于 VitePress 1.6.3 + Vue 3 构建
-- 集成 Element Plus 组件库
-- 响应式布局和动态导航栏
-- 自定义主题样式系统
-- 内置文章卡片、标签云等组件
-- SEO 友好配置
-- 静态资源自动优化
+[57Darling02's Blog](https://57darling02.github.io/)
+
+##  特色
+
+- 深浅色主题样式、专注模式专注内
+- 静态资源自动优化，不需要图床也能够插入图片
 
 ##  快速开始（简单部署）
 
@@ -54,7 +53,7 @@ git push
 
 
 
-#### （可选）预览文章
+#### （可选，如果你仅仅使用默认样式，请跳过）预览文章
 
 确保你有nodejs环境后，在命令行完成：
 
@@ -90,9 +89,11 @@ npm run preview
 
 1. 等待。
 
-优点：后续修改posts文件夹内容，site_config.ts后，只需要上传即可。
+>  优点：后续修改posts文件夹内容，site_config.ts后，只需要上传即可。
 
 ##### 本地构建
+
+> 该方式需要你手动打包，并让github部署
 
 1. 构建生产版本
 
@@ -111,19 +112,11 @@ npm run build
 
 ## 主题更新
 
-#### **1. 添加上游仓库（指向原始仓库）**
+#### 直接更新：运行update_theme.sh
 
-```bash
-git remote add upstream https://github.com/57Darling02/VitePress_butterfly.git
-```
+> 这将仅保留 "posts/" "site_config.ts"  "public/"  ".github/"，其余文件将被覆盖。如果只修改了以上文件，简单更新即可。
 
-#### **2. 获取主题更新**
-
-1. 直接更新：运行update_theme.sh
-
-	> 这将仅保留 "posts/" "site_config.ts"  "public/"  ".github/"，其余文件将被覆盖。如果只修改了以上文件，简单更新即可。
-
-2. 手动更新，同步仓库并合并冲突
+#### 手动更新，同步仓库并合并冲突
 
 ## 配置指南
 

@@ -15,6 +15,7 @@
     "build": "vitepress build --outDir docs"
   },
   "dependencies": {
+    "busuanzi.pure.js": "^1.0.3",
     "element-plus": "^2.9.5",
     "lodash-es": "^4.17.21",
     "typeit": "^8.8.7"

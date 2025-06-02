@@ -27,7 +27,7 @@
 import { inject, onMounted, onUnmounted, ref } from 'vue'
 import { throttle } from 'lodash-es'
 import { useData } from 'vitepress'
-const { theme, page, frontmatter } = useData()
+const { theme, page, frontmatter, isDark } = useData()
 import { ArrowUpBold } from '@element-plus/icons-vue'
 import Nav from './components/Nav.vue'
 import Footer from './components/Footer.vue'
@@ -44,8 +44,7 @@ const showSidebar = inject('showSidebar', ref(true))
 const isMounted = ref(false)
 const scrollbarRef = ref()
 const contentContainer = ref()
-
-
+isDark.value = theme.value.isDark || isDark.value
 // 窗口宽度状态和尺寸变化处理
 const windowWidth = ref(typeof window !== 'undefined' ? window.innerWidth : 0)
 const handleResize = () => {

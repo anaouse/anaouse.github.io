@@ -9,8 +9,15 @@
         <el-tag size="small" type="success" effect="plain" round>
             {{ copyright }}
         </el-tag>
+
+        <span id="vercount_container_site_pv" style='display:none'>
+            本站总访问量<span id="vercount_value_site_pv"></span>次
+        </span>
+
     </div>
+
 </template>
+
 <script lang='ts' setup>
 import { useData } from 'vitepress'
 const { theme, page, frontmatter } = useData()
@@ -19,12 +26,14 @@ const footer = theme.value.footer || {}
 const copyright = footer.copyright || ''
 const message = footer.message || ''
 </script>
+
 <style lang="scss" scoped>
 .divider {
     width: 100%;
     height: 1px;
 }
-.footer-container{
+
+.footer-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,6 +42,7 @@ const message = footer.message || ''
     padding-bottom: 25px;
     padding-top: 25px;
 }
+
 .divider-line {
     width: 100%;
     height: 1px;

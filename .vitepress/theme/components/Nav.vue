@@ -1,5 +1,5 @@
 <template>
-    <div id="nav" style="flex: 1;" :class="{ 'nav-hidden': !showNavbar  }">
+    <div id="nav" style="flex: 1;" :class="{ 'nav-hidden': !(showNavbar || visible) }">
         <el-row style="width: 100%;height: 100%;">
             <el-col :span="12" justify="start">
                 <a style="display: flex;width: 100%;height: 100%;justify-content: start; font-weight: 700;" href="/"
@@ -14,50 +14,62 @@
             </el-col>
         </el-row>
     </div>
-    <el-drawer v-model="visible" :size="300" :destroy-on-close="true" :z-index="99" :show-close="false"
-        style="border-top-left-radius: 12px;border-bottom-left-radius: 12px;" :before-close="handleBeforeClose">
-
-        <el-row>
-            <el-col :span="12">主题模式: {{ useData().isDark ? '暗色' : '浅色' }}</el-col>
-            <el-col :span="12">
-                <VPSwitchAppearance />
-            </el-col>
-            <el-col :span="12">专注模式: {{ isFocusMode ? '开启' : '关闭' }}</el-col>
-            <el-col :span="12">
-                <ToggleFocusModeBTN />
-            </el-col>
-        </el-row>
-        <Toc v-if="!showSidebar" />
-        <!-- theme: {{ theme }}
+    <el-drawer v-model="visible" :size="300" :destroy-on-close="true" :show-close="false" :lock-scroll="false"
+        style="border-top-left-radius: 12px;border-bottom-left-radius: 12px;"
+        :before-close="handleBeforeClose" :modal="false">
+        <template v-if="drawerContentVisible">
+            <el-row>
+                <el-col :span="12">主题模式: {{ useData().isDark ? '暗色' : '浅色' }}</el-col>
+                <el-col :span="12">
+                    <VPSwitchAppearance />
+                </el-col>
+                <el-col :span="12">专注模式: {{ isFocusMode ? '开启' : '关闭' }}</el-col>
+                <el-col :span="12">
+                    <ToggleFocusModeBTN />
+                </el-col>
+            </el-row>
+            <Drawer />
+            <!-- theme: {{ theme }}
         page: {{ page }} -->
-        <!-- frontmatter: {{ frontmatter }} -->
-        <!-- <Submenu v-if="visible"/> -->
+            <!-- frontmatter: {{ frontmatter }} -->
+            <!-- <Submenu v-if="visible"/> -->
+        </template>
+
     </el-drawer>
 </template>
 
 <script lang='ts' setup>
 import { useData, useRouter } from 'vitepress'
 const { theme, page, frontmatter } = useData()
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import VPSwitchAppearance from './default/VPSwitchAppearance.vue'
 import ToggleFocusModeBTN from './default/ToggleFocusModeBTN.vue'
 import VPNavBarHamburger from './default/VPNavBarHamburger.vue'
-import Toc from './Toc.vue'
+
+import Drawer from './Drawer.vue'
 const visible = ref(false)
 import { inject } from 'vue'
 // 获取全局状态和方法
 const isFocusMode = inject('isFocusMode')
 const showNavbar = inject('showNavbar')
 const showSidebar = inject('showSidebar')
-
+const drawerContentVisible = ref(false)
 const handleBeforeClose = (done: () => void) => {
-    // 立即销毁子组件
-    visible.value = false
-    // 等待下一帧执行关闭动画
+    drawerContentVisible.value = false
     setTimeout(done, 200)
-
 }
-
+watch(visible, (newVal) => {
+    console.log('handleBeforeClose')
+    if (newVal) { // 打开时
+        // 等待抽屉展开动画完成（根据你的scss中$transition-time: 0.3s; 设为300ms）
+        setTimeout(() => {
+            drawerContentVisible.value = true
+        }, 200)
+    } else { // 关闭时
+        // 立即销毁内容
+        drawerContentVisible.value = false
+    }
+})
 </script>
 
 
@@ -81,7 +93,7 @@ $hide-offset: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 100;
+    z-index: 9999;
     opacity: 0.8;
     border-bottom: 1px solid transparent;
     box-shadow: 0 0 0 rgba(202, 199, 199, 0);
@@ -89,6 +101,7 @@ $hide-offset: 100%;
     border-bottom-right-radius: $border-radius;
     background-color: $nav-bg;
     transition: transform $transition-time ease;
+
     &.nav-hidden {
         transform: translateY(-$hide-offset);
     }

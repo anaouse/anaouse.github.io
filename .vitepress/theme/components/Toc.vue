@@ -19,6 +19,7 @@ const getScrollContainer = () => {
 onMounted(() => {
     scrollContainer.value = getScrollContainer()
     headers.value = getHeaders(frontmatter.value.outline ?? theme.value.outline ?? 'deep');
+    
 })
 // onContentUpdated(() => {
 //     headers.value = getHeaders(frontmatter.value.outline ?? theme.value.outline ?? 'deep');
@@ -161,8 +162,7 @@ function buildTree(data: Node[], min: number, max: number) {
                     :check-on-click-leaf="false" node-key="value" :auto-expand-parent="false"
                     :render-after-expand="false">
                     <template #default="{ node, data }">
-                        <el-anchor-link :href="`${data.value}`" :title="data.label">
-                        </el-anchor-link>
+                        <el-anchor-link v-if="data.value && data.label" :href="data.value" :title="data.label"/>
                     </template>
                 </el-tree>
             </el-scrollbar>

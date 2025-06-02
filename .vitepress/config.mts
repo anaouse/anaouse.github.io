@@ -94,10 +94,13 @@ const customElements = [
   'annotation-xml',
 ];
 export default defineConfig({
-  title: myconfig.site_name||"VitePress-Butterfly",
-  description: myconfig.site_description||"VitePress-Butterfly is a VitePress theme inspired by the Butterfly theme.",
+  title: myconfig.site_name || "VitePress-Butterfly",
+  description: myconfig.site_description || "VitePress-Butterfly is a VitePress theme inspired by the Butterfly theme.",
   themeConfig: myconfig,
   lastUpdated: true,
+  head: [
+    ['script', { defer: '', async: '', src: 'https://cn.vercount.one/js' }]
+  ],
   vite: {
     ssr: {
       noExternal: ['element-plus']
