@@ -19,7 +19,7 @@
                 </template>
                 <template #sidebar-stay>
                     <Toc class="a-card" style="height: 300px;display: flex;flex-direction: column;padding: 18px;" v-if="!isFocusMode"/>
-                    <Toc v-else/>
+                    <Toc style="background-color: var(--vp-sidebar-bg-color);" v-else/>
                 </template>
             </DocView>
         </div>

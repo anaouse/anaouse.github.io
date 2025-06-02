@@ -22,6 +22,10 @@
         </el-icon>
         <time :datetime="date">{{ formattedDate }}</time>
       </div>
+      <div class="divider"></div>
+      <span id="vercount_container_site_pv"  style='display:none'>
+        本文总阅读量 <span id="busuanzi_value_page_pv">Loading</span> 次
+      </span>
     </div>
     <VPDocFooterLastUpdated />
   </div>
@@ -33,9 +37,6 @@ import { useData } from 'vitepress'
 import { Calendar, User } from '@element-plus/icons-vue'
 import VPDocFooterLastUpdated from './VPDocFooterLastUpdated.vue'
 const { frontmatter, theme, page } = useData()
-// console.log(frontmatter.value)
-// console.log(theme.value)
-// console.log(page.value)
 const {
   title = "Untitled Article",
   author = frontmatter.value?.author || theme.value?.author || "Unknown Author",

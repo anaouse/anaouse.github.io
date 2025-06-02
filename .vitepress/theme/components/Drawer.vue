@@ -1,9 +1,11 @@
 <template>
     <el-collapse style="--el-fill-color-blank: transparent;--el-collapse-border-color:transparent;" accordion>
-        <el-collapse v-model="activeName" style="--el-fill-color-blank: transparent;--el-collapse-border-color:transparent;" accordion>
-            
-            <el-collapse-item title="大纲" name="wz" v-if="menuToc &&(!frontmatter.layout || frontmatter.layout == 'doc')">
-                <Toc style="height: 300px" v-if="activeName=='wz'"/>
+        <el-collapse v-model="activeName"
+            style="--el-fill-color-blank: transparent;--el-collapse-border-color:transparent;" accordion>
+
+            <el-collapse-item title="大纲" name="wz"
+                v-if="menuToc && (!frontmatter.layout || frontmatter.layout == 'doc')">
+                <Toc style="height: 300px" v-if="activeName == 'wz'" />
             </el-collapse-item>
 
             <el-collapse-item v-for="(item, index) in menuItems" :title="item.label" :name="index">
@@ -14,13 +16,13 @@
                     </div>
                 </el-scrollbar>
             </el-collapse-item>
-            
+
         </el-collapse>
     </el-collapse>
 </template>
 <script setup>
 import { useData } from 'vitepress'
-const { theme, frontmatter} = useData()
+const { theme, frontmatter } = useData()
 import { ref, onMounted, onUnmounted } from 'vue'
 import Toc from './Toc.vue'
 const {
@@ -31,6 +33,8 @@ const {
 const activeName = ref('0')
 
 const handleMenuClick = (item) => {
+    if (typeof window === 'undefined') return null
+
     if (item.children?.length) {
         return
     }

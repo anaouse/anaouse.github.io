@@ -7,16 +7,36 @@
                     <el-text style="color: var(--vp-c-text-1);" truncated>{{ theme.site_name }}</el-text>
                 </a>
             </el-col>
-            <el-col :span="12" justify="end">
+            <el-col :span="12" justify="end" style="flex-direction: column;">
+
                 <div style="display: flex;height: 100%;justify-content: end;" id="menu">
+                    <div class="dropitem">
+                        <el-dropdown v-for="item in menuItems" :key="item.label" popper-class="custom-dropdown">
+                            <h3 class="menu-fitem">
+                                <span>
+                                    <i :class="item.icon"></i>
+                                    {{ item.label }}
+                                    <i class="fa-light fa-angle-up arrow-icon"></i>
+                                </span>
+                            </h3>
+                            <template #dropdown v-if="item.children?.length">
+                                <el-dropdown-menu>
+                                    <el-dropdown-item v-for="subitem in item.children" :key="subitem.key"
+                                        class="menu-item" @click="handleMenuClick(subitem)">
+                                        <i :class="subitem.icon"></i>
+                                        {{ subitem.label }}
+                                    </el-dropdown-item>
+                                </el-dropdown-menu>
+                            </template>
+                        </el-dropdown>
+                    </div>
                     <VPNavBarHamburger :active="visible" @click="visible = !visible" />
                 </div>
             </el-col>
         </el-row>
     </div>
-    <el-drawer v-model="visible" :size="300" :destroy-on-close="true" :show-close="false" :lock-scroll="false"
-        style="border-top-left-radius: 12px;border-bottom-left-radius: 12px;"
-        :before-close="handleBeforeClose" :modal="false">
+    <el-drawer v-model="visible" :size="300" :destroy-on-close="true" :show-close="false"
+        style="border-top-left-radius: 12px;border-bottom-left-radius: 12px;" :before-close="handleBeforeClose">
         <template v-if="drawerContentVisible">
             <el-row>
                 <el-col :span="12">主题模式: {{ useData().isDark ? '暗色' : '浅色' }}</el-col>
@@ -59,7 +79,6 @@ const handleBeforeClose = (done: () => void) => {
     setTimeout(done, 200)
 }
 watch(visible, (newVal) => {
-    console.log('handleBeforeClose')
     if (newVal) { // 打开时
         // 等待抽屉展开动画完成（根据你的scss中$transition-time: 0.3s; 设为300ms）
         setTimeout(() => {
@@ -70,6 +89,24 @@ watch(visible, (newVal) => {
         drawerContentVisible.value = false
     }
 })
+const { menuItems } = theme.value
+const handleMenuClick = (item) => {
+    if (item.children?.length) return
+    if (item.link) {
+        // 生成完整路径
+        const basePath = window.location.origin
+        const fullPath = item.link.startsWith('/')
+            ? `${basePath}${item.link}`
+            : `${basePath}/${item.link}`
+
+        if (item.link.startsWith('http')) {
+            window.open(item.link, '_blank')
+        }
+        else {
+            window.open(fullPath, '_blank') // 保持新标签页打开行为
+        }
+    }
+}
 </script>
 
 
@@ -109,6 +146,73 @@ $hide-offset: 100%;
 
 #menu {
     align-items: center;
+
+    el-dropdown,
+    .menu-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        border: 0px;
+    }
+
+    [class*="el-"]:focus-visible {
+        outline: none !important;
+    }
+
+    .menu-fitem {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 2;
+        margin-left: 20px;
+    }
+
+    .menu-fitem span {
+        background: linear-gradient(to right, #3498db, #2980b9) no-repeat left bottom;
+        background-size: 0 5px;
+        transition: background-size 0.3s;
+        font-size: 1rem;
+        white-space: nowrap;
+        /* 新增禁止换行属性 */
+        display: inline-flex;
+        /* 使用弹性布局保持元素对齐 */
+        align-items: center;
+        gap: 6px;
+        /* 控制图标和文字间距 */
+    }
+
+    .menu-fitem span:hover {
+        background-size: 100% 5px;
+    }
+
+    .sbbtn {
+        display: none;
+    }
+
+    .arrow-icon {
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+        display: inline-block;
+    }
+
+    .menu-fitem:hover .arrow-icon {
+        transform: rotate(180deg);
+    }
+
+    @media (max-width: 748px) {
+        .menu-fitem i {
+            margin: 0;
+        }
+
+        .dropitem {
+            display: none;
+        }
+
+        .sbbtn {
+            display: flex;
+        }
+
+    }
 }
 
 #title {

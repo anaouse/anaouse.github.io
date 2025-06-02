@@ -11,14 +11,18 @@
         </div>
     </transition>
 
+
     <el-scrollbar height="100vh" ref="scrollbarRef" @scroll="handleScroll" wrap-style="max-width:100vw;">
         <el-header height="var(--nav-height)">
-            <Nav />
+            <ClientOnly><Nav /></ClientOnly>
         </el-header>
-        <MainView />
-        <el-footer>
-            <Footer />
-        </el-footer>
+        
+            <NotFound v-if="page.isNotFound" />
+            <MainView v-else />
+            <el-footer>
+                <Footer />
+            </el-footer>
+        
     </el-scrollbar>
 
 </template>
@@ -32,6 +36,7 @@ import { ArrowUpBold } from '@element-plus/icons-vue'
 import Nav from './components/Nav.vue'
 import Footer from './components/Footer.vue'
 import MainView from './components/Views/MainView.vue'
+import NotFound from './components/Views/NotFound.vue'
 import Loading from './components/default/Loading.vue'
 import Bg_StarrySkySass from './components/default/Bg_StarrySkySass.vue'
 import { useRouter } from 'vitepress'

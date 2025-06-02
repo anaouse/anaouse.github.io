@@ -4,15 +4,11 @@
     </div>
     <div class="footer-container">
         <el-text style='color: var(--vp-c-text-2);'>
-            {{ message }}
+            {{ message }} <span id="vercount_container_site_pv"  style='display:none'>|本站总访问量<span id="vercount_value_site_pv"/>次</span> 
         </el-text>
         <el-tag size="small" type="success" effect="plain" round>
             {{ copyright }}
         </el-tag>
-
-        <span id="vercount_container_site_pv" style='display:none'>
-            本站总访问量<span id="vercount_value_site_pv"></span>次
-        </span>
 
     </div>
 

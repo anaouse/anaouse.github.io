@@ -4,7 +4,7 @@ export default {
   site_description: "这是一个使用 VitePress 构建的文档站点。",
   site_url: "/",
   author: '57Darling02',
-  defaultFocusMode: true, // 是否默认开启焦点模式
+  defaultFocusMode: false, // 是否默认开启焦点模式
   isDark: null, // 是否默认开启深色模式, null 则会跟随系统
   // 首页配置
   home: {
@@ -13,6 +13,8 @@ export default {
   },
   background: '/wallpaper/1.webp',
   pageSize: 8, //首页文章列表分页大小，默认为8
+
+
   // 侧边简介卡
   avatar: "https://resource-un4.pages.dev/article/yjtp.webp", //头像地址
   name: '57Darling02',
@@ -33,28 +35,30 @@ export default {
   menuToc: true, //是否显示文章目录
   menuItems: [
     {
-      label: '更多',
-      icon: 'fa-solid fa-list',
+      label: '好用的网站',
+      icon: 'fa-solid fa-browser',
       children: [
         {
           key: 'action1',
-          label: 'action1',
-          icon: 'fa-solid fa-circle',
-          link: 'website'
+          label: '课程平台青春版',
+          icon: 'fa-solid fa-browser',
+          link: 'https://course.bjtu.top'
         },
-        {
-          key: 'action2',
-          label: 'Action 2',
-          icon: 'fa-solid fa-square',
-          link: 'index'
-        },
-        {
-          key: 'action3',
-          label: 'Action 3',
-          icon: 'fa-solid fa-star',
-          link: 'website'
-        }
+        
       ]
-    }
+    },
+    {
+      label: '更多',
+      icon: '',
+      children: [
+        {
+          key: 'action1',
+          label: '标签',
+          icon: 'fa-solid fa-tags',
+          link: '/Tags/'
+        },
+      ]
+    },
+    
   ],
 }

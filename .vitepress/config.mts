@@ -98,9 +98,6 @@ export default defineConfig({
   description: myconfig.site_description || "VitePress-Butterfly is a VitePress theme inspired by the Butterfly theme.",
   themeConfig: myconfig,
   lastUpdated: true,
-  head: [
-    ['script', { defer: '', async: '', src: 'https://cn.vercount.one/js' }]
-  ],
   vite: {
     ssr: {
       noExternal: ['element-plus']

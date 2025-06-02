@@ -22,7 +22,7 @@
             </template>
             <!-- 专注模式 -->
             <template v-else>
-                <div class="sidebar-stay" style="background-color: var(--vp-sidebar-bg-color);"
+                <div class="sidebar-stay"
                     :class="{ 'nav-hidden': !showNavbar }">
                     <slot name="sidebar-stay"/>
                 </div>
