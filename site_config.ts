@@ -21,7 +21,6 @@ export default {
     text: '📆最后更新于', // 最后更新时间的文本
   },
 
-
   // 侧边简介卡
   avatar: "https://resource-un4.pages.dev/article/yjtp.webp", //头像地址
   name: '57Darling02',

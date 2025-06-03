@@ -1,1 +1,1 @@
-cp posts/主题介绍/README.md README.md && git add . && git commit -m "update" && git push origin main
+cp posts/主题介绍/README.md README.md &&cp site_config.ts .vitepress/site_config_template.ts && git add . && git commit -m "update" && git push origin main
