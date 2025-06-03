@@ -131,9 +131,9 @@ npm run build
 
 #### 直接更新：建议通过 博客管理脚本.sh 完成
 
+如果你的版本太旧，请移步最新仓库获得这份脚本。
+
 > 这将仅保留 "posts/" "site_config.ts"  "public/"  ".github/"，其余文件将被覆盖。如果只修改了以上文件，简单更新即可。
-
-
 
 注意，如果有新特性，配置选项请查看.vitepress目录中的模板site_config_template.ts
 
