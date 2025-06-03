@@ -1,1 +1,1 @@
-cp posts/主题介绍/README.md README.md&& git add . && git commit -m "update" && git push -f origin main
+cp posts/主题介绍/README.md README.md&& git add . && git commit -m "update" && git push origin main
