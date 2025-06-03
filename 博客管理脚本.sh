@@ -34,7 +34,7 @@ deploy() {
   # 提交更新
   git add .
   git commit -m "update"
-  git push origin main
+  git push -f origin main
   
   echo "✅ 已成功发布更新！"
 }
