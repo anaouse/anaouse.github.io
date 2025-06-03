@@ -93,6 +93,7 @@ update_theme() {
     if [ -e "$path" ]; then
       echo "  - 清空保护目录: $path"
       rm -rf "$path"
+      git rm -rf "$path" 
     fi
     # 尝试从合并前的提交恢复（即使目录之前不存在也继续）
     git checkout $PRE_MERGE_COMMIT -- "$path" 2>/dev/null
