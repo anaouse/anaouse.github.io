@@ -59,6 +59,8 @@ $hide-offset: var(--nav-height);
 #page-wrapper {
     padding: 0px 5px 0px;
     width: 100%;
+    overflow: auto;
+
 }
 
 .sidebar {

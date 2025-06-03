@@ -13,21 +13,17 @@
         </el-icon>
         <span class="author">{{ author }}</span>
       </div>
+      <div class="divider"></div>
+      <a>👁️<span id="busuanzi_value_page_pv">--</span>次</a>
       <!-- 分隔线 -->
       <div class="divider"></div>
       <!-- 发布日期 -->
       <div class="date-info">
-        <el-icon>
-          <Calendar />
-        </el-icon>
-        <time :datetime="date">{{ formattedDate }}</time>
+        <time :datetime="date">📅{{ formattedDate }}</time>
+        <div class="divider"></div>
+        <VPDocFooterLastUpdated :lastUpdated="page.lastUpdated" />
       </div>
-      <div class="divider"></div>
-      <span id="vercount_container_site_pv"  style='display:none'>
-        本文总阅读量 <span id="busuanzi_value_page_pv">Loading</span> 次
-      </span>
     </div>
-    <VPDocFooterLastUpdated />
   </div>
 </template>
 

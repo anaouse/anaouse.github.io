@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref, watchEffect } from 'vue'
 import { useData } from 'vitepress'
 const { theme, lang } = useData()
+import VPDocFooterLastUpdated from './VPDocFooterLastUpdated.vue'
 const props = defineProps({
     post: {
         type: Object,
@@ -19,7 +20,6 @@ const props = defineProps({
         })
     }
 })
-
 const formattedDate = computed(() => {
     if (!props.post.date) return ''
     try {
@@ -34,26 +34,15 @@ const formattedDate = computed(() => {
 })
 
 
-const hasValidDate = props.post.lastUpdated && !isNaN(new Date(props.post.lastUpdated).getTime())
 
-const date = hasValidDate ? new Date(props.post.lastUpdated!) : new Date()
-const isoDatetime = hasValidDate ? date.toISOString() : ''
-const datetime = ref('')
-
-datetime.value = new Intl.DateTimeFormat(
-    theme.value.lastUpdated?.formatOptions?.forceLocale ? lang.value : undefined,
-    theme.value.lastUpdated?.formatOptions ?? {
-        dateStyle: 'short',
-        timeStyle: 'short'
-    }
-).format(date)
 
 </script>
 
 <template>
     <div class="a-card">
-        <a class="article-card" :href="props.post.link.replace('.html','')">
-            <el-image v-if="props.post.cover" class="article-cover" :src="props.post.cover" :alt="props.post.title" fit="cover" lazy/>
+        <a class="article-card" :href="props.post.link.replace('.html', '')">
+            <el-image v-if="props.post.cover" class="article-cover" :src="props.post.cover" :alt="props.post.title"
+                fit="cover" lazy />
             <article>
                 <h1 class="article-title">
                     {{ props.post.title ?? 'Untitled Article' }}
@@ -62,16 +51,18 @@ datetime.value = new Intl.DateTimeFormat(
                     {{ props.post.excerpt }}
                 </p>
                 <div class="article-info" data-allow-mismatch>
-                    
+
                     <el-space wrap class="tag-group">
-                        <el-tag v-for="(tag, index) in props.post.tags" :key="index" size="default" type="info" effect="plain" style="display: flex;justify-content: center;background-color: var(--vp-c-bg-soft);" round>
+                        <el-tag v-for="(tag, index) in props.post.tags" :key="index" size="default" type="info"
+                            effect="plain"
+                            style="display: flex;justify-content: center;background-color: var(--vp-c-bg-soft);" round>
                             🏷️{{ tag }}
                         </el-tag>
                         <p v-if="formattedDate" class="article-words">📅{{ formattedDate }}</p>
                         ✍️{{ props.post.textNum }}字
-                        <time :datetime="isoDatetime">最后更新于:{{ datetime }}</time>
+                        <VPDocFooterLastUpdated :lastUpdated="props.post.lastUpdated" />
                     </el-space>
-                    
+
                 </div>
             </article>
         </a>
@@ -79,16 +70,17 @@ datetime.value = new Intl.DateTimeFormat(
 </template>
 
 <style lang="scss" scoped>
-*{
+* {
     font-weight: 550;
 }
+
 .article-card {
     container-type: inline-size;
     position: relative;
     margin: 1rem 0;
     border-radius: 0.8rem;
     color: var(--vp-c-text);
-    
+
 
     >article {
         display: grid;
@@ -139,7 +131,8 @@ datetime.value = new Intl.DateTimeFormat(
     mask: linear-gradient(to right, transparent, #fff 50%);
     transition: all 0.2s;
     object-fit: cover;
-    border-radius:  12px;
+    border-radius: 12px;
+
     :hover>& {
         opacity: 1;
     }

@@ -6,6 +6,8 @@ export default {
   author: '57Darling02',
   defaultFocusMode: false, // 是否默认开启焦点模式
   isDark: null, // 是否默认开启深色模式, null 则会跟随系统
+  lastUpdatedText: '最后更新于', // 最后更新时间的文本
+
   // 首页配置
   home: {
     mainTitle: "My Awesome Site",

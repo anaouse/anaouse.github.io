@@ -69,7 +69,7 @@ echo "恢复保护内容..."
 for path in "${PROTECTED_PATHS[@]}"; do
   if [ -e "$BACKUP_DIR/$path" ]; then
     rm -rf "$path"
-    cp -r "$BACKUP_DIR/$path" "./"
+    cp -rp "$BACKUP_DIR/$path" "./"
     echo "恢复: $path"
   fi
 done

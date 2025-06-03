@@ -1,108 +1,82 @@
-import { createContentLoader } from 'vitepress'
+import { createContentLoader } from "vitepress";
+import theme from "../../../../site_config";
+import pMap from "p-map";
+import fs from "fs";
+import path from "path";
+import { spawn } from "cross-spawn";
 const contentLoaderConfig = {
     includeSrc: true,
     render: true,
     excerpt: true,
-    transform(rawData) {
-        return rawData.sort((a, b) => {
-            return +new Date(b.frontmatter.date) - +new Date(a.frontmatter.date)
-        }).map((page) => {
-            // 摘要处理
-            let excerpt = page.excerpt
-            let textNum = 0
-            if (true) {
-                const plainText = page.src
-                    .replace(/^---[\s\S]*?---/, '')
-                    .replace(/(```[\s\S]*?```|#+\s+|\[.*?\]\(.*?\))/g, '')
-                    .substring(0, 30)
-                excerpt = plainText + (plainText.length >= 30 ? '......' : '')
-                excerpt = excerpt.trim()
-                textNum = page.src.length
-            }
-            return {
-                title: page.frontmatter.title,
-                date: page.frontmatter.date,
-                link: page.url,
-                excerpt: excerpt,
-                tags: (page.frontmatter.tags?.split(/[,\s]+/) ?? []).map(tag => tag.trim()),
-                categories: (page.frontmatter.categories?.split(',') ?? []).map(category => category.trim()),
-                cover: page.frontmatter.cover || '' , 
-                lastUpdated: page.lastUpdated || page.frontmatter.date || '',
-                textNum,
-            }
-        })
+    async transform(rawData) {
+        const data = await pMap(
+            rawData,
+            async (page: any) => {
+                // console.log(item.url);
+                const lastUpdated = await getLastUpdated(page.url);
+                let excerpt = page.excerpt
+                let textNum = 0
+                if (true) {
+                    const plainText = page.src
+                        .replace(/^---[\s\S]*?---/, '')
+                        .replace(/(```[\s\S]*?```|#+\s+|\[.*?\]\(.*?\))/g, '')
+                        .substring(0, 30)
+                    excerpt = plainText + (plainText.length >= 30 ? '......' : '')
+                    excerpt = excerpt.trim()
+                    textNum = page.src.length
+                }
+                return {
+                    title: page.frontmatter.title,
+                    date: page.frontmatter.date,
+                    link: page.url,
+                    excerpt: excerpt,
+                    tags: (page.frontmatter.tags?.split(/[,\s]+/) ?? []).map(tag => tag.trim()),
+                    cover: page.frontmatter.cover || '',
+                    lastUpdated: lastUpdated as number || new Date(page.frontmatter.date).getTime() || new Date().getTime(),
+                    textNum,
+                }
+                // return { ...item, lastUpdated };
+            },
+            { concurrency: 64 }
+        );
+        // Sort the data based on the themeConfig.sortedMethor options
+        const sortedMethor: "title" | "date" | "lastUpdated" = theme.sortedMethor || 'lastUpdated';
+        if (sortedMethor === 'title') {
+            data.sort((a, b) => a.title.localeCompare(b.title));
+        } else if (sortedMethor === 'date') {
+            data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        } else {
+            data.sort((a, b) => b.lastUpdated - a.lastUpdated);
+        }
+        
+        return data;
     }
 }
-// export const data = createContentLoader('posts/**/*.md', contentLoaderConfig)
-export default createContentLoader('posts/**/*.md', contentLoaderConfig)
+const loader = createContentLoader('posts/**/*.md', contentLoaderConfig)
+export const data = await loader.load();
+export default loader;
+// export default createContentLoader('posts/**/*.md', contentLoaderConfig)
 
-interface Node {
-    children: Node[];
-    label: string;
-    value: string;
-    level: number;
-}
-function getHeaders(range: any,document: Document) {
-    if (range === false) {
-        return [];
-    }
-    const headers = [
-        ...document.querySelectorAll('.vp-doc :where(h1,h2,h3,h4,h5,h6)')
-    ]
-        .filter((el) => el.id && el.hasChildNodes())
-        .map((el) => {
-            const level = Number(el.tagName[1]);
-            return {
-                label: serializeHeader(el),
-                value: '#' + el.id,
-                level,
-                children: [],
-            } as Node;
+// getLastUpdated function to fetch the last update time of a markdown file
+async function getLastUpdated(url) {
+    // Access global VITEPRESS_CONFIG
+    const siteConfig = globalThis.VITEPRESS_CONFIG;
+
+    let file = url.replace(/(^|\/)$/, "$1index");
+    file = file.replace(/(\.html)?$/, ".md");
+    file = siteConfig.rewrites.inv[file] || file;
+    file = path.join(siteConfig.srcDir, file);
+
+    return new Promise((resolve, reject) => {
+        const cwd = path.dirname(file);
+        if (!fs.existsSync(cwd)) return resolve(0);
+        const fileName = path.basename(file);
+        const child = spawn("git", ["log", "-1", '--pretty="%ai"', fileName], {
+            cwd,
         });
-
-    // return headers
-    return resolveHeaders(headers, range);
-}
-function serializeHeader(h: Element) {
-    let ret = '';
-    for (const node of h.childNodes) {
-        if (node.nodeType === 1) {
-            ret += node.textContent;
-        }
-        else if (node.nodeType === 3) {
-            ret += node.textContent;
-        }
-    }
-    return ret.trim();
-}
-function resolveHeaders(headers, range) {
-    const levelsRange = (typeof range === 'object' && !Array.isArray(range)
-        ? range.level
-        : range) || 2;
-    const [high, low] = typeof levelsRange === 'number'
-        ? [levelsRange, levelsRange]
-        : levelsRange === 'deep'
-            ? [2, 6]
-            : levelsRange;
-    return buildTree(headers, high, low);
-}
-function buildTree(data: Node[], min: number, max: number) {
-    const result: Node[] = [];
-    const stack: Node[] = [];
-    data.forEach((item) => {
-        const node: Node = item as Node;
-        let parent = stack[stack.length - 1];
-        while (parent && parent.level >= node.level) {
-            stack.pop();
-            parent = stack[stack.length - 1];
-        }
-        if (node.level > max || node.level < min)
-            return;
-        if (parent)
-            parent.children.push(node);
-        else
-            result.push(node);
-        stack.push(node);
+        let output = "";
+        child.stdout.on("data", (data) => (output += String(data)));
+        child.on("close", () => resolve(new Date(output).getTime()));
+        child.on("error", reject);
     });
-    return result;
 }
