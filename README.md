@@ -52,11 +52,15 @@ layout: doc # 这行不写也行，涉及到自定义页面才会涉及
 
  **上传到GitHub**
 
+**推荐使用博客管理脚本.sh**
+
+或者手动上传
+
 ```
-git add . && git commit -m "update" && git push -f origin main
+git add . && git commit -m "update" && git push origin main
 ```
 
-可以直接点击脚本deploy2github.sh一键执行
+
 
 
 
@@ -125,7 +129,7 @@ npm run build
 
 ## 主题更新
 
-#### 直接更新：运行update_theme.sh
+#### 直接更新：建议通过 博客管理脚本.sh 完成
 
 > 这将仅保留 "posts/" "site_config.ts"  "public/"  ".github/"，其余文件将被覆盖。如果只修改了以上文件，简单更新即可。
 
@@ -142,10 +146,6 @@ git add . && git commit -m "update" && git push -f origin main
 
 
 #### 手动更新，同步仓库并合并冲突
-
-
-
-
 
 ## 配置指南
 
