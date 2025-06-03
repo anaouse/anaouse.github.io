@@ -100,6 +100,8 @@ npm run preview
 
 3. 在本地的仓库中git pull得到创建的.github/workflow/mydeploy.yml文件
 
+4. 后续提交内容，将根据mydeploy.yml文件自动部署，点击actions查看部署进度。
+
 >  优点：后续修改posts文件夹，site_config.ts等内容后，只需要上传即可。
 
 ##### 本地构建
