@@ -84,7 +84,7 @@ update_theme() {
   git commit -m "Save local changes before update"
   echo "拉取上游更新（自动合并，冲突时使用上游版本）"
   git fetch upstream main
-  git pull upstream/main --strategy-option theirs 
+  git merge -X theirs upstream/main
   echo "正在恢复保护的文件和目录..."
   for path in "${PROTECTED_PATHS[@]}"; do
     if [ -e "$path" ] || git ls-tree --error-unmatch HEAD "$path" >/dev/null 2>&1; then
