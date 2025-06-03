@@ -58,6 +58,12 @@ deploy_dev() {
 update_theme() {
   echo "🔄 开始更新主题..."
   
+  # 检查工作区是否干净
+  if ! git diff --quiet || ! git diff --cached --quiet; then
+    echo "错误：工作区或暂存区存在未提交的更改。请先提交或保存更改后再更新主题。"
+    return 1
+  fi
+
   # 检查是否在Git仓库
   if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     echo "错误：当前目录不是Git仓库！"
@@ -94,13 +100,15 @@ update_theme() {
   # 备份保护内容
   echo "备份保护内容..."
   local BACKUP_DIR=".theme-backup-$(date +%s)"
-  mkdir "$BACKUP_DIR"
+  mkdir -p "$BACKUP_DIR"
 
   for path in "${PROTECTED_PATHS[@]}"; do
     if [ -e "$path" ]; then
       mkdir -p "$(dirname "$BACKUP_DIR/$path")"
-      cp -r "$path" "$BACKUP_DIR/$path"
+      cp -rp "$path" "$BACKUP_DIR/$path"
       echo "备份: $path"
+    else
+      echo "注意: 保护路径 $path 不存在"
     fi
   done
 
@@ -112,12 +120,20 @@ update_theme() {
   echo "恢复保护内容..."
   for path in "${PROTECTED_PATHS[@]}"; do
     if [ -e "$BACKUP_DIR/$path" ]; then
-      rm -rf "$path"
-      cp -rp "$BACKUP_DIR/$path" "./"
+      # 确保目标目录存在
+      mkdir -p "$(dirname "$path")"
+      # 使用rsync进行更安全的同步
+      rsync -a --delete "$BACKUP_DIR/$path/" "$path/" 2>/dev/null || \
+        cp -rp "$BACKUP_DIR/$path" "$(dirname "$path")"
       echo "恢复: $path"
     fi
   done
 
+  # 创建恢复提交
+  echo "创建恢复提交..."
+  git add .
+  git commit -m "更新主题并恢复自定义内容"
+  
   # 清理备份
   echo "清理临时文件..."
   rm -rf "$BACKUP_DIR"
@@ -134,7 +150,8 @@ update_theme() {
   echo "下一步建议:"
   echo "1. 运行本地预览: npm run dev"
   echo "2. 检查站点功能"
-  echo "3. 如有问题可回退: git reset --hard HEAD@{1}"
+  echo "3. 如有问题可回退: git reset --hard HEAD^"
+  echo "4. 测试无误后推送: git push origin main"
 }
 
 # 主程序
