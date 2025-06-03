@@ -45,6 +45,8 @@ jobs:
         uses: actions/configure-pages@v4
       - name: Install dependencies
         run: yarn install # 或 pnpm install / yarn install / bun install
+      - name: Copy README to root directory
+        run: cp posts/主题介绍/README.md README.md
       - name: Build with VitePress
         run: yarn docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
       - name: Upload artifact
