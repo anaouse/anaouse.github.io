@@ -16,7 +16,7 @@ export default {
 
 
   // 侧边简介卡
-  avatar: "", //头像地址
+  avatar: "/wallpaper/anaouse.jpg", //头像地址
   name: 'anaouse',
   position: '个人博客',
   bio: '我是无敌玩耍高手',
