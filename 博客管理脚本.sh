@@ -9,6 +9,15 @@ PROTECTED_PATHS=(
   "public/"
   ".github/"
 )
+is_protected() {
+    local file="$1"
+    for protected_path in "${PROTECTED_PATHS[@]}"; do
+        if [[ "$file" == "$protected_path"* ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
 
 # 上游主题仓库URL
 UPSTREAM_URL="https://github.com/57Darling02/VitePress_butterfly.git"
@@ -86,7 +95,17 @@ update_theme() {
   echo "合并前的提交ID: $PRE_MERGE_COMMIT"  # 调试用
   echo "拉取上游更新（自动合并，冲突时使用上游版本）"
   git fetch upstream main
-  git merge -s recursive -X theirs upstream/main -m "Merge upstream/main updates" || true
+  local files=$(git ls-tree --name-only upstream/main)
+  for file in $files; do
+      if ! is_protected "$file"; then
+          git checkout upstream/main -- "$file"
+          if [ $? -eq 0 ]; then
+              echo "✓ 成功检出文件: $file"
+          else
+              echo "✗ 检出文件失败: $file"
+          fi
+      fi
+  done
   echo "正在恢复保护的文件和目录..."
   for path in "${PROTECTED_PATHS[@]}"; do
     # 彻底删除本地目录
@@ -116,7 +135,7 @@ update_theme() {
 
   
   echo ""
-  echo "如有问题可回退: git reset --hard HEAD@{1}"
+  echo "如有问题可回退至云端: git reset --hard origin/main"
   echo "测试无误后推送"
 }
 
