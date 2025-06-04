@@ -12,7 +12,7 @@ const contentLoaderConfig = {
         const data = await pMap(
             rawData,
             async (page: any) => {
-                // console.log(item.url);
+                
                 const lastUpdated = await getLastUpdated(page.url);
                 let excerpt = page.excerpt
                 let textNum = 0
@@ -25,6 +25,7 @@ const contentLoaderConfig = {
                     excerpt = excerpt.trim()
                     textNum = page.src.length
                 }
+                console.log(page.frontmatter.title,lastUpdated);
                 return {
                     title: page.frontmatter.title,
                     date: page.frontmatter.date,
