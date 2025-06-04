@@ -7,7 +7,6 @@ PROTECTED_PATHS=(
   "posts/"
   "site_config.ts"
   "public/"
-  ".github/"
 )
 is_protected() {
     local file="$1"
