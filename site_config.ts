@@ -11,8 +11,8 @@ const config: ThemeConfig = {
 
   // 首页配置
   home: {
-    mainTitle: "My Awesome Site",
-    subTitles: ['我要', '听音乐', '看动漫'],//打字机效果的副标题，使用字符串列表
+    mainTitle: "666's website",
+    subTitles: ['code', 'type', 'navigate','listen'],//打字机效果的副标题，使用字符串列表
     firstViewHeight: 60, //首页第一屏的高度，默认为100vh
   },
   pageSize: 8, //首页文章列表分页大小，默认为8
