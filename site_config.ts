@@ -11,7 +11,7 @@ const config: ThemeConfig = {
 
   // 首页配置
   home: {
-    mainTitle: "666's website",
+    mainTitle: "anaouse's website",
     subTitles: ['code', 'type', 'navigate','listen'],//打字机效果的副标题，使用字符串列表
     firstViewHeight: 60, //首页第一屏的高度，默认为100vh
   },
@@ -20,7 +20,7 @@ const config: ThemeConfig = {
   
   // 背景
   background: '/wallpaper/1.webp',
-  bg_rainfall: true, //是否开启背景雨
+  bg_rainfall: false, //是否开启背景雨
 
   // 最后更新时间相关选项
   lastUpdated: {
