@@ -19,7 +19,7 @@ const config: ThemeConfig = {
   sortedMethor : 'date', //排序方式，默认为lastUpdated，可选值为lastUpdated、date
   
   // 背景
-  background: '/wallpaper/1.webp',
+  background: '/wallpaper/wallpaper.jpg',
   bg_rainfall: false, //是否开启背景雨
 
   // 最后更新时间相关选项
@@ -42,7 +42,7 @@ const config: ThemeConfig = {
   ],
   footer: {
     message: '......',
-    copyright: 'Copyright © 2025-present My Awesome Site'
+    copyright: 'Copyright © 2025-present anaouse Site'
   },
   //菜单栏
   menuToc: true, //是否显示文章目录
