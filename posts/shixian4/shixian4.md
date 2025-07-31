@@ -31,9 +31,9 @@ Meaning: Every time the user types or edits text in m_searchLineEdit, the onFilt
 
 Meaning: When the user double-clicks or presses Enter on an item in m_listWidget, the onItemActivated function in the TitleSelector class is called.
 
-&Class::function is C++ syntax for a pointer to a member function
+&Class::function is C++ syntax for a pointer to a member function.
 
-"^##\ \s+(.+)$" : What it matches: Lines that start with ##, followed by at least one whitespace, and then any sequence of characters until the end of the line. The text after the whitespace is captured in a group. useful but not readable use AI for it.
+"^##\\s+(.+)$" : What it matches: Lines that start with ##, followed by at least one whitespace, and then any sequence of characters until the end of the line. The text after the whitespace is captured in a group. useful but not readable use AI for it.
 
 ## idea
 
@@ -55,7 +55,7 @@ vim ~/.bashrc to modify initial command before starting a bash
 
 **road map**
 
-- multithread get kline data(done, use vector<thread> to dispatch curl task and use std::lock_guard<std::mutex> lock(mutex) which is RAII lock to write the data, and std::atomic<int>& success_count to count)
+- multithread get kline data(done, use `vector<thread>` to dispatch curl task and use `std::lock_guard<std::mutex> lock(mutex)` which is RAII lock to write the data, and `std::atomic<int>& success_count` to count)
 - dingding info(done, use curl post set specific header)
 - get data and multithread calculate it()
 
@@ -67,6 +67,7 @@ goal: make my json data to interactived bubble, choose wrong answer will report 
 
 ```
 {
+"flag":"myjson"
 "question": "Your question here",
 "A": "Option A",
 "B": "Option B",
