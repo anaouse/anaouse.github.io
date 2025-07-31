@@ -9,11 +9,11 @@ layout: doc
 
 **roadmap**
 
-- shortcut open and close(done, use QAbstractNativeEventFilter get win32 system hotkey)->
-- latest sorted(done,but now it is dir latest md is not)->
-- search bar result enable using arrow(done, override QLineEdit to process keyboard event to use arrow to activate item)->
-- latest edited sorted()->
-- md latest sorted()->
+- shortcut open and close(done, use QAbstractNativeEventFilter get win32 system hotkey)
+- latest sorted(done,but now it is dir latest md is not)
+- search bar result enable using arrow(done, override QLineEdit to process keyboard event to use arrow to activate item)
+- latest edited sorted()
+- md latest sorted()
 
 Q_OBJECT Macro: Enables Qt's meta-object compiler (moc) to process the class for signals and slots, a core mechanism for event handling in Qt.
 
