@@ -33,7 +33,7 @@ Meaning: When the user double-clicks or presses Enter on an item in m_listWidget
 
 &Class::function is C++ syntax for a pointer to a member function
 
-QRegularExpression regex("^##\\s+(.+)$"); : What it matches: Lines that start with ##, followed by at least one whitespace, and then any sequence of characters until the end of the line. The text after the whitespace is captured in a group. useful but not readable use AI for it.
+"^##\ \s+(.+)$" : What it matches: Lines that start with ##, followed by at least one whitespace, and then any sequence of characters until the end of the line. The text after the whitespace is captured in a group. useful but not readable use AI for it.
 
 ## idea
 
@@ -78,6 +78,7 @@ goal: make my json data to interactived bubble, choose wrong answer will report 
 ```
 
 **road map**
+
 - modify the chat data to show we can intercept the data(done, 798 line, content={message.content+'this is my custom message: '} can change the data in bubble)
 - show my json in interactive multi-choice quiz format(done, get the message and if it has my flag do not show it until getting all data, if it is normal json just show it.)
 - rag let the model output mullti-choice quiz in my json format()
@@ -86,15 +87,15 @@ ollama bug: Error: llama runner process has terminated: exit status 2
 
 I got the same error. I just installed microsoft visual redistributable c++ latest version. It is working for me and restart: https://github.com/ollama/ollama/issues/8770
 
-llm->src\lib\components\chat\Messages\ResponseMessage.svelte->render:
+llm>>src\lib\components\chat\Messages\ResponseMessage.svelte>>render:
 
 Summary: The Lifecycle of a Message in this Component
 
-Initiation: A new message object is created in the history store with done: false and an empty content string. The component renders a <Skeleton /> loader.
+Initiation: A new message object is created in the history store with done: false and an empty content string. The component renders a Skeleton loader.
 
 Streaming: The parent component receives tokens from the LLM and appends them to message.content in the history store.
 
-Real-time Update: The $: ... block in ResponseMessage detects the change and updates its view, showing the growing text inside the <ContentRenderer />.
+Real-time Update: The $: ... block in ResponseMessage detects the change and updates its view, showing the growing text inside the ContentRenderer.
 
 Completion: The stream ends. The parent component sets done: true in the history store.
 Final Render: The component updates one last time. Now, because message.done is true, the action buttons (Copy, Edit, Regenerate, Rate) and any follow-up prompts appear below the completed message.
@@ -107,6 +108,7 @@ So, to summarize, yes, this component is explicitly designed to handle and displ
 sort it first, and two pointers to get the target -nums[i]
 
 **16 3sum closest**
+
 the same as 15, use two pointers
 
 
