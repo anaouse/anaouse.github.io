@@ -5,6 +5,7 @@ setlocal EnableDelayedExpansion
 
 :: === 读取文件夹名称 ===
 set /p "folder_name=请输入文件夹名称: "
+echo 你输入的是: !folder_name!
 if "!folder_name!"=="" (
     echo 取消：未输入文件夹名称
     goto :eof
@@ -35,9 +36,8 @@ for /f %%i in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') d
     echo ---
 )
 
-:: === 打开 VS Code ===
-echo 正在使用 VS Code 打开文件: !file_path!
-code "!file_path!" || (
+echo 正在使用 sublime 打开文件: !file_path!
+subl "!file_path!" || (
     echo 打开 VS Code 失败；请确认 VS Code 安装并已把 ^"code^" 加入 PATH。
     goto :eof
 )
