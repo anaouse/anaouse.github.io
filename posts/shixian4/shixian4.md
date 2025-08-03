@@ -51,13 +51,16 @@ ctrl+G to jump to specific line
 
 vim ~/.bashrc to modify initial command before starting a bash
 
+truncate -s 0 log.txt make log.txt file size become 0 bytes
+
 ## duck db monitor 1m kline
 
 **road map**
 
 - multithread get kline data(done, use `vector<thread>` to dispatch curl task and use `std::lock_guard<std::mutex> lock(mutex)` which is RAII lock to write the data, and `std::atomic<int>& success_count` to count)
-- dingding info(done, use curl post set specific header)
-- get data and multithread calculate it()
+- dingtalk info(done, use curl post specific json and header)
+- get symbol volumns over 5000,and get them 10 klines to calculate bollinger band(done, but it seem that useless)
+- stdexec get openinterest and store it
 
 use reference in function variant or it will copy one is time wasting. 
 
@@ -112,5 +115,9 @@ sort it first, and two pointers to get the target -nums[i]
 
 the same as 15, use two pointers
 
+## gnucash
 
+use gnucash to record my money and time. lets goooooo.
+
+gnucash use a acount transfer to another acount to record.
 
