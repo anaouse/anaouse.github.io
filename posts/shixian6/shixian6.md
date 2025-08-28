@@ -5,6 +5,24 @@ author: anaouse
 layout: doc
 ---
 
+## 丫丫，我们接你回家啦😄
+
+愿思念化作风 把丫丫吹回家
+
+别再浪迹天涯 丫丫快回来吧
+
+我真的好害怕 你突然失联了
+
+在世界的尽头 没谁陪你说话
+
+愿思念化作风 把丫丫吹回家
+
+别再浪迹天涯 丫丫快回来吧
+
+在异乡的日子 一个人怕不怕
+
+你无助的时候 很想念乐乐吧
+
 ## grocery 2
 
 - vector push_back:
@@ -44,7 +62,7 @@ and it will be slow to read the unaligned data for cpu
 
 but in internet protocol, we write the original bytes data, so do not align, because it will add redundant bytes
 
-- waveout workflow
+- waveOut workflow
 
 Find a buffer that the audio driver is not currently using.
 If one is found, fill it with new MP3 data.
@@ -97,3 +115,67 @@ and release after leave the scope
 - vec.reserve(nums.size())
 
 pre-allocate to speed up
+
+- ps aux | grep app 
+
+root(user)  1055038(PID)  8.3(%CPU) 15.3(%MEM) 
+
+780064(Virtual Memory Size) 
+
+150564(Resident Set Size, RAM be used now, 150MB)
+
+?(TTY, Controlling Terminal ? means there is no controller, its background)
+
+S(Process State, S mean Interruptible sleep)    
+
+Aug26(the date the process started)  66:19(cumulative CPU time,  this process has used 66 minutes and 19 seconds of CPU time since it started) ./build/bin/app(the full command line that was used to launch the process)
+
+- virtual memory in linux
+
+Illusion: Each process believes it has memory starting from address 0 up to a very large number (e.g., 2^32 for 32-bit systems, 2^64 for 64-bit).
+
+Isolation: The OS ensures that one program cannot directly access the memory of another program, enhancing security and stability.
+
+Paging: The virtual address space is divided into fixed-size blocks called pages (typically 4KB).
+
+Demand Paging: Pages are only loaded into RAM when they are actually needed (accessed).
+
+Swapping/Paging File: If RAM runs low, the OS can move less-used pages from RAM to a special area on the hard drive called the "swap space" or "paging file." When those pages are needed again, they are loaded back into RAM. This gives the illusion of more RAM than physically exists.
+
+MMU in cpu->translate pages table to physics address->page do not in RAM trigger page fault->loads it from disk if swapped out, or allocates a new zero-filled page, put it in RAM->retry
+
+memory layout:
+
+64 bits: 4 bit to show a hex number, so has x00000000 00000000 (16 multi 4=64) 16 hex numbers to represent the virtual memory.
+
+use `cat /proc/goal_pid/maps` to check the memory layout:
+
+619b4e63e000-619b4e63f000 r--p 00000000 fd:02 2613780 /home/http_client/app_learn        
+
+619b4e63e000-619b4e63f000: address range [a, b)
+
+r--p: permission, r--p, r-xp, r-read, w-write, x-excute, p-private mapping made to this region are private to the process often implemented using copy-on-write, s-sharing mapping this region are visible to other processes that have the same region mapped
+
+00000000-offset within the file or other mapped object, here means This region starts at the very beginning of the /home/http_client/app_learn file. 
+
+fd:02:  the major and minor device numbers of the filesystem where the mapped file resides(??)
+
+2613780:  inode number
+
+/home/http_client/app_learn: Pathname or heap, stack 
+
+- ls -l /dev/
+
+- lscpu
+
+- open chrome in full screen as default:
+
+at chrome short properties add `--start-fullscreen` after the target
+
+- nushell with windows terminal
+
+- nvim
+
+when treesitter install new language, should exit all other nvim windows
+
+

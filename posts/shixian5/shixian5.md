@@ -265,7 +265,7 @@ borel(R)->a sigma-algebra of R->A=the collection of open subsets of R->borel(R)=
 
 ## Music Player with Memory Pool
 
-understand by thread
+understand by threads
 
 threads:
 
@@ -288,8 +288,4 @@ use atomic variant to stop thread
 ## 活着久
 
 感觉有事情做或者没事情做都不太行，重要的是一种节奏，活得久，每天都有点东西玩玩就很舒服。
-
-
-
-
 

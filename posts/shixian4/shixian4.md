@@ -206,6 +206,16 @@ smaller element add to result directly
 
 append tem to result
 
+- 24 SwapPairs
+
+use 3 ptr to change a pair(second node of last pairs, first node, seconde node), new a my_head as first node of first pairs, and change first and second, fix pre's next
+
+- 29
+
+
+
+0,1,2
+
 ## gnucash
 
 use gnucash to record my money and time. lets goooooo.
