@@ -9,11 +9,9 @@ layout: doc
 
 **roadmap**
 
-- shortcut open and close(done, use QAbstractNativeEventFilter get win32 system hotkey)
+- shortcut open and close(done, use QAbstractNativeEventFilter get win32 system hotkey, override nativeEventFilter and install to the app, before it become qt message, capture the event and handle by myself)
 - latest sorted(done,but now it is dir latest md is not)
-- search bar result enable using arrow(done, override QLineEdit to process keyboard event to use arrow to activate item)
-- latest edited sorted()
-- md latest sorted()
+- search bar result enable using arrow(done, override QLineEdit to process keyboard event to use arrow to activate item, add my own searchbar and itemlist widget to layout to present)
 
 Q_OBJECT Macro: Enables Qt's meta-object compiler (moc) to process the class for signals and slots, a core mechanism for event handling in Qt.
 
@@ -210,9 +208,7 @@ append tem to result
 
 use 3 ptr to change a pair(second node of last pairs, first node, seconde node), new a my_head as first node of first pairs, and change first and second, fix pre's next
 
-- 29
-
-
+record this problem is a waste of time
 
 0,1,2
 
@@ -228,14 +224,25 @@ gnucash use a acount transfer to another acount to record.
 
 ## Shortcuts
 
-ctrl+`:select english under mouse and translate
+alt+`:select english under mouse and translate
+
 ctrl+\ : pop up window, input english or chinese will translate it
 
 ctrl+alt+t: pop up timer
 
-ctrl+shift+q: note manager 
+ctrl+alt+;: note manager 
 
 ctrl+alt+p: open the music player
+
+windows+alt+n: onenote open draft note
+
+ctrl+`: sublime text open nushell
+
+ctrl+1:  sublime text open nushell with msvc x64 env
+
+reaper: ctrl+alt+a toggle piano roll
+
+windows 回收站：explorer.exe shell:RecycleBinFolder
 
 ## grocery
 

@@ -164,18 +164,150 @@ fd:02:  the major and minor device numbers of the filesystem where the mapped fi
 
 /home/http_client/app_learn: Pathname or heap, stack 
 
+- inode=0
+
+Anonymous Memory: An inode number of 0 in `/proc/<pid>/maps` signifies that the memory region is anonymous, meaning it is not backed by a file on disk. Instead, it is allocated dynamically in memory (e.g., via mmap with MAP_ANONYMOUS or through heap allocations like malloc). These regions are typically used for:Process heap (e.g., dynamically allocated memory).Stack memory.Other runtime memory allocations not tied to a specific file.
+
+- why cout address only 12 bits?
+
 - ls -l /dev/
 
 - lscpu
 
-- open chrome in full screen as default:
+- std::ref
 
-at chrome short properties add `--start-fullscreen` after the target
+```
+int main() {
+    std::thread t;
+    {
+        int a = 42;
+        t = std::thread(work, std::ref(a));
+    } // a goes out of scope here!!!
+    t.join(); // ❌ dangling reference, UB
+}
+```
+```
+int main() {
+    std::thread t;
+    {
+        int a = 42;
+        t = std::thread([&]{ work(a); });
+    } // ❌ capture by ref, a is destroyed here
+    t.join();
+}
 
-- nushell with windows terminal
+```
 
-- nvim
+```
+int main() {
+    std::thread t;
+    {
+        int a = 42;
+        t = std::thread([=]{ work(a); });
+    } // ✅ capture by value, a copy lives inside the lambda object
+    t.join();
+}
 
-when treesitter install new language, should exit all other nvim windows
+```
 
+std::ref makes sure the thread sees the original object, not a copy.
 
+But it does not extend the object’s lifetime.
+
+You must ensure the referenced object stays alive until all threads are done, usually by join() before scope ends, or by using shared_ptr.
+
+std::thread doesn’t immediately call work.Instead, it has to store the function and arguments somewhere until the new thread starts.so it have to capture the variant
+
+## nushell with windows terminal
+
+sublime with nushell is OK, nvim in windows waste lots of time
+
+## 问题
+
+有一个具体详细的问题就很舒服，有种目标明确的感觉，不断产生感觉可以作为问题的问题，然后去解决就很舒服
+
+## reaper hook
+
+news->detect news type->buy sleep sold
+
+log->show time to check the latency
+
+get and post->get
+
+pool->if every second it will be 14G per day, it will disconnect every 2 minuts? reconnect myself and use two server, redis yes!->pool 100 time, it need a reconnect, can we use two thread? if it disconnect using IP it will lose, try it->it do not work? is the telegram problem maybe? i quit, the big chance is enough, or select the underrated stock or coin is enough, original capital is not enough, it is boring
+
+0.7->0.9, under 1 second but detect the message after 2.5 second
+
+## Makefile
+
+reference: https://github.com/seisman/how-to-write-makefile
+
+- syntax
+
+targets: prerequisites
+    command
+    command
+    command
+
+if prerequisites modified, than run commands, command use a "tab" as start
+
+感觉小项目完全当作脚本来用足够了，根本不用学那么多，等到要构建大项目再说吧。
+
+.PHONY: let makefile know the command is not dir or file which already exist
+
+if build
+
+## 睡前
+
+晚上睡前不知道干嘛，然后突然发现回顾以前听过的歌很有意思，以及把经典的视频下载下来也很不错，用键盘多了手指疼，以后累了就不打了，休息一下。只写紧急的事情
+
+## vulkan triangle
+
+glfw->window
+vulkan->command
+
+physics device->queue->logic device
+
+set images
+
+- why use queue? we can not send command to gpu device directly?
+
+A single physical device (the GPU) can have multiple types of queues or just one queue that supports all these tasks. Each queue family in Vulkan is responsible for one or more types of tasks (e.g., graphics, compute, transfer).
+
+- whats surface mean? why vulkan can not command the glfw window directly:
+
+Vulkan does not manage platform-specific windows directly, which is why a surface is required to bridge the gap between Vulkan and the windowing system.
+
+- swap chain
+
+data wait for rendering, visualizing
+
+## 嗯
+
+感觉现在要想东西都要依赖外界，电脑或者书籍来查资料啥的，但是思考自己要过什么样的生活的时候就只用自己的脑子就足够了。目前想到人生要做的事情有理财，健康的身体，剩下就是要做什么的思考了
+
+## bookmark
+
+南中國的世界城：廣州的非洲人與低端全球化：page:99
+
+## prompt
+
+I know English, lets learn Japanese by solving problem,I will give you a Japanese article, you give me question in English which is words or grammar about the article from easy to hard, I will try to express my though in English with Japanese, and you correct my answer in English, and use English with Japanese contained pronunciation to express words and grammar, and give me a new quiz
+
+I know English, lets learn Japanese by solving problem,I will give you a Japanese article, you give me question in English which is words or grammar about the article from easy to hard, I will try to express my though in English with Japanese, and you correct my answer in English, and use English with Japanese contained pronunciation to express words and grammar, and I will ask you new quiz or ask the quiz deeply
+
+## client can get and post
+
+TCP/TLS connection: Only if same host+port.
+
+Resolver (DNS cache): Can be reused across all requests.
+
+io_context + ssl::context: One per process is enough, can be reused for all clients.
+
+Create one SSL context per host (e.g. for fapi.binance.com).
+
+Then in multiple threads, create connections (ssl::stream / SSL*) using that same context.
+
+Each connection goes through its own handshake and can request different URLs.
+
+get last minute kline->store kline, cross mean 20 and volumn over 7W U except BTCUSDT,ETHUSDT,BNBUSDT,SOLUSDT   than send dingtalk

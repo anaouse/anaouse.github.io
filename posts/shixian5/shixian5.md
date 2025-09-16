@@ -30,8 +30,12 @@ page 11
 |結果-kekka, result, consequence|どうやら-douyara, apparently, it seems|興味-kyoumi, interest|示す-shimesu, show, indicate|
 |ホット-hotto, represent the sign sound|一息つく-hitoikituku, take a breath|改めて-aratamete, anew, once more, an action is being performed again, but with a new intention or seriousness|表情-hyoujyou, facial expression|
 |引く-hiku, pull|締める-shimeru, tighten|二十歳-hatachi, twenty years old|真面目な-majimena, serious, honest|
-|相応の-sououno, suitable, appropriate|落ち着く-ochituku, to be calm|演出する-ennshutusuru, produce, direct, create a certain effect||
+|相応の-sououno, suitable, appropriate|落ち着く-ochituku, to be calm|演出する-ennshutusuru, produce, direct, create a certain effect|まとめます-matomemasu, summarize|
+|ネタバレ-netabare, spoiler|まだまだ-madamada, still|備忘録-bibouroku, memo|記録-kiroku, record|
+|旅-tabi, tour|として-toshite, as, in the purpose of|まとめてみよう-matometemiyou, lets try to summarize, te-form+みる-try to do, る-よう-lets||
 |||||
+|||||
+
 
 
 
@@ -257,7 +261,7 @@ smallest sigma-algebra of X which contain collection A->mean sigma-algebra gener
 
 borel(R)->a sigma-algebra of R->A=the collection of open subsets of R->borel(R)=sigma(A)->we can use [a,b], (a,b], (-inf, b] to build the same borel(R) too
 
-
+感觉数学物理这种东西还得是用纸和笔对味，键盘笔记很不舒服
 
 ## XXXX
 
@@ -280,6 +284,8 @@ m_playback thread: loop to end or get command, not blocked
 show time thread: busy-wait with sleep to get and show where the song now when cmd is visivle
 
 use atomic variant to stop thread
+
+how mp3 to sound: dr_mp3 get mp3 file handle and use drmp3_read_pcm_frames_s16 to get a frame data, the pointer go ahead, frame stored in m_buffers[free_buffer_index] which is binded with m_wave_headers, waveOutWrite make &m_wave_headers[free_buffer_index] in queue, after using the buffer, it use callback function to increase free buffer number, a buffer is used and now can make a new in queue buffer up to 4, if 4 buffers are used now just sleep a little bit
 
 ## 读博客增长知识面
 
