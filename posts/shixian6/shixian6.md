@@ -282,13 +282,17 @@ Vulkan does not manage platform-specific windows directly, which is why a surfac
 
 data wait for rendering, visualizing
 
+I am going to learn opengl first
+
 ## 嗯
 
 感觉现在要想东西都要依赖外界，电脑或者书籍来查资料啥的，但是思考自己要过什么样的生活的时候就只用自己的脑子就足够了。目前想到人生要做的事情有理财，健康的身体，剩下就是要做什么的思考了
 
 ## bookmark
 
-南中國的世界城：廣州的非洲人與低端全球化：page:99
+南中國的世界城：廣州的非洲人與低端全球化：123
+
+剑桥中华人民共和国史：17
 
 ## prompt
 
