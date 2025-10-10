@@ -222,6 +222,8 @@ std::thread doesn’t immediately call work.Instead, it has to store the functio
 
 sublime with nushell is OK, nvim in windows waste lots of time
 
+~\AppData\Roaming\nushell下配置env可以让nushell走clash代理
+
 ## 问题
 
 有一个具体详细的问题就很舒服，有种目标明确的感觉，不断产生感觉可以作为问题的问题，然后去解决就很舒服
@@ -299,6 +301,9 @@ I am going to learn opengl first
 I know English, lets learn Japanese by solving problem,I will give you a Japanese article, you give me question in English which is words or grammar about the article from easy to hard, I will try to express my though in English with Japanese, and you correct my answer in English, and use English with Japanese contained pronunciation to express words and grammar, and give me a new quiz
 
 I know English, lets learn Japanese by solving problem,I will give you a Japanese article, you give me question in English which is words or grammar about the article from easy to hard, I will try to express my though in English with Japanese, and you correct my answer in English, and use English with Japanese contained pronunciation to express words and grammar, and I will ask you new quiz or ask the quiz deeply
+
+
+以下每一行是一个动漫的一集的台词,请你翻译为中文给我, 并且保留它们之间一行行的格式方便为直接复制到txt当中:
 
 ## client can get and post
 

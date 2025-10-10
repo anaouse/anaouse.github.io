@@ -59,6 +59,10 @@ kill a process by name: killall name
 
 wc -l test.txt: get test.txt line numbers
 
+~/.ssh下配置输入公钥到authorized_key, 然后有一个设置文件要确保可以使用ssh连接然后就可以使用ssh了
+
+
+
 ## duck db monitor 1m kline
 
 **road map**

@@ -3,7 +3,7 @@ import ThemeConfig  from "./.vitepress/theme/ts/ThemeConfig";
 const config: ThemeConfig = {
   // VitePress 站点基本配置
   site_name: "anaouse'blog",
-  site_description: "这是一个使用 VitePress 构建的文档站点。",
+  site_description: "这是anaouse的博客网站, 我fork同学模板的, 嘻嘻",
   site_url: "/",
   author: 'anaouse',
   defaultFocusMode: true, // 是否默认开启焦点模式
@@ -12,7 +12,7 @@ const config: ThemeConfig = {
   // 首页配置
   home: {
     mainTitle: "anaouse's website",
-    subTitles: ['code', 'type', 'navigate','listen'],//打字机效果的副标题，使用字符串列表
+    subTitles: ['娱乐化编程','日常记录写作'],//打字机效果的副标题，使用字符串列表
     firstViewHeight: 60, //首页第一屏的高度，默认为100vh
   },
   pageSize: 8, //首页文章列表分页大小，默认为8

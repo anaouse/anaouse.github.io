@@ -3,5 +3,8 @@ node_modules
 .vitepress/cache
 .vitepress/theme/components/theme-default
 .vitepress/config.mts.timestamp-*
+.obsidian
 /myown/
 /open/
+/py_scripts/
+/draw/
