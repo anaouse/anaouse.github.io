@@ -128,7 +128,20 @@ split window `:vs file2.txt`, `ctrl+w w`跳转切换窗口聚焦
 
 /用于搜索, n向下N向上, 然后:noh用于关闭高亮
 
-toggleterm使用nushell的时候报错/s, 然后配置里写
+toggleterm使用nushell的时候报错/s, nushell没有这个参数然后init.lua里写:
+
+```
+vim.opt.shellcmdflag="-c"
+vim.opt.shellquote = ""
+vim.opt.shellxquote = ""
+```
+
+nvim-cmp: 问AI配置init.lua
+
+```
+git clone https://github.com/hrsh7th/nvim-cmp.git
+git clone https://github.com/hrsh7th/cmp-buffer.git
+```
 
 ## keyboaholic
 

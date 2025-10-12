@@ -19,7 +19,7 @@ const config: ThemeConfig = {
   sortedMethor : 'date', //排序方式，默认为lastUpdated，可选值为lastUpdated、date
   
   // 背景
-  background: 'fern.jpg',
+  background: './wallpaper/fern.jpg',
   bg_rainfall: false, //是否开启背景雨
 
   // 最后更新时间相关选项
