@@ -33,6 +33,8 @@ Meaning: When the user double-clicks or presses Enter on an item in m_listWidget
 
 "^##\\s+(.+)$" : What it matches: Lines that start with ##, followed by at least one whitespace, and then any sequence of characters until the end of the line. The text after the whitespace is captured in a group. useful but not readable use AI for it.
 
+这个程序目前我已经已经实现了一个Nvim插件,这样不用单独打开一个程序直接nvim就解决了,具体可以查看后面的笔记
+
 ## idea
 
 感觉为了快速实现功能而一直复制粘贴很难受，还是一个个字符敲比较舒服，这样逻辑就很清楚很舒服，反正也不急着干嘛。事无巨细地知道逻辑感觉也挺有意思，至少脑子是专注的，这种状态就很舒服。

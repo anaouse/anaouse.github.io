@@ -12,14 +12,14 @@ const config: ThemeConfig = {
   // 首页配置
   home: {
     mainTitle: "anaouse's website",
-    subTitles: ['娱乐化编程','日常记录写作'],//打字机效果的副标题，使用字符串列表
+    subTitles: ['recreational','fern'],//打字机效果的副标题，使用字符串列表
     firstViewHeight: 60, //首页第一屏的高度，默认为100vh
   },
   pageSize: 8, //首页文章列表分页大小，默认为8
   sortedMethor : 'date', //排序方式，默认为lastUpdated，可选值为lastUpdated、date
   
   // 背景
-  background: '',
+  background: 'fern.jpg',
   bg_rainfall: false, //是否开启背景雨
 
   // 最后更新时间相关选项
