@@ -9,6 +9,8 @@ layout: doc
 
 每周日一个时间浏览信息源都讲了什么即可
 
+开源: https://github.com/anaouse/UrlLauncher
+
 ## C# dotnet
 
 Models(数据类型) View(展示数据) ViewModels(处理交互与读写) MVVM 设计模式
@@ -101,7 +103,7 @@ https://www.zhihu.com/question/328247039
 
 参考: http://www.91kindle.cn/index.php/2024/01/02/kindle%E5%AD%97%E5%85%B8%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/
 
-## github ssh连接失效
+## git github ssh连接失效 ssh 链接服务器
 
 更改指纹的原因
 
@@ -110,6 +112,75 @@ https://www.zhihu.com/question/328247039
 `ssh-keygen -R "[ssh.github.com]:443"`
 
 然后重新push或者`ssh -T git@github.com`然后yes创建新指纹即可
+
+有时候以上方法不行的时候,多试试切换几个节点重复尝试即可
+
+.gitignore只会用于没有被加入的文件,如果一个文件被追踪了那么再更新它,它还是会上传那个文件
+
+`git rm --cached water_timer_records.json`
+
+`ssh-keygen` 然后输入对应文件名如:`D:\myssh\myserver`生成密钥
+
+把公钥复制到服务器的~/.ssh/authr...这个啥文件里面,然后即可`ssh -i ...` 登录,可以删除一下known_hosts里面已有的配置
+
+cwrsync要使用cwrsync自己的ssh而不是windows自带的,这里给一个可运行的使用ssh rsync的bat例子:
+
+```
+@echo off
+
+REM Local paths (Windows style)
+SET LOCAL_BACKEND=/cygdrive/d/GoProjects/Blog/backend/
+SET LOCAL_FRONTEND=/cygdrive/d/GoProjects/Blog/frontend/dist/
+
+REM Server configuration
+SET SERVER_USER=root
+SET SERVER_HOST=xxx.xxx.xxx.xxx
+SET SERVER_BACKEND=/home/Blog/backend/
+SET SERVER_FRONTEND=/home/Blog/frontend/
+SET SERVER_PORT=22
+
+SET SSH_KEY=/cygdrive/d/myssh/vultr
+
+SET CWRSYNC_PATH=D:\cwrsync\bin
+
+SET PATH=%CWRSYNC_PATH%;%PATH%
+
+SET SSH_OPTS=-e "ssh -p %SERVER_PORT% -i %SSH_KEY%"
+
+echo.
+echo ========================================
+echo Syncing Backend...
+echo ========================================
+rsync -avz --progress %SSH_OPTS% %LOCAL_BACKEND% %SERVER_USER%@%SERVER_HOST%:%SERVER_BACKEND%
+
+if %ERRORLEVEL% NEQ 0 (
+    echo ERROR: Backend sync failed!
+    pause
+    exit /b 1
+)
+
+echo Backend sync completed successfully!
+
+echo.
+echo ========================================
+echo Syncing Frontend...
+echo ========================================
+rsync -avz --progress %SSH_OPTS% %LOCAL_FRONTEND% %SERVER_USER%@%SERVER_HOST%:%SERVER_FRONTEND%
+
+if %ERRORLEVEL% NEQ 0 (
+    echo ERROR: Frontend sync failed!
+    pause
+    exit /b 1
+)
+
+echo Frontend sync completed successfully!
+
+
+echo.
+echo ========================================
+echo All syncs completed successfully!
+echo ========================================
+```
 
 ## 编辑这件事
 突然感觉其实一直在做的事情是通过键盘编辑各种各样的文字, 因为过于频繁, 导致没用慎重地思考自己在编辑什么东西, 有没有一种可能, 其实根本不需要编辑那么多东西? 或者说, 很多东西其实可以编辑一点其实就足以完成?
@@ -147,6 +218,19 @@ nvim-cmp: 问AI配置init.lua
 ```
 git clone https://github.com/hrsh7th/nvim-cmp.git
 git clone https://github.com/hrsh7th/cmp-buffer.git
+```
+
+复制截屏,然后粘贴图片到md
+
+https://github.com/ekickx/clipboard-image.nvim?tab=readme-ov-file
+
+V,选块然后gc注释,shift+> 整块tab
+
+copilot:
+
+```
+git clone https://github.com/zbirenbaum/copilot.lua.git
+git clone https://github.com/zbirenbaum/copilot-cmp.git
 ```
 
 ## keyboaholic
@@ -195,7 +279,6 @@ chrome下使用vim模式, 主要有j下滑k上滑,ctrl+f之后可以选择超链
 ## title-focus
 
 nvim插件
-
 todo:
 
 展示一个悬浮窗,悬浮窗上上方一个搜索输入框,下方展示东西
@@ -236,5 +319,78 @@ struct是数据,trait是行为?
 两页最多查阅一个生词,是为了不破坏阅读体验,感觉这个观点可以尝试一下
 
 来源: https://www.bilibili.com/opus/437744660241310223
+
+## rsync-win
+
+https://github.com/rn7s2/rsync-win
+
+在exe同文件夹下创建home/YOURUSER/.ssh来让程序写入known_hosts
+
+do not use this, use CwRsync instead
+
+## 工作,玩
+
+感觉需要的是无聊的时候就工作一下,而不是工作累了就休息一下,这样的思考方式应该很快会蔓延开来.上班得的钱越来越少那就没人愿意上班
+
+## python构建
+
+额,什么makefile,什么bash,最后感觉还是python用得舒服啊,不舒服的东西就应该早点换掉
+
+## github.dev
+
+这个域名直接使用vscode打开仓库,方便浏览代码代码,感觉不错
+
+## Reaper Music Production
+
+w回到开始,从头播放
+
+ctrl+alt+a toggle 钢琴窗,这个不记得在哪里设置的了
+
+使用vital做一个bass音色并保存,可以重复使用 done 
+
+画包络线 done
+
+use sound files: use Media Explorer ctrl+alt+x
+
+## Mixxx DJ
+
+connect two songs
+
+import sound track
+
+把Minecraft alpha重新编排?
+
+4-Death as start->one track as background music for the death
+
+## 耳机声场和低频不对劲
+
+我感觉是我的电脑带不动耳机,但是没办法条件受限
+
+尝试旋转一下接着电脑的那个部位
+
+## blog websites go and react
+
+I am planning move my blog from githubpage to a server
+
+react for frontend, go for backend
+
+`go env | findstr /I "C:\\"` find what env variables stored in C disk
+
+**roadmap**
+
+- basic frontend 
+done in react(use vite proxy to handle the fetch port for dev and deploy easily)
+
+- basic backend 
+
+done in go net
+
+- upload posts to server from my pc 
+
+done use CwRsync(use delete variable with caution)
+
+- deploy it 
+
+buy a domain and now dns propagating debian apt install version is old...
 
 
